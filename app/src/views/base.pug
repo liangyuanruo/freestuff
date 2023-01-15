@@ -1,0 +1,93 @@
+block vars 
+  - var title='base.pug'
+  - var description="base.pug description";
+  - var image='https://via.placeholder.com/1200x630.png'
+  - var stylesheet='/base.css'
+  - var script='/base.js'
+
+doctype html
+html 
+  head
+    block head
+      title #{title}
+      meta(name="viewport", content="width=device-width, initial-scale=1, user-scalable=0")
+      //- Search engines
+      meta(name='description', content=description)
+      //- Twitter
+      meta(name='twitter:card', content='summary')
+      meta(name='twitter:site', content='')
+      meta(name='twitter:title', content=title)
+      meta(name='twitter:description', content=description)
+      meta(name='twitter:creator', content='')
+      meta(name='twitter:image:src', content=image)
+      meta(name='twitter:player', content='')
+      //- Open Graph General (Facebook & Pinterest)
+      meta(property='og:title', content=title)
+      meta(property='og:description', content=description)
+      meta(property='og:site_name', content=title)
+      meta(property='og:image', content=image)
+      meta(property='fb:admins', content='')
+      meta(property='fb:app_id', content='')
+      meta(property='og:type', content='website')
+      meta(property='og:locale', content='')
+      meta(property='og:audio', content='')
+      meta(property='og:video', content='')
+      //- Favicons
+      //- link(rel='apple-touch-icon', sizes='57x57', href='/apple-icon-57x57.png')
+      //- link(rel='apple-touch-icon', sizes='60x60', href='/apple-icon-60x60.png')
+      //- link(rel='apple-touch-icon', sizes='72x72', href='/apple-icon-72x72.png')
+      //- link(rel='apple-touch-icon', sizes='76x76', href='/apple-icon-76x76.png')
+      //- link(rel='apple-touch-icon', sizes='114x114', href='/apple-icon-114x114.png')
+      //- link(rel='apple-touch-icon', sizes='120x120', href='/apple-icon-120x120.png')
+      //- link(rel='apple-touch-icon', sizes='144x144', href='/apple-icon-144x144.png')
+      //- link(rel='apple-touch-icon', sizes='152x152', href='/apple-icon-152x152.png')
+      //- link(rel='apple-touch-icon', sizes='180x180', href='/apple-icon-180x180.png')
+      //- link(rel='icon', type='image/png', sizes='192x192', href='/android-icon-192x192.png')
+      //- link(rel='icon', type='image/png', sizes='32x32', href='/favicon-32x32.png')
+      //- link(rel='icon', type='image/png', sizes='96x96', href='/favicon-96x96.png')
+      //- link(rel='icon', type='image/png', sizes='16x16', href='/favicon-16x16.png')
+      //- link(rel='manifest', href='/manifest.json')
+      //- meta(name='msapplication-TileColor', content='#ffffff')
+      //- meta(name='msapplication-TileImage', content='/ms-icon-144x144.png')
+      //- meta(name='theme-color', content='#ffffff')
+      link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css", rel="stylesheet")
+      link(href=stylesheet, rel="stylesheet")
+      script(src=script)
+
+  body
+    block body
+      header.navbar
+        block header
+          .container
+            .navbar-brand
+              a.navbar-item(href="/")
+                img(src="/logo.png" width=92 height=28)
+              a.navbar-burger(role="button"  aria-label="menu" aria-expanded="false" data-target="navbarBasicExample")
+                span(aria-hidden="true")
+                span(aria-hidden="true")
+                span(aria-hidden="true")
+
+            .navbar-menu
+              .navbar-start
+                .navbar-item
+                  a.button.is-primary(href="/post")
+                    | Post a message
+                    
+              .navbar-end
+                .navbar-item
+                  .buttons
+                    if user
+                      a.button(href="/account")
+                        span.icon-text
+                          span.icon 
+                            i.fas.fa-user
+                          span Account
+                    if !user
+                      a.button.is-primary(href="/register")
+                        strong Register
+                      a.button.is-light(href="/login")
+                        | Log in
+
+      main
+        block main
+          h1.title #{title}

@@ -1,0 +1,16 @@
+extends base.pug
+
+block append vars
+  - var stylesheet='/index.css'
+  - var script='/index.js'
+
+block main
+  .container
+    each post in posts
+      article.box
+        img(src=post.imageURL)
+        p= post.description
+        strong= post.owner
+        | &nbsp
+        small= post.timestamp
+

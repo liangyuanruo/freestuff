@@ -1,0 +1,52 @@
+# Local development environment configuration
+services:
+
+  db:
+    build:
+      context: db
+      target: dev
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+    ports:
+      - 5432:5432
+
+  blobstore:
+    build: blobstore
+    environment:
+      MINIO_ROOT_USER: "minioadmin"
+      MINIO_ROOT_PASSWORD: "minioadmin"
+    ports:
+      - 9000:9000
+      - 9001:9001
+  
+  cache:
+    build: cache
+    # password defined in redis.conf file
+    ports:
+      - 6379:6379
+      
+  app:
+    build: app
+    environment:
+      PORT: 1337
+      DB_HOST: "db"
+      DB_PORT: 5432
+      DB_USER: "postgres"
+      DB_PASSWORD: "postgres"
+      DB_NAME: "postgres"
+      BLOB_HOST: "blobstore"
+      BLOB_PORT: 9000
+      BLOB_USER: "minioadmin"
+      BLOB_PASSWORD: "minioadmin"
+      BLOB_BUCKET: "uploads"
+      BLOB_PATH: "http://localhost:9000/uploads/"
+      CACHE_HOST: "cache"
+      CACHE_PORT: 6379
+      CACHE_PASSWORD: "foobared"
+    ports:
+      - 1337:1337
+    depends_on:
+      - db
+      - blobstore
+      - cache

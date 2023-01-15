@@ -1,0 +1,34 @@
+Template & guide for the development & deployment of a basic production app
+
+# Development environment
+- Local Docker compose cluster for isolated dev infra
+- VSCode for an IDE connected to the dev containers
+- Standard JS for linting and formatting
+- Local testing (TBD)
+- Git branching startegy (TBD)
+- CI/CD strategy (TBD)
+
+# App structure
+- Postgres database
+- S3-compatible blobstore 
+- Redis cache
+- App server running express with server-side rendering
+
+# Deployment infrastructure (TBD)
+- Digital ocean (compose/swarm/manual config)
+- Dev/Staging/Prod environments
+- Incremental rollout
+- Autoscaling
+- Backups
+- Alerts
+
+# Get started
+- Install Docker Desktop
+- Install VS Code
+- Install TablePlus
+- Copy https://github.com/fynyky/web-app-template into your own repo
+- Create a Docker Dev Environment using the new repo
+- Check website working localhost
+- Open app container in VSCode from docker dev
+- In the VSCode terminal `npm run dev`
+- Make changes

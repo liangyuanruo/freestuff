@@ -1,0 +1,21 @@
+extends base.pug
+
+block append vars
+  - var stylesheet='/login.css'
+  - var script='/login.js'
+
+block main
+  .container
+    h1.title Login
+    form(action="login" method="POST")
+      .field
+        .control
+          label.label(for="name") Name
+          input.input(type="text" id="name" name="name")
+      .field
+        .control
+          label.label(for="password") Password
+          input.input(type="password" id="password" name="password")
+      .field
+        .control
+          button.button.is-primary(type="submit") Login
