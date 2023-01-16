@@ -157,7 +157,7 @@ app.use(express.static(publicPath))
 
 app.get('/', async (req, res) => {
   const query = `
-    SELECT post_description, post_created_at, post_image_key, account_name 
+    SELECT post_description, post_created_at, post_image_key 
     FROM post JOIN account 
     ON post_owner_id = account_id
     ORDER BY post_created_at DESC
@@ -165,7 +165,6 @@ app.get('/', async (req, res) => {
   const result = await db.query(query)
   const posts = result.rows.map(row => {
     return {
-      owner: row.account_name, 
       description: row.post_description,
       timestamp: row.post_created_at,
       imageURL: `${BLOB_PATH}${row.post_image_key}`
@@ -197,17 +196,10 @@ app.post('/post', auth.check('/login'), upload.single('file'), async (req, res) 
   res.redirect('/')
 })
 
-app.get('/register', auth.checkNot('/'), async (req, res) => {
-  res.render('register', { user: req.user })
-})
-app.post('/register', auth.checkNot('/'), async (req, res) => {
-  await auth.registerUser(req.body.name, req.body.password)
-  res.redirect('/login')
-})
 app.get('/login', auth.authenticate())
 
 app.get('/callback', auth.authenticate(), async (req, res) => {
-  res.send("callback " + req.user)
+  res.send("callback " + JSON.stringify(req.user))
 })
 
 app.post(
