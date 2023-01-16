@@ -12,12 +12,13 @@ import path from 'path'
 import pg from 'pg'
 import redis from 'redis'
 import connectRedis from 'connect-redis'
+import { SgidClient } from '@opengovsg/sgid-client'
 import { v4 as uuid } from 'uuid'
 import waitOn from 'wait-on'
 import Auth from './auth.js'
 
 // -----------------------------------------------------------------------------
-// Environmental Variables && Constants
+// Environmental Variables & Constants
 // -----------------------------------------------------------------------------
 const APP_PORT = process.env.APP_PORT ? process.env.APP_PORT : 1337
 const SESSION_SECRET = process.env.SESSION_SECRET
@@ -203,8 +204,10 @@ app.post('/register', auth.checkNot('/'), async (req, res) => {
   await auth.registerUser(req.body.name, req.body.password)
   res.redirect('/login')
 })
-app.get('/login', auth.checkNot('/'), async (req, res) => {
-  res.render('login', { user: req.user })
+app.get('/login', auth.authenticate())
+
+app.get('/callback', auth.authenticate(), async (req, res) => {
+  res.send("callback " + req.user)
 })
 
 app.post(
@@ -216,10 +219,7 @@ app.post(
       targetUrl = req.session.targetUrl
       delete req.session.targetUrl
     }
-    return auth.authenticate({
-      successRedirect: targetUrl,
-      failureRedirect: '/login'
-    })(req, res, next)
+    return auth.authenticate()(req, res, next)
   }
 )
 

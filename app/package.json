@@ -12,6 +12,7 @@
     "dev": "bash scripts/dev.sh"
   },
   "dependencies": {
+    "@opengovsg/sgid-client": "^1.0.4",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "bcrypt": "^5.0.1",
     "bulma": "^0.9.4",
@@ -22,7 +23,7 @@
     "minio": "^7.0.29",
     "multer": "^1.4.5-lts.1",
     "passport": "^0.6.0",
-    "passport-local": "^1.0.0",
+    "passport-strategy": "^1.0.0",
     "pg": "^8.7.3",
     "pug": "^3.0.2",
     "redis": "^4.2.0",
