@@ -1,2 +1,4 @@
 #!/bin/bash
-sass --watch src/sass:src/server/public & nodemon src/index.js
+rollup --watch --config rollup.config.js & /
+sass --watch src/sass:src/public & /
+nodemon src/index.js
