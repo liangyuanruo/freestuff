@@ -1,1 +1,22 @@
 @import base.sass
+
+.hero
+  display: flex
+  height: 20rem
+  background-color: $inverse-background-color
+  background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url("https://images.unsplash.com/photo-1609139003551-ee40f5f73ec0")
+  background-size: cover
+  background-position: center
+  color: $inverse-text-color
+  flex-direction: column
+  justify-content: center
+  align-items: center
+  text-align: center
+
+  .title
+    font-size: 3rem
+    line-height: 1
+    margin-bottom: 0.5rem
+
+  .subtitle
+    margin-bottom: 1rem

@@ -50,6 +50,7 @@ html
       //- meta(name='msapplication-TileColor', content='#ffffff')
       //- meta(name='msapplication-TileImage', content='/ms-icon-144x144.png')
       //- meta(name='theme-color', content='#ffffff')
+      link(href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css", rel="stylesheet")
       link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css", rel="stylesheet")
       link(href=stylesheet, rel="stylesheet")
       script(src=script)
@@ -58,28 +59,19 @@ html
     block body
       header.navbar
         block header
-          .container
-            .navbar-brand
-              a.navbar-item(href="/")
-                img(src="/logo.png" width=92 height=28)
-
-            .navbar-menu.is-active
-                    
-              .navbar-end
-                .navbar-item
-                  a.button.is-primary(href="/post")
-                    | List an item
-                .navbar-item
-                  .buttons
-                    if user
-                      a.button(href="/account")
-                        span.icon-text
-                          span.icon 
-                            i.fas.fa-user
-                          span Account
-                    if !user
-                      a.button.is-light(href="/login")
-                        | Log in
+          a.site-logo(href="/")
+            img(src="/logo.png" width=92 height=28)
+          .site-controls
+            a.button.primary(href="/post")
+              | List an item
+            if user
+              a.button(href="/account")
+                span.icon-text
+                  i.fas.fa-user
+                  |  Account
+            if !user
+              a.button(href="/login")
+                | Log in
 
       main
         block main
