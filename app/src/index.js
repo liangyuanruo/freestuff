@@ -218,7 +218,7 @@ app.post(
 app.post('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) next(err)
-    else res.redirect('back')
+    else res.redirect('/')
   })
 })
 

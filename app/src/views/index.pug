@@ -5,12 +5,121 @@ block append vars
   - var script='/index.js'
 
 block main
-  .container
-    each post in posts
-      article.box
-        img(src=post.imageURL)
-        p= post.description
-        strong= post.owner
-        | &nbsp
-        small= post.timestamp
+  section.hero.is-info
+    .hero-body.has-text-centered
+        h1.title.is-1 Freestuff
+        p.subtitle Give stuff away to people who need it
+        a.button.is-primary(href="/post") List an item
+  section.listings 
+    //- .listing.card 
+    //-   .card-image
+    //-     figure.image.is-4by3
+    //-     img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+    //-   .card-content
+    //-     .content
+    //-       | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+    //-       time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+
+
+    //- .listing.card
+    .columns
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+      .column.is-one-fifth
+        .card
+          .card-image
+            figure.image.is-4by3
+              img(src='https://bulma.io/images/placeholders/1280x960.png' alt='Placeholder image')
+          .card-content
+            .content
+              | Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+              time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
+
+  //- .container
+  //-   each post in posts
+  //-     article.box
+  //-       img(src=post.imageURL)
+  //-       p= post.description
+  //-       strong= post.owner
+  //-       | &nbsp
+  //-       small= post.timestamp
 

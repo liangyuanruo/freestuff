@@ -62,18 +62,13 @@ html
             .navbar-brand
               a.navbar-item(href="/")
                 img(src="/logo.png" width=92 height=28)
-              a.navbar-burger(role="button"  aria-label="menu" aria-expanded="false" data-target="navbarBasicExample")
-                span(aria-hidden="true")
-                span(aria-hidden="true")
-                span(aria-hidden="true")
 
-            .navbar-menu
-              .navbar-start
-                .navbar-item
-                  a.button.is-primary(href="/post")
-                    | Post a message
+            .navbar-menu.is-active
                     
               .navbar-end
+                .navbar-item
+                  a.button.is-primary(href="/post")
+                    | List an item
                 .navbar-item
                   .buttons
                     if user
@@ -83,8 +78,6 @@ html
                             i.fas.fa-user
                           span Account
                     if !user
-                      a.button.is-primary(href="/register")
-                        strong Register
                       a.button.is-light(href="/login")
                         | Log in
 
