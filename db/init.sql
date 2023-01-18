@@ -6,10 +6,10 @@ CREATE TABLE account (
   account_created_at TIMESTAMP DEFAULT current_timestamp
 );
 
-CREATE TABLE post (
-  post_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(), 
-  post_owner_id TEXT REFERENCES account(account_id),
-  post_description TEXT,
-  post_image_key TEXT,
-  post_created_at TIMESTAMP DEFAULT current_timestamp
+CREATE TABLE listing (
+  listing_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(), 
+  listing_owner_id TEXT REFERENCES account(account_id),
+  listing_description TEXT,
+  listing_image_key TEXT,
+  listing_created_at TIMESTAMP DEFAULT current_timestamp
 );

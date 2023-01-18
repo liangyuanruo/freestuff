@@ -157,38 +157,38 @@ app.use(express.static(publicPath))
 
 app.get('/', async (req, res) => {
   const query = `
-    SELECT post_description, post_created_at, post_image_key 
-    FROM post JOIN account 
-    ON post_owner_id = account_id
-    ORDER BY post_created_at DESC
+    SELECT listing_description, listing_created_at, listing_image_key 
+    FROM listing JOIN account 
+    ON listing_owner_id = account_id
+    ORDER BY listing_created_at DESC
   `
   const result = await db.query(query)
-  const posts = result.rows.map(row => {
+  const listings = result.rows.map(row => {
     return {
-      description: row.post_description,
-      timestamp: row.post_created_at,
-      imageURL: `${BLOB_PATH}${row.post_image_key}`
+      description: row.listing_description,
+      timestamp: row.listing_created_at,
+      imageURL: `${BLOB_PATH}${row.listing_image_key}`
     }
   })
-  res.render('index', { posts, user: req.user })
+  res.render('index', { listings, user: req.user })
 })
 
 app.get('/account', auth.check('/login'), async (req, res) => {
   res.render('account', { user: req.user })
 })
 
-app.get('/post', auth.check('/login'), async (req, res) => {
-  const results = (await db.query('SELECT * FROM post')).rows
-  res.render('post', { results, user: req.user })
+app.get('/listing', auth.check('/login'), async (req, res) => {
+  res.render('listing', { user: req.user })
 })
 
-app.post('/post', auth.check('/login'), upload.single('file'), async (req, res) => {
+app.post('/listing', auth.check('/login'), upload.single('file'), async (req, res) => {
   console.log('posting a file', req.file)
-  const owner = req.user.account_id
+  console.log("req.user", req.user)
+  const owner = req.user.id
   const description = req.body.description
   const image = req.file.key
   const query = `
-    INSERT INTO post(post_owner_id, post_description, post_image_key) 
+    INSERT INTO listing(listing_owner_id, listing_description, listing_image_key) 
     VALUES ($1, $2, $3) 
     RETURNING *
   `

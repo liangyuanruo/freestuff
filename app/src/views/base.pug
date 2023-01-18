@@ -62,13 +62,12 @@ html
           a.site-logo(href="/")
             img(src="/logo.png" width=92 height=28)
           .site-controls
-            a.button.primary(href="/post")
+            a.button.primary(href="/listing")
               | List an item
             if user
               a.button(href="/account")
-                span.icon-text
-                  i.fas.fa-user
-                  |  Account
+                i.fas.fa-user
+                |  Account
             if !user
               a.button(href="/login")
                 | Log in

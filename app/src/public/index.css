@@ -31,8 +31,17 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
+img {
+  display: block;
+}
+
 input[type=checkbox] {
   cursor: pointer;
+}
+
+.card, .listings .listing {
+  overflow: hidden;
+  border-radius: 0.2rem;
 }
 
 .navbar {
@@ -52,7 +61,7 @@ input[type=checkbox] {
 
 .button {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 0.7rem;
   border-radius: 0.2rem;
   text-decoration: none;
   color: #222;
@@ -82,6 +91,41 @@ input[type=checkbox] {
 }
 .hero .subtitle {
   margin-bottom: 1rem;
+}
+
+.listings {
+  display: flex;
+  background-color: #EEEEEE;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+.listings .listing {
+  margin: 1rem;
+  max-width: calc(33.3333333333% - 2rem);
+  background-color: #FFFFFF;
+  cursor: pointer;
+}
+.listings .listing img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+.listings .listing footer {
+  padding: 0.5rem 1rem;
+}
+.listings .listing footer .description {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.listings .listing footer .meta {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  color: #777;
 }
 
 /*# sourceMappingURL=index.css.map */

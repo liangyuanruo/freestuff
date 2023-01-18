@@ -31,8 +31,17 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 300;
 }
 
+img {
+  display: block;
+}
+
 input[type=checkbox] {
   cursor: pointer;
+}
+
+.card {
+  overflow: hidden;
+  border-radius: 0.2rem;
 }
 
 .navbar {
@@ -52,7 +61,7 @@ input[type=checkbox] {
 
 .button {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.2rem 0.7rem;
   border-radius: 0.2rem;
   text-decoration: none;
   color: #222;

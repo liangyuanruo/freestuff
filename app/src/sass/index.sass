@@ -20,3 +20,33 @@
 
   .subtitle
     margin-bottom: 1rem
+
+.listings
+  display: flex
+  background-color: $well-background-color
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: flex-start
+  .listing
+    @extend .card
+    margin: 1rem
+    max-width: calc(100%/3 - 2rem)
+    background-color: $content-background-color
+    cursor: pointer
+    img
+      width: 100%
+      aspect-ratio: 4/3
+      object-fit: cover
+    footer
+      padding: 0.5rem 1rem
+      .description
+        margin-top: 0
+        margin-bottom: 0.5rem
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+      .meta
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        color: $hint-color

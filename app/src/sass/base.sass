@@ -18,7 +18,7 @@ $inverse-hint-color: rgba($inverse-text-color, 0.7)
 // Styles
 $body-font-family: Arial, sans-serif
 $header-font-family: Arial, sans-serif
-$card-border-radius: 0.4rem
+$card-border-radius: 0.2rem
 $float-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5)
 $depressed-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5)
 $glow-start-shadow: 0 0 0 0 rgba($glow-color, 1)
@@ -56,6 +56,9 @@ h1, h2, h3, h4, h5, h6
   font-family: $header-font-family
   font-weight: 300
 
+img
+  display: block
+
 // section > h1,
 // section > h2,
 // section > h3,
@@ -68,6 +71,11 @@ h1, h2, h3, h4, h5, h6
 
 input[type="checkbox"]
   cursor: pointer
+
+.card 
+  overflow: hidden
+  border-radius: $card-border-radius
+  // box-shadow: $float-shadow
 
 ////////////////////////////////////////////////////////////////////////////////
 // Specific Styles
@@ -89,8 +97,8 @@ input[type="checkbox"]
 
 .button
   display: inline-block
-  padding: 0.5rem 1rem
-  border-radius: $card-border-radius/2
+  padding: 0.2rem 0.7rem
+  border-radius: $card-border-radius
   text-decoration: none
   color: $text-color
   &.primary
