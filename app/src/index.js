@@ -160,7 +160,7 @@ app.use(express.static(publicPath))
 
 app.get('/', async (req, res) => {
   const query = `
-    SELECT listing_description, listing_created_at, listing_image_key 
+    SELECT listing_description, listing_location, listing_created_at, listing_image_key 
     FROM listing JOIN account 
     ON listing_owner_id = account_id
     ORDER BY listing_created_at DESC
@@ -170,6 +170,7 @@ app.get('/', async (req, res) => {
     return {
       description: row.listing_description,
       timestamp: dayjs(row.listing_created_at).fromNow(),
+      location: row.listing_location,
       imageURL: `${BLOB_PATH}${row.listing_image_key}`
     }
   })
@@ -189,13 +190,33 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
   console.log("req.user", req.user)
   const owner = req.user.id
   const description = req.body.description
+  const category = req.body.category
+  const location = req.body.location
+  const pickup = req.body.pickup
+  const contact = req.body.contact
   const image = req.file.key
   const query = `
-    INSERT INTO listing(listing_owner_id, listing_description, listing_image_key) 
-    VALUES ($1, $2, $3) 
+    INSERT INTO listing(
+      listing_owner_id,
+      listing_description,
+      listing_category,
+      listing_location,
+      listing_pickup,
+      listing_contact,
+      listing_image_key
+    ) 
+    VALUES ($1, $2, $3, $4, $5, $6, $7) 
     RETURNING *
   `
-  await db.query(query, [owner, description, image])
+  await db.query(query, [
+    owner,
+    description,
+    category,
+    location,
+    pickup,
+    contact,
+    image
+  ])
   res.redirect('/')
 })
 

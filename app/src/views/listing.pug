@@ -1,18 +1,30 @@
 extends base.pug
 
 block append vars
-  - var stylesheet='/post.css'
-  - var script='/post.js'
+  - var stylesheet='/listing.css'
+  - var script='/listing.js'
 
 block main
   .container
     h1.title Post a new message
-    form(action="post" method="POST" enctype="multipart/form-data")
+    img.preview(src="https://via.placeholder.com/150")
+    form(action="listing" method="POST" enctype="multipart/form-data")
       .field
-        .control 
-          textarea.textarea(type='text' id="description" name="description" placeholder='Text input')
+        label(for="category") category
+        input(id="category" name="category" type="text")
       .field
-        .control
+        label(for="location") location
+        input(id="location" name="location" type="text")
+      .field
+        label(for="pickup") pickup
+        input(id="pickup" name="pickup" type="text")
+      .field
+        label(for="contact") contact
+        input(id="contact" name="contact" type="text")
+      .field
+        label(for="description") description
+        textarea(type='text' id="description" name="description" placeholder='Text input')
+      .field
         input(type='file' id="file" name="file" accept="image/png, image/jpeg")
       .field
         .control
