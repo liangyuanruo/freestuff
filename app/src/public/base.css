@@ -74,8 +74,5 @@ input[type=checkbox] {
 .navbar .site-logo img {
   display: block;
 }
-.navbar .site-controls .button:not(:last-child) {
-  margin-right: 0.5rem;
-}
 
 /*# sourceMappingURL=base.css.map */

@@ -74,10 +74,6 @@ input[type=checkbox] {
 .navbar .site-logo img {
   display: block;
 }
-.navbar .site-controls .button:not(:last-child), .navbar .site-controls main form .fields .field button:not(:last-child), main form .fields .field .navbar .site-controls button:not(:last-child), .navbar .site-controls main form .image-field label[for=file]:not(:last-child), main form .image-field .navbar .site-controls label[for=file]:not(:last-child) {
-  margin-right: 0.5rem;
-}
-
 main form {
   display: flex;
   padding: 1rem;
