@@ -126,6 +126,14 @@ input[type=checkbox] {
   flex-direction: row;
   justify-content: space-between;
   color: #777;
+  white-space: nowrap;
+}
+.listings .listing footer .meta .location {
+  margin-right: 2em;
+}
+.listings .listing footer .meta time {
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /*# sourceMappingURL=index.css.map */

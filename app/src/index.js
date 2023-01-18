@@ -1,6 +1,8 @@
 // -----------------------------------------------------------------------------
 // Dependencies
 // -----------------------------------------------------------------------------
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime.js'
 import express from 'express'
 import flash from 'express-flash'
 import session from 'express-session'
@@ -44,6 +46,7 @@ const CACHE_PASSWORD = process.env.CACHE_PASSWORD ? process.env.CACHE_PASSWORD :
 // -----------------------------------------------------------------------------
 // Initialization
 // -----------------------------------------------------------------------------
+dayjs.extend(relativeTime)
 
 // Setup the database connection
 console.log(`Waiting on database availability ${DB_HOST}:${DB_PORT}`)
@@ -166,7 +169,7 @@ app.get('/', async (req, res) => {
   const listings = result.rows.map(row => {
     return {
       description: row.listing_description,
-      timestamp: row.listing_created_at,
+      timestamp: dayjs(row.listing_created_at).fromNow(),
       imageURL: `${BLOB_PATH}${row.listing_image_key}`
     }
   })

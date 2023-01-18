@@ -11,95 +11,14 @@ block main
         .subtitle Give stuff away to people who need it
         a.button.primary(href="/post") List an item
   section.listings
-    article.listing
-      img(src='https://images.unsplash.com/photo-1585659722983-3a675dabf23d?' alt='Placeholder image')
-      footer 
-        p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        small.meta
-          .location
-            i.fas.fa-location-dot
-            |  Tampines
-          time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
-    article.listing
-      img(src='https://images.unsplash.com/photo-1585659722983-3a675dabf23d?' alt='Placeholder image')
-      footer 
-        p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        small.meta
-          .location
-            i.fas.fa-location-dot
-            |  Tampines
-          time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
-    article.listing
-      img(src='https://images.unsplash.com/photo-1585659722983-3a675dabf23d?' alt='Placeholder image')
-      footer 
-        p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        small.meta
-          .location
-            i.fas.fa-location-dot
-            |  Tampines
-          time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
-    article.listing
-      img(src='https://images.unsplash.com/photo-1585659722983-3a675dabf23d?' alt='Placeholder image')
-      footer 
-        p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        small.meta
-          .location
-            i.fas.fa-location-dot
-            |  Tampines
-          time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
-    article.listing
-      img(src='https://images.unsplash.com/photo-1585659722983-3a675dabf23d?' alt='Placeholder image')
-      footer 
-        p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        small.meta
-          .location
-            i.fas.fa-location-dot
-            |  Tampines
-          time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
-    article.listing
-      img(src='https://images.unsplash.com/photo-1585659722983-3a675dabf23d?' alt='Placeholder image')
-      footer 
-        p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        small.meta
-          .location
-            i.fas.fa-location-dot
-            |  Tampines
-          time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
-    article.listing
-      img(src='https://images.unsplash.com/photo-1585659722983-3a675dabf23d?' alt='Placeholder image')
-      footer 
-        p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        small.meta
-          .location
-            i.fas.fa-location-dot
-            |  Tampines
-          time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
-    article.listing
-      img(src='https://images.unsplash.com/photo-1585659722983-3a675dabf23d?' alt='Placeholder image')
-      footer 
-        p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        small.meta
-          .location
-            i.fas.fa-location-dot
-            |  Tampines
-          time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
-    article.listing
-      img(src='https://images.unsplash.com/photo-1585659722983-3a675dabf23d?' alt='Placeholder image')
-      footer 
-        p.description Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        small.meta
-          .location
-            i.fas.fa-location-dot
-            |  Tampines
-          time(datetime='2016-1-1') 11:09 PM - 1 Jan 2016
-
-
-  //- .container
-  //-   each post in posts
-  //-     article.box
-  //-       img(src=post.imageURL)
-  //-       p= post.description
-  //-       strong= post.owner
-  //-       | &nbsp
-  //-       small= post.timestamp
-
+    each listing in listings
+      article.listing
+        img(src=listing.imageURL)
+        footer
+          p.description= listing.description
+          small.meta
+            .location
+              i.fas.fa-location-dot
+              |  Tampines
+            time(datetime='2016-1-1')=listing.timestamp
+  
