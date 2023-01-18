@@ -6,6 +6,7 @@
 // Colors
 $site-color: #4A90E2
 $secondary-color: #78b5ff
+$action-color: #209CEE
 $highlight-color: #FF5722
 $glow-color: #77FFFF
 $content-background-color: #FFFFFF
@@ -15,10 +16,12 @@ $text-color: #222
 $inverse-text-color: #FFFFFF
 $hint-color: #777
 $inverse-hint-color: rgba($inverse-text-color, 0.7)
+$outline-color: #CCC
+
 // Styles
 $body-font-family: Arial, sans-serif
 $header-font-family: Arial, sans-serif
-$card-border-radius: 0.2rem
+$card-border-radius: 0.3rem
 $float-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5)
 $depressed-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5)
 $glow-start-shadow: 0 0 0 0 rgba($glow-color, 1)
@@ -77,6 +80,22 @@ input[type="checkbox"]
   border-radius: $card-border-radius
   // box-shadow: $float-shadow
 
+.hidden
+  display: none !important
+
+.button
+  display: inline-block
+  padding: 0.2rem 0.7rem
+  border: none
+  border-radius: $card-border-radius
+  text-decoration: none
+  color: $text-color
+  cursor: pointer
+  line-height: 1.7
+  &.primary
+    background-color: $action-color
+    color: $inverse-text-color
+
 ////////////////////////////////////////////////////////////////////////////////
 // Specific Styles
 ////////////////////////////////////////////////////////////////////////////////
@@ -95,14 +114,5 @@ input[type="checkbox"]
     .button:not(:last-child)
       margin-right: 0.5rem
 
-.button
-  display: inline-block
-  padding: 0.2rem 0.7rem
-  border-radius: $card-border-radius
-  text-decoration: none
-  color: $text-color
-  &.primary
-    background-color: $highlight-color
-    color: $inverse-text-color
 
 

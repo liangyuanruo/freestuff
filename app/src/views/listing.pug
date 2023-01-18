@@ -5,26 +5,29 @@ block append vars
   - var script='/listing.js'
 
 block main
-  .container
-    h1.title Post a new message
-    img.preview(src="https://via.placeholder.com/150")
-    form(action="listing" method="POST" enctype="multipart/form-data")
+  //- img.preview(src="https://via.placeholder.com/150")
+  form(action="listing" method="POST" enctype="multipart/form-data")
+    .image-field 
+      i.fa-solid.fa-image
+      label(for="file") Add a photo
+      input(type='file' id="file" name="file" accept="image/png, image/jpeg")
+      img.preview.hidden(src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==")
+      label.change.hidden(for="file") Change photo
+    .fields
       .field
-        label(for="category") category
+        label(for="category") Category
         input(id="category" name="category" type="text")
       .field
-        label(for="location") location
+        label(for="location") Location
         input(id="location" name="location" type="text")
       .field
-        label(for="pickup") pickup
+        label(for="pickup") Pickup
         input(id="pickup" name="pickup" type="text")
       .field
-        label(for="contact") contact
+        label(for="contact") Contact
         input(id="contact" name="contact" type="text")
       .field
-        label(for="description") description
-        textarea(type='text' id="description" name="description" placeholder='Text input')
+        label(for="description") Description
+        input(id="description" name="description" type="text")
       .field
-        input(type='file' id="file" name="file" accept="image/png, image/jpeg")
-      .field
-        button(type="submit") Make post
+        button.primary(type="submit") List item
