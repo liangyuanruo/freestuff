@@ -32,6 +32,18 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 400;
 }
 
+input[type=text], select {
+  appearance: none;
+  border-radius: 0.3rem;
+  border-color: #CCC;
+  border-style: solid;
+  border-width: 1px;
+  padding: 0.5rem 1rem;
+}
+input[type=text]::placeholder, select::placeholder {
+  color: #999;
+}
+
 input[type=checkbox] {
   cursor: pointer;
 }
@@ -81,6 +93,10 @@ input[type=checkbox] {
   font-family: Caveat, sans-serif;
   color: #FE938C;
   text-decoration: none;
+}
+main {
+  border-top: 3px solid;
+  border-color: #FE938C;
 }
 main form {
   display: flex;
@@ -141,14 +157,6 @@ main form .fields .field.delivery {
 }
 main form .fields .field label {
   margin-bottom: 0.3rem;
-}
-main form .fields .field input[type=text], main form .fields .field select {
-  appearance: none;
-  border-radius: 0.3rem;
-  border-color: #CCC;
-  border-style: solid;
-  border-width: 1px;
-  padding: 0.5rem 1rem;
 }
 main form .fields .field input[type=radio] {
   display: none;

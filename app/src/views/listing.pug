@@ -24,7 +24,6 @@ block main
           option(value='tools') Tools
 
       .field
-
         label(for="location") Location 
         select#location(name='location')
           option(value='ang moh kio') Ang Moh Kio
@@ -42,10 +41,16 @@ block main
         label.button(for='drop-off') Drop off
 
       .field
-        label(for="contact") Contact Information
-        input(id="contact" name="contact" type="text")
+        label(for="contact") Contact Details
+        input(
+          id="contact" name="contact" type="text" 
+          placeholder="How should people get in touch with you?"
+        )
       .field
         label(for="description") Description
-        input(id="description" name="description" type="text")
+        input(
+          id="description" name="description" type="text"
+          placeholder="Details about the item that would be useful or interesting!"
+        )
       .field
         button.primary(type="submit") List item

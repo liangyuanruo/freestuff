@@ -13,7 +13,7 @@ $content-background-color: #FFFFFF
 $well-background-color: #EEEEEE
 $outline-color: #CCC
 $text-color: #222
-$hint-color: #777
+$hint-color: #999
 
 $inverse-background-color: rgba(0,0,0,0.8)
 $inverse-text-color: #FFFFFF
@@ -55,6 +55,16 @@ h1, h2, h3, h4, h5, h6
   font-family: $header-font-family
   font-weight: 400
 
+input[type=text], select
+  appearance: none
+  border-radius: $card-border-radius
+  border-color: $outline-color
+  border-style: solid
+  border-width: 1px
+  padding: 0.5rem 1rem
+  &::placeholder
+    color: $hint-color
+    
 input[type="checkbox"]
   cursor: pointer
 
