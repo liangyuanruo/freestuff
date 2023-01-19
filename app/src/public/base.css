@@ -1,4 +1,5 @@
-@import 'https://fonts.googleapis.com/css?family=Josefin+Sans:300';
+@import 'https://fonts.googleapis.com/css2?family=Caveat&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap';
 * {
   box-sizing: border-box;
 }
@@ -20,19 +21,15 @@ html {
 body {
   color: #222;
   line-height: 1.7;
-  font-family: Arial, sans-serif;
-  font-weight: 300;
+  font-family: Heebo, sans-serif;
+  font-weight: 400;
 }
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: Arial, sans-serif;
-  font-weight: 300;
-}
-
-img {
-  display: block;
+  font-family: Caveat, sans-serif;
+  font-weight: 400;
 }
 
 input[type=checkbox] {
@@ -50,17 +47,23 @@ input[type=checkbox] {
 
 .button {
   display: inline-block;
-  padding: 0.2rem 0.7rem;
   border: none;
-  border-radius: 0.3rem;
-  text-decoration: none;
-  color: #222;
-  cursor: pointer;
+  padding: 0.3rem 0.8rem;
   line-height: 1.7;
+  border-radius: 0.3rem;
+  color: #222;
+  text-decoration: none;
+  cursor: pointer;
 }
 .button.primary {
-  background-color: #209CEE;
+  background-color: #FD685D;
   color: #FFFFFF;
+}
+.button:hover {
+  background-color: #FFA8A3;
+}
+.button:active {
+  background-color: #ff7870;
 }
 
 .navbar {
@@ -71,8 +74,12 @@ input[type=checkbox] {
   justify-content: space-between;
   align-items: center;
 }
-.navbar .site-logo img {
+.navbar .site-logo {
   display: block;
+  font-size: 1.5rem;
+  font-family: Caveat, sans-serif;
+  color: #FE938C;
+  text-decoration: none;
 }
 
 /*# sourceMappingURL=base.css.map */

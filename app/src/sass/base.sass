@@ -1,33 +1,29 @@
-@import 'https://fonts.googleapis.com/css?family=Josefin+Sans:300'
+@import 'https://fonts.googleapis.com/css2?family=Caveat&display=swap'
+@import 'https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Variables
 ////////////////////////////////////////////////////////////////////////////////
 // Colors
-$site-color: #4A90E2
-$secondary-color: #78b5ff
-$action-color: #209CEE
-$highlight-color: #FF5722
-$glow-color: #77FFFF
+$brand-color: #FE938C
+$action-color: #FD685D
+$highlight-color: #FFA8A3
+
 $content-background-color: #FFFFFF
 $well-background-color: #EEEEEE
-$inverse-background-color: rgba(0,0,0,0.8)
-$text-color: #222
-$inverse-text-color: #FFFFFF
-$hint-color: #777
-$inverse-hint-color: rgba($inverse-text-color, 0.7)
 $outline-color: #CCC
+$text-color: #222
+$hint-color: #777
+
+$inverse-background-color: rgba(0,0,0,0.8)
+$inverse-text-color: #FFFFFF
+$inverse-hint-color: rgba($inverse-text-color, 0.7)
 
 // Styles
-$body-font-family: Arial, sans-serif
-$header-font-family: Arial, sans-serif
+$header-font-family: Caveat, sans-serif
+$body-font-family: Heebo, sans-serif
 $card-border-radius: 0.3rem
-$float-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5)
-$depressed-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.5)
-$glow-start-shadow: 0 0 0 0 rgba($glow-color, 1)
-$glow-end-shadow: 0 0 1rem 2rem rgba($glow-color, 0)
-$pulse-start-shadow: 0 0 0 0 rgba($glow-color, 1)
-$pulse-end-shadow: 0 0 0.5rem 1rem rgba($glow-color, 0)
+
 // Breakpoints
 $xs-max: 400px
 $small-max: 650px
@@ -51,26 +47,13 @@ body
   color: $text-color
   line-height: 1.7
   font-family: $body-font-family
-  font-weight: 300
+  font-weight: 400
 
 h1, h2, h3, h4, h5, h6
   margin-top: 0
   margin-bottom: 0
   font-family: $header-font-family
-  font-weight: 300
-
-img
-  display: block
-
-// section > h1,
-// section > h2,
-// section > h3,
-// section > h4,
-// section > h5,
-// section > h6
-//   margin-top: 1em
-//   margin-bottom: 1em
-//   color: $site-color
+  font-weight: 400
 
 input[type="checkbox"]
   cursor: pointer
@@ -78,23 +61,26 @@ input[type="checkbox"]
 .card 
   overflow: hidden
   border-radius: $card-border-radius
-  // box-shadow: $float-shadow
 
 .hidden
   display: none !important
 
 .button
   display: inline-block
-  padding: 0.2rem 0.7rem
   border: none
-  border-radius: $card-border-radius
-  text-decoration: none
-  color: $text-color
-  cursor: pointer
+  padding: 0.3rem 0.8rem
   line-height: 1.7
+  border-radius: $card-border-radius
+  color: $text-color
+  text-decoration: none
+  cursor: pointer
   &.primary
     background-color: $action-color
     color: $inverse-text-color
+  &:hover
+    background-color: $highlight-color
+  &:active
+    background-color: darken($highlight-color, 10%)
 
 ////////////////////////////////////////////////////////////////////////////////
 // Specific Styles
@@ -107,10 +93,12 @@ input[type="checkbox"]
   justify-content: space-between
   align-items: center
 
-  .site-logo img
+  .site-logo
     display: block
-  
+    font-size: 1.5rem
+    font-family: $header-font-family
+    color: $brand-color
+    text-decoration: none
+
   .site-controls
-
-
-
+    
