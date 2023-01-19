@@ -45,21 +45,31 @@ main
       
 
     .fields
+      flex-grow: 1
       .field
         display: flex
         margin-bottom: 1rem
         &:last-child
           margin-bottom: 0rem
         flex-direction: column
+        &.delivery
+          flex-direction: row
         label
           margin-bottom: 0.3rem
 
-        input[type=text]
+        input[type=text], select
+          appearance: none
           border-radius: $card-border-radius
           border-color: $outline-color
           border-style: solid
           border-width: 1px
           padding: 0.5rem 1rem
+        
+        input[type=radio]
+          display: none
+
+        input[type=radio]:checked + .button
+          background-color: $glow-color
         
         button
           @extend .button

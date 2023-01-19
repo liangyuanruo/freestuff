@@ -15,16 +15,34 @@ block main
       label.change.hidden(for="file") Change photo
     .fields
       .field
-        label(for="category") Category
-        input(id="category" name="category" type="text")
+        label(for="category") Category 
+        select#category(name='category')
+          option(value='clothes') Clothes
+          option(value='furniture') Furniture
+          option(value='appliances') Appliances
+          option(value='toys') Toys &amp; Games
+          option(value='tools') Tools
+
       .field
-        label(for="location") Location
-        input(id="location" name="location" type="text")
+
+        label(for="location") Location 
+        select#location(name='location')
+          option(value='ang moh kio') Ang Moh Kio
+          option(value='bukit timah') Bukit Timah
+          option(value='orchard') Orchard
+          option(value='jurong') Jurong
+          option(value='woodlands') Woodlands
+
+      .field.delivery
+        input#pick-up(type='radio' name='pickup' value='pick up')
+        label.button(for='pick-up') Pickup
+        input#donate(type='radio' name='pickup' value='donate')
+        label.button(for='donate') Donate
+        input#drop-off(type='radio' name='pickup' value='drop off')
+        label.button(for='drop-off') Drop off
+
       .field
-        label(for="pickup") Pickup
-        input(id="pickup" name="pickup" type="text")
-      .field
-        label(for="contact") Contact
+        label(for="contact") Contact Information
         input(id="contact" name="contact" type="text")
       .field
         label(for="description") Description
