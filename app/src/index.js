@@ -186,15 +186,25 @@ app.get('/listing', auth.check('/login'), async (req, res) => {
 })
 
 app.post('/listing', auth.check('/login'), upload.single('file'), async (req, res) => {
-  console.log('posting a file', req.file)
-  console.log("req.user", req.user)
-  const owner = req.user.id
-  const description = req.body.description
-  const category = req.body.category
-  const location = req.body.location
-  const pickup = req.body.pickup
-  const contact = req.body.contact
-  const image = req.file.key
+  const owner = req?.user?.id
+  const description = req?.body?.description
+  const category = req?.body?.category
+  const location = req?.body?.location
+  const pickup = req?.body?.pickup
+  const contact = req?.body?.contact
+  const image = req?.file?.key
+  // Validate inputs. Only create a new object if all fields are set
+  if (
+    owner === undefined ||
+    description === undefined ||
+    category === undefined ||
+    location === undefined ||
+    pickup === undefined ||
+    contact === undefined ||
+    image === undefined
+  ) {
+    res.sendStatus(422)
+  }
   const query = `
     INSERT INTO listing(
       listing_owner_id,
