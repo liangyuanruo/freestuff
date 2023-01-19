@@ -233,7 +233,8 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
 app.get('/login', auth.authenticate())
 
 app.get('/callback', auth.authenticate(), async (req, res) => {
-  res.send("callback " + JSON.stringify(req.user))
+  if (req.session.targetUrl) res.redirect(req.session.targetUrl)
+  else res.redirect('/')
 })
 
 app.post(
