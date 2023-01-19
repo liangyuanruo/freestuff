@@ -6,11 +6,11 @@
   background-color: $inverse-background-color
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url("https://images.unsplash.com/photo-1609139003551-ee40f5f73ec0")
   background-size: cover
-  background-position: center
+  background-position: 50% 25%
   color: $inverse-text-color
   flex-direction: column
-  justify-content: center
   align-items: center
+  justify-content: center
   text-align: center
 
   .title
@@ -20,7 +20,7 @@
     color: $brand-color
 
   .subtitle
-    margin-bottom: 1rem
+    margin-bottom: 1.5rem
 
 .listings
   display: flex
@@ -28,17 +28,20 @@
   flex-direction: row
   flex-wrap: wrap
   justify-content: flex-start
+
   .listing
     @extend .card
     margin: 1rem
     width: calc(100%/3 - 2rem)
-    background-color: $content-background-color
     cursor: pointer
     img
+      display: block
       width: 100%
       aspect-ratio: 4/3
       object-fit: cover
     footer
+      border-top: 5px solid
+      border-color: $brand-color
       padding: 0.5rem 1rem
       .description
         margin-top: 0
@@ -50,8 +53,8 @@
         display: flex
         flex-direction: row
         justify-content: space-between
-        color: $hint-color
         white-space: nowrap
+        color: $hint-color
         .location
           margin-right: 2em
         time

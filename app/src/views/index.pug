@@ -5,17 +5,20 @@ block append vars
   - var script='/index.js'
 
 block main
+
   section.hero
     .hero-body.has-text-centered
-        h1.title Freestuff
-        .subtitle Clear clutter &amp; help people
-        a.button.primary(href="/listing") List an item
+      h1.title Freestuff
+      .subtitle Clear clutter &amp; help people
+      a.button.primary(href="/listing") List an item
+
   section.listings
     each listing in listings
+
       article.listing
         img(src=listing.imageURL)
         footer
-          p.description= listing.description
+          p.description=listing.description
           small.meta
             .location
               i.fas.fa-location-dot
