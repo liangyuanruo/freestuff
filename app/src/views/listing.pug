@@ -41,6 +41,7 @@ block main
         .field
           label(for="category") Category 
           select#category(name='category')
+            option(value='' selected disabled hidden) - Choose a category -
             option(value='clothes') Clothes
             option(value='furniture') Furniture
             option(value='appliances') Appliances
@@ -57,6 +58,7 @@ block main
         .field
           label(for="location") Location 
           select#location(name='location')
+            option(value='' selected disabled hidden) - Choose a location -
             option(value='ang moh kio') Ang Moh Kio
             option(value='bukit timah') Bukit Timah
             option(value='orchard') Orchard
