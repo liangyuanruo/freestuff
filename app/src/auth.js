@@ -88,6 +88,7 @@ export default class Auth {
     if (results.rows[0] === undefined) return null
     const user = {
       id: results.rows[0].account_id,
+      charity: results.rows[0].account_charity,
       createdAt: results.rows[0].account_created_at
     }
     return user
