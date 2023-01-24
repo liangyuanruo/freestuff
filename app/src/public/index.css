@@ -129,8 +129,11 @@ input[type=checkbox] {
   justify-content: flex-start;
 }
 .listings .listing {
+  display: block;
   margin: 1rem;
   width: calc(33.3333333333% - 2rem);
+  color: #222;
+  text-decoration: none;
   cursor: pointer;
 }
 .listings .listing img {
@@ -160,6 +163,9 @@ input[type=checkbox] {
 }
 .listings .listing footer .meta .location {
   margin-right: 2em;
+}
+.listings .listing footer .meta .location i {
+  color: #FE938C;
 }
 .listings .listing footer .meta time {
   overflow: hidden;

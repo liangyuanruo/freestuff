@@ -15,7 +15,7 @@ block main
   section.listings
     each listing in listings
 
-      article.listing
+      a.listing(href="/listing/" + listing.id)
         img(src=listing.imageURL)
         footer
           p.description=listing.description

@@ -164,14 +164,14 @@ app.get('/', async (req, res) => {
   let result
   if (req.user?.charity) {
     result = await db.query(`
-      SELECT listing_description, listing_location, listing_created_at, listing_image_key 
+      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
       FROM listing JOIN account 
       ON listing_owner_id = account_id
       ORDER BY listing_created_at DESC
     `)
   } else if (req.user?.id) {
     result = await db.query(`
-      SELECT listing_description, listing_location, listing_created_at, listing_image_key 
+      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
       FROM listing JOIN account 
       ON listing_owner_id = account_id
       WHERE (listing_created_at < NOW() - INTERVAL '48 hours')
@@ -180,7 +180,7 @@ app.get('/', async (req, res) => {
     `, [req.user.id])
   } else {
     result = await db.query(`
-      SELECT listing_description, listing_location, listing_created_at, listing_image_key 
+      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
       FROM listing JOIN account 
       ON listing_owner_id = account_id
       WHERE listing_created_at < NOW() - INTERVAL '48 hours'
@@ -190,6 +190,7 @@ app.get('/', async (req, res) => {
   // Non charity users only see stuff older than 48 hours
   const listings = result.rows.map(row => {
     return {
+      id: row.listing_id,
       description: row.listing_description,
       timestamp: dayjs(row.listing_created_at).fromNow(),
       location: row.listing_location,
@@ -201,6 +202,16 @@ app.get('/', async (req, res) => {
 
 app.get('/account', auth.check('/login'), async (req, res) => {
   res.render('account', { user: req.user })
+})
+
+app.get('/listing/:listingId', auth.check('/login'), async (req, res) => {
+  const result = await db.query(`
+    SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
+    FROM listing JOIN account 
+    ON listing_owner_id = account_id
+    WHERE listing_id = $1
+  `, [ req.params.listingId ])
+  res.render('listing', { user: req.user })
 })
 
 app.get('/listing', auth.check('/login'), async (req, res) => {

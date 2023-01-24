@@ -30,9 +30,12 @@
   justify-content: flex-start
 
   .listing
+    display: block
     @extend .card
     margin: 1rem
     width: calc(100%/3 - 2rem)
+    color: $text-color
+    text-decoration: none
     cursor: pointer
     img
       display: block
@@ -57,6 +60,8 @@
         color: $hint-color
         .location
           margin-right: 2em
+          i
+            color: $brand-color
         time
           overflow: hidden
           text-overflow: ellipsis
