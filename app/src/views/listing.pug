@@ -32,13 +32,12 @@ block main
           option(value='jurong') Jurong
           option(value='woodlands') Woodlands
 
-      .field.delivery
-        input#pick-up(type='radio' name='pickup' value='pick up')
-        label.button(for='pick-up') Pickup
-        input#donate(type='radio' name='pickup' value='donate')
-        label.button(for='donate') Donate
-        input#drop-off(type='radio' name='pickup' value='drop off')
-        label.button(for='drop-off') Drop off
+      .field
+        label(for="collection") Collection
+        input(
+          id="collection" name="collection" type="text" 
+          placeholder="How should people collect the item?"
+        )
 
       .field
         label(for="contact") Contact Details

@@ -227,6 +227,7 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
     image === undefined
   ) {
     res.sendStatus(422)
+    return
   }
   const query = `
     INSERT INTO listing(
