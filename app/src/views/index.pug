@@ -16,7 +16,7 @@ block main
     each listing in listings
 
       a.listing(href="/listing/" + listing.id)
-        img(src=listing.imageURL)
+        img(src=listing.imageURL loading="lazy")
         footer
           p.description=listing.description
           small.meta
