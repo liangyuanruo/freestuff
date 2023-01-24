@@ -78,6 +78,10 @@ input[type=checkbox] {
 .button:active {
   background-color: #ff7870;
 }
+.button:disabled {
+  background-color: #999;
+  cursor: auto;
+}
 
 .navbar {
   display: flex;

@@ -14,7 +14,6 @@ import path from 'path'
 import pg from 'pg'
 import redis from 'redis'
 import connectRedis from 'connect-redis'
-import { SgidClient } from '@opengovsg/sgid-client'
 import { v4 as uuid } from 'uuid'
 import waitOn from 'wait-on'
 import Auth from './auth.js'
@@ -38,7 +37,7 @@ const BLOB_PORT = process.env.BLOB_PORT ? parseInt(process.env.BLOB_PORT) : 9000
 const BLOB_USER = process.env.BLOB_USER ? process.env.BLOB_USER : 'minioadmin'
 const BLOB_PASSWORD = process.env.BLOB_PASSWORD ? process.env.BLOB_PASSWORD : 'minioadmin'
 const BLOB_BUCKET = process.env.BLOB_BUCKET ? process.env.BLOB_BUCKET : 'uploads'
-const BLOB_PATH = process.env.BLOB_PATH ? process.env.BLOB_PATH : 'http://localhost:9000/uploads/';
+const BLOB_PATH = process.env.BLOB_PATH ? process.env.BLOB_PATH : 'http://localhost:9000/uploads/'
 const CACHE_HOST = process.env.CACHE_HOST ? process.env.CACHE_HOST : 'cache'
 const CACHE_PORT = process.env.CACHE_PORT ? parseInt(process.env.CACHE_PORT) : 6379
 const CACHE_PASSWORD = process.env.CACHE_PASSWORD ? process.env.CACHE_PASSWORD : 'foobared'

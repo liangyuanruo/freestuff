@@ -58,7 +58,7 @@ input[type=checkbox] {
   display: none !important;
 }
 
-.button, main form .fields .field button, main form .image-field label[for=file] {
+.button, main form .fields .field button[type=submit], main form .image-field label[for=file] {
   display: inline-block;
   border: none;
   padding: 0.3rem 0.8rem;
@@ -68,15 +68,19 @@ input[type=checkbox] {
   text-decoration: none;
   cursor: pointer;
 }
-.button.primary, main form .fields .field button.primary, main form .image-field label.primary[for=file] {
+.button.primary, main form .fields .field button.primary[type=submit], main form .image-field label.primary[for=file] {
   background-color: #FD685D;
   color: #FFFFFF;
 }
-.button:hover, main form .fields .field button:hover, main form .image-field label[for=file]:hover {
+.button:hover, main form .fields .field button[type=submit]:hover, main form .image-field label[for=file]:hover {
   background-color: #FFA8A3;
 }
-.button:active, main form .fields .field button:active, main form .image-field label[for=file]:active {
+.button:active, main form .fields .field button[type=submit]:active, main form .image-field label[for=file]:active {
   background-color: #ff7870;
+}
+.button:disabled, main form .fields .field button[type=submit]:disabled, main form .image-field label[for=file]:disabled {
+  background-color: #999;
+  cursor: auto;
 }
 
 .navbar {
@@ -161,7 +165,7 @@ main form .fields .field label {
 main form .fields .field input[type=radio] {
   display: none;
 }
-main form .fields .field input[type=radio]:checked + .button, main form .fields .field input[type=radio]:checked + button, main form .fields .field .image-field input[type=radio]:checked + label[for=file], main form .image-field .fields .field input[type=radio]:checked + label[for=file] {
+main form .fields .field input[type=radio]:checked + .button, main form .fields .field input[type=radio]:checked + button[type=submit], main form .fields .field .image-field input[type=radio]:checked + label[for=file], main form .image-field .fields .field input[type=radio]:checked + label[for=file] {
   background-color: #FFA8A3;
 }
 

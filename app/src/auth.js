@@ -15,24 +15,23 @@ const SGID_PRIVATE_KEY = process.env.SGID_PRIVATE_KEY
 const SGID_REDIRECT_URI = process.env.SGID_REDIRECT_URI
 
 // -----------------------------------------------------------------------------
-// Implementation 
+// Implementation
 // -----------------------------------------------------------------------------
 // Passport Strategy for authenticating users using sgID
 class SgidStrategy extends PassportStrategy {
-
   // Takes SG client params as well as a verify function
-  // verify is called when the sgid authentication is complete 
+  // verify is called when the sgid authentication is complete
   // It takes the sub, sgid user data, and a `done(err, user)` callback
   // It's meant to combine with your non-sgid data to "hydrate" a full user
   // which can then be returned by the done callback
   // callback signature after getting the user data - function(sub, data, function(error, user){})
-  constructor(config, verify) {
+  constructor (config, verify) {
     if (config === undefined) throw new TypeError('sgID configuration must be set')
     if (verify === undefined) throw new TypeError('SgidStrategy requires verify callback')
     super()
     this.name = 'sgid'
     this.client = new SgidClient(config)
-    this.verify = verify 
+    this.verify = verify
   }
 
   // Overloaded method
@@ -40,7 +39,7 @@ class SgidStrategy extends PassportStrategy {
   // When called with a `code` query param in the request
   // Tries to swap the code for an access token and user data
   // If successful it then calls verify to populate application user data
-  async authenticate(req, options) {
+  async authenticate (req, options) {
     // For the initial call just send the user to the sgid site to authenticate
     if (req?.query?.code === undefined) {
       const { url } = this.client.authorizationUrl(
@@ -66,7 +65,6 @@ class SgidStrategy extends PassportStrategy {
       }
     }
   }
-
 }
 
 export default class Auth {
@@ -78,7 +76,7 @@ export default class Auth {
   }
 
   // Helper function to retrieve the full user data given an id
-  async getUser(id) {
+  async getUser (id) {
     const selectQuery = `
       SELECT * 
       FROM account

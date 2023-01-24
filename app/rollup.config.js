@@ -1,8 +1,8 @@
 // Have bundle each source js file into an output file with node modules included
-import glob from 'glob';
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
-import { nodeResolve } from '@rollup/plugin-node-resolve';
+import glob from 'glob'
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { nodeResolve } from '@rollup/plugin-node-resolve'
 export default {
   input: Object.fromEntries(
     glob.sync('src/js/*.js').map(file => [
@@ -18,4 +18,4 @@ export default {
     dir: 'src/public'
   },
   plugins: [nodeResolve()]
-};
+}
