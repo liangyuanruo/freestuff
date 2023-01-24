@@ -12,6 +12,29 @@ block main
       .subtitle Clear clutter &amp; help people
       a.button.primary(href="/listing") List an item
 
+  section.filters 
+    .filter
+      label(for='search') Search
+      input#search(type="text")
+    .filter
+      label(for='category') Category
+      select#category(name='category' required)
+        option(value='all' selected) All
+        option(value='clothes') Clothes
+        option(value='furniture') Furniture
+        option(value='appliances') Appliances
+        option(value='toys') Toys &amp; Games
+        option(value='tools') Tools
+    .filter
+      label(for='location') Location
+      select#location(name='location' required)
+        option(value='all' selected) All
+        option(value='ang moh kio') Ang Moh Kio
+        option(value='bukit timah') Bukit Timah
+        option(value='orchard') Orchard
+        option(value='jurong') Jurong
+        option(value='woodlands') Woodlands
+
   section.listings
     each listing in listings
 
