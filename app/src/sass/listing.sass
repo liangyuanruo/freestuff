@@ -1,10 +1,8 @@
 @import base.sass
 
 main
-  border-top: 3px solid
-  border-color: $brand-color
     
-  form
+  .listing
     display: flex
     padding: 1rem
     flex-direction: row
@@ -56,6 +54,8 @@ main
           flex-direction: row
         label
           margin-bottom: 0.3rem
+          font-size: 0.8em
+          color: $hint-color
 
         input[type=radio]
           display: none
@@ -63,5 +63,8 @@ main
         input[type=radio]:checked + .button
           background-color: $highlight-color
         
+        p
+          margin: 0
+
         button[type=submit]
           @extend .button

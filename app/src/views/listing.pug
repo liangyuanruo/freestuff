@@ -5,51 +5,77 @@ block append vars
   - var script='/listing.js'
 
 block main
-  //- img.preview(src="https://via.placeholder.com/150")
-  form(action="listing" method="POST" enctype="multipart/form-data")
-    .image-field 
-      i.fa-solid.fa-image
-      label(for="file") Add a photo
-      input(type='file' id="file" name="file" accept="image/png, image/jpeg")
-      img.preview.hidden(src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==")
-      label.change.hidden(for="file") Change photo
-    .fields
-      .field
-        label(for="category") Category 
-        select#category(name='category')
-          option(value='clothes') Clothes
-          option(value='furniture') Furniture
-          option(value='appliances') Appliances
-          option(value='toys') Toys &amp; Games
-          option(value='tools') Tools
 
-      .field
-        label(for="location") Location 
-        select#location(name='location')
-          option(value='ang moh kio') Ang Moh Kio
-          option(value='bukit timah') Bukit Timah
-          option(value='orchard') Orchard
-          option(value='jurong') Jurong
-          option(value='woodlands') Woodlands
+  //- View an existing listing
+  if listing
+    .listing 
+      .image-field
+        img.preview(src=listing.imageURL)
+      .fields
+        .field
+          label Category
+          p= listing.category
+        .field
+          label Description 
+          p= listing.description
+        .field
+          label Location 
+          p= listing.location
+        .field
+          label Collection 
+          p= listing.collection
+        .field
+          label Contact 
+          p= listing.contact
 
-      .field
-        label(for="collection") Collection
-        input(
-          id="collection" name="collection" type="text" 
-          placeholder="How should people collect the item?"
-        )
+  //- Creating a new listing
+  else
+    form.listing(action="listing" method="POST" enctype="multipart/form-data")
+      .image-field 
+        i.fa-solid.fa-image
+        label(for="file") Add a photo
+        input(type='file' id="file" name="file" accept="image/png, image/jpeg")
+        img.preview.hidden(src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==")
+        label.change.hidden(for="file") Change photo
+      .fields
+        .field
+          label(for="category") Category 
+          select#category(name='category')
+            option(value='clothes') Clothes
+            option(value='furniture') Furniture
+            option(value='appliances') Appliances
+            option(value='toys') Toys &amp; Games
+            option(value='tools') Tools
 
-      .field
-        label(for="contact") Contact Details
-        input(
-          id="contact" name="contact" type="text" 
-          placeholder="How should people get in touch with you?"
-        )
-      .field
-        label(for="description") Description
-        input(
-          id="description" name="description" type="text"
-          placeholder="Details about the item that would be useful or interesting!"
-        )
-      .field
-        button.primary(type="submit") List item
+        .field
+          label(for="description") Description
+          input(
+            id="description" name="description" type="text"
+            placeholder="Details about the item that would be useful or interesting!"
+          )
+
+        .field
+          label(for="location") Location 
+          select#location(name='location')
+            option(value='ang moh kio') Ang Moh Kio
+            option(value='bukit timah') Bukit Timah
+            option(value='orchard') Orchard
+            option(value='jurong') Jurong
+            option(value='woodlands') Woodlands
+
+        .field
+          label(for="collection") Collection
+          input(
+            id="collection" name="collection" type="text" 
+            placeholder="How should people collect the item?"
+          )
+
+        .field
+          label(for="contact") Contact Details
+          input(
+            id="contact" name="contact" type="text" 
+            placeholder="How should people get in touch with you?"
+          )
+
+        .field
+          button.primary(type="submit") List item

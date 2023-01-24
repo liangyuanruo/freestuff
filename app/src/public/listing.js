@@ -17,11 +17,11 @@ form.addEventListener('change', () => {
   submit.disabled = false;
 });
 
-// Set
+// Set auto lister 
 const preview = document.getElementsByClassName('preview')[0];
 const fileChange = document.getElementsByClassName('change')[0];
 const fileInput = document.getElementById('file');
-fileInput.onchange = event => {
+fileInput.addEventListener("change", event => {
   const [file] = fileInput.files;
   console.log(file);
   if (file) {
@@ -29,4 +29,4 @@ fileInput.onchange = event => {
     preview.classList.remove('hidden');
     fileChange.classList.remove('hidden');
   }
-};
+});

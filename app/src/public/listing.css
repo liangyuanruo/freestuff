@@ -58,7 +58,7 @@ input[type=checkbox] {
   display: none !important;
 }
 
-.button, main form .fields .field button[type=submit], main form .image-field label[for=file] {
+.button, main .listing .fields .field button[type=submit], main .listing .image-field label[for=file] {
   display: inline-block;
   border: none;
   padding: 0.3rem 0.8rem;
@@ -68,17 +68,17 @@ input[type=checkbox] {
   text-decoration: none;
   cursor: pointer;
 }
-.button.primary, main form .fields .field button.primary[type=submit], main form .image-field label.primary[for=file] {
+.button.primary, main .listing .fields .field button.primary[type=submit], main .listing .image-field label.primary[for=file] {
   background-color: #FD685D;
   color: #FFFFFF;
 }
-.button:hover, main form .fields .field button[type=submit]:hover, main form .image-field label[for=file]:hover {
+.button:hover, main .listing .fields .field button[type=submit]:hover, main .listing .image-field label[for=file]:hover {
   background-color: #FFA8A3;
 }
-.button:active, main form .fields .field button[type=submit]:active, main form .image-field label[for=file]:active {
+.button:active, main .listing .fields .field button[type=submit]:active, main .listing .image-field label[for=file]:active {
   background-color: #ff7870;
 }
-.button:disabled, main form .fields .field button[type=submit]:disabled, main form .image-field label[for=file]:disabled {
+.button:disabled, main .listing .fields .field button[type=submit]:disabled, main .listing .image-field label[for=file]:disabled {
   background-color: #999;
   cursor: auto;
 }
@@ -86,6 +86,8 @@ input[type=checkbox] {
 .navbar {
   display: flex;
   height: 3rem;
+  border-bottom: 4px solid;
+  border-color: #FE938C;
   padding: 0 1rem;
   flex-direction: row;
   justify-content: space-between;
@@ -98,17 +100,14 @@ input[type=checkbox] {
   color: #FE938C;
   text-decoration: none;
 }
-main {
-  border-top: 3px solid;
-  border-color: #FE938C;
-}
-main form {
+
+main .listing {
   display: flex;
   padding: 1rem;
   flex-direction: row;
   align-items: stretch;
 }
-main form .image-field {
+main .listing .image-field {
   position: relative;
   display: flex;
   margin-right: 1rem;
@@ -121,52 +120,57 @@ main form .image-field {
   justify-content: center;
   align-items: center;
 }
-main form .image-field i {
+main .listing .image-field i {
   margin-bottom: 1rem;
   font-size: 7rem;
 }
-main form .image-field label[for=file] {
+main .listing .image-field label[for=file] {
   background-color: #FD685D;
   color: #FFFFFF;
   cursor: pointer;
 }
-main form .image-field label[for=file].change {
+main .listing .image-field label[for=file].change {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
 }
-main form .image-field input[type=file] {
+main .listing .image-field input[type=file] {
   display: none;
 }
-main form .image-field img.preview {
+main .listing .image-field img.preview {
   position: absolute;
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-main form .fields {
+main .listing .fields {
   flex-grow: 1;
 }
-main form .fields .field {
+main .listing .fields .field {
   display: flex;
   margin-bottom: 1rem;
   flex-direction: column;
 }
-main form .fields .field:last-child {
+main .listing .fields .field:last-child {
   margin-bottom: 0rem;
 }
-main form .fields .field.delivery {
+main .listing .fields .field.delivery {
   flex-direction: row;
 }
-main form .fields .field label {
+main .listing .fields .field label {
   margin-bottom: 0.3rem;
+  font-size: 0.8em;
+  color: #999;
 }
-main form .fields .field input[type=radio] {
+main .listing .fields .field input[type=radio] {
   display: none;
 }
-main form .fields .field input[type=radio]:checked + .button, main form .fields .field input[type=radio]:checked + button[type=submit], main form .fields .field .image-field input[type=radio]:checked + label[for=file], main form .image-field .fields .field input[type=radio]:checked + label[for=file] {
+main .listing .fields .field input[type=radio]:checked + .button, main .listing .fields .field input[type=radio]:checked + button[type=submit], main .listing .fields .field .image-field input[type=radio]:checked + label[for=file], main .listing .image-field .fields .field input[type=radio]:checked + label[for=file] {
   background-color: #FFA8A3;
+}
+main .listing .fields .field p {
+  margin: 0;
 }
 
 /*# sourceMappingURL=listing.css.map */

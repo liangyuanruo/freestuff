@@ -206,12 +206,30 @@ app.get('/account', auth.check('/login'), async (req, res) => {
 
 app.get('/listing/:listingId', auth.check('/login'), async (req, res) => {
   const result = await db.query(`
-    SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
+    SELECT 
+      listing_owner_id,
+      listing_description,
+      listing_category,
+      listing_location,
+      listing_contact,
+      listing_collection,
+      listing_image_key,
+      listing_created_at
     FROM listing JOIN account 
     ON listing_owner_id = account_id
     WHERE listing_id = $1
   `, [ req.params.listingId ])
-  res.render('listing', { user: req.user })
+  const listing = {
+    id: result.rows[0].listing_id,
+    description: result.rows[0].listing_description,
+    category: result.rows[0].listing_category,
+    location: result.rows[0].listing_location,
+    contact: result.rows[0].listing_contact,
+    collection: result.rows[0].listing_collection,
+    imageURL: `${BLOB_PATH}${result.rows[0].listing_image_key}`,
+    timestamp: dayjs(result.rows[0].listing_created_at).fromNow()
+  }
+  res.render('listing', { user: req.user, listing })
 })
 
 app.get('/listing', auth.check('/login'), async (req, res) => {

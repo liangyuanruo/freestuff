@@ -86,6 +86,8 @@ input[type=checkbox] {
 .navbar {
   display: flex;
   height: 3rem;
+  border-bottom: 4px solid;
+  border-color: #FE938C;
   padding: 0 1rem;
   flex-direction: row;
   justify-content: space-between;
@@ -98,6 +100,7 @@ input[type=checkbox] {
   color: #FE938C;
   text-decoration: none;
 }
+
 .hero {
   display: flex;
   height: 20rem;
@@ -143,7 +146,7 @@ input[type=checkbox] {
   object-fit: cover;
 }
 .listings .listing footer {
-  border-top: 5px solid;
+  border-top: 4px solid;
   border-color: #FE938C;
   padding: 0.5rem 1rem;
 }
