@@ -3,6 +3,7 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE account (
   account_id TEXT PRIMARY KEY DEFAULT uuid_generate_v4(),
+  account_charity BOOLEAN DEFAULT FALSE, 
   account_created_at TIMESTAMP DEFAULT current_timestamp
 );
 
@@ -13,7 +14,7 @@ CREATE TABLE listing (
   listing_category TEXT,
   listing_location TEXT,
   listing_contact TEXT,
-  listing_pickup TEXT,
+  listing_collection TEXT,
   listing_image_key TEXT,
   listing_created_at TIMESTAMP DEFAULT current_timestamp
 );

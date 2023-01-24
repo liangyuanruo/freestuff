@@ -35,7 +35,7 @@ class SgidStrategy extends PassportStrategy {
     this.verify = verify 
   }
 
-  // Overloaded method 
+  // Overloaded method
   // When called normally redirects the user to a SGID signin page
   // When called with a `code` query param in the request
   // Tries to swap the code for an access token and user data

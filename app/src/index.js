@@ -190,7 +190,7 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
   const description = req?.body?.description
   const category = req?.body?.category
   const location = req?.body?.location
-  const pickup = req?.body?.pickup
+  const collection = req?.body?.collection
   const contact = req?.body?.contact
   const image = req?.file?.key
   // Validate inputs. Only create a new object if all fields are set
@@ -199,7 +199,7 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
     description === undefined ||
     category === undefined ||
     location === undefined ||
-    pickup === undefined ||
+    collection === undefined ||
     contact === undefined ||
     image === undefined
   ) {
@@ -211,7 +211,7 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
       listing_description,
       listing_category,
       listing_location,
-      listing_pickup,
+      listing_collection,
       listing_contact,
       listing_image_key
     ) 
@@ -223,7 +223,7 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
     description,
     category,
     location,
-    pickup,
+    collection,
     contact,
     image
   ])
