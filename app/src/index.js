@@ -121,7 +121,7 @@ await waitOn({
 const RedisStore = connectRedis(session)
 const redisClient = redis.createClient({
   legacyMode: true,
-  url: `redis://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
+  url: `rediss://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
 })
 await redisClient.connect()
 console.log(`Cache available ${CACHE_HOST}:${CACHE_PORT}`)
