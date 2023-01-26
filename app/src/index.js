@@ -32,6 +32,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD
   ? process.env.DB_PASSWORD
   : 'postgres'
 const DB_NAME = process.env.DB_NAME ? process.env.DB_NAME : 'postgres'
+const DB_SSL = process.env.DB_SSL ? (process.env.DB_SSL === 'true') : false
 const BLOB_HOST = process.env.BLOB_HOST ? process.env.BLOB_HOST : 'blobstore'
 const BLOB_PORT = process.env.BLOB_PORT ? parseInt(process.env.BLOB_PORT) : 9000
 const BLOB_USER = process.env.BLOB_USER ? process.env.BLOB_USER : 'minioadmin'
@@ -41,6 +42,7 @@ const BLOB_PATH = process.env.BLOB_PATH ? process.env.BLOB_PATH : 'http://localh
 const CACHE_HOST = process.env.CACHE_HOST ? process.env.CACHE_HOST : 'cache'
 const CACHE_PORT = process.env.CACHE_PORT ? parseInt(process.env.CACHE_PORT) : 6379
 const CACHE_PASSWORD = process.env.CACHE_PASSWORD ? process.env.CACHE_PASSWORD : 'foobared'
+const CACHE_SSL = process.env.CACHE_SSL ? (process.env.CACHE_SSL === 'true') : false
 
 // -----------------------------------------------------------------------------
 // Initialization
@@ -57,7 +59,8 @@ const db = new pg.Pool({
   port: DB_PORT,
   database: DB_NAME,
   user: DB_USER,
-  password: DB_PASSWORD
+  password: DB_PASSWORD,
+  ssl: DB_SSL
 })
 console.log(`Database available at ${DB_HOST}:${DB_PORT}`)
 
@@ -121,7 +124,9 @@ await waitOn({
 const RedisStore = connectRedis(session)
 const redisClient = redis.createClient({
   legacyMode: true,
-  url: `rediss://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
+  url: CACHE_SSL 
+    ? `rediss://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
+    : `redis://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
 })
 await redisClient.connect()
 console.log(`Cache available ${CACHE_HOST}:${CACHE_PORT}`)
