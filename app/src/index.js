@@ -32,7 +32,7 @@ const DB_PASSWORD = process.env.DB_PASSWORD
   ? process.env.DB_PASSWORD
   : 'postgres'
 const DB_NAME = process.env.DB_NAME ? process.env.DB_NAME : 'postgres'
-const DB_SSL = process.env.DB_SSL ? (process.env.DB_SSL === 'true') : false
+const DB_CA = process.env.DB_CA ? process.env.DB_CA : null
 const BLOB_HOST = process.env.BLOB_HOST ? process.env.BLOB_HOST : 'blobstore'
 const BLOB_PORT = process.env.BLOB_PORT ? parseInt(process.env.BLOB_PORT) : 9000
 const BLOB_USER = process.env.BLOB_USER ? process.env.BLOB_USER : 'minioadmin'
@@ -60,7 +60,10 @@ const db = new pg.Pool({
   database: DB_NAME,
   user: DB_USER,
   password: DB_PASSWORD,
-  ssl: DB_SSL
+  ssl: DB_CA ? {
+    rejectUnauthorized: true,
+    ca: DB_CA
+  } : null
 })
 console.log(`Database available at ${DB_HOST}:${DB_PORT}`)
 
