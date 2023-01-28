@@ -96,6 +96,7 @@ class MinioMulterStorage {
       key,
       file.stream,
       (err, result) => {
+        console.log("finished upload", err, result)
         if (err) cb(err)
         cb(null, {
           bucket: this.#bucket,
