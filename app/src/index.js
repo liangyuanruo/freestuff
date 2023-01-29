@@ -7,8 +7,9 @@ import express from 'express'
 import flash from 'express-flash'
 import session from 'express-session'
 import url from 'url'
-import minio from 'minio'
+import { S3Client } from '@aws-sdk/client-s3';
 import multer from 'multer'
+import multerS3 from 'multer-s3'
 import passport from 'passport'
 import path from 'path'
 import pg from 'pg'
@@ -35,9 +36,11 @@ const DB_NAME = process.env.DB_NAME ? process.env.DB_NAME : 'postgres'
 const DB_CA = process.env.DB_CA ? process.env.DB_CA : null
 const BLOB_HOST = process.env.BLOB_HOST ? process.env.BLOB_HOST : 'blobstore'
 const BLOB_PORT = process.env.BLOB_PORT ? parseInt(process.env.BLOB_PORT) : 9000
+const BLOB_SSL = process.env.BLOB_SSL ? (process.env.BLOB_SSL === 'true') : false
+const BLOB_BUCKET = process.env.BLOB_BUCKET ? process.env.BLOB_BUCKET : 'uploads'
 const BLOB_USER = process.env.BLOB_USER ? process.env.BLOB_USER : 'minioadmin'
 const BLOB_PASSWORD = process.env.BLOB_PASSWORD ? process.env.BLOB_PASSWORD : 'minioadmin'
-const BLOB_BUCKET = process.env.BLOB_BUCKET ? process.env.BLOB_BUCKET : 'uploads'
+const BLOB_REGION = process.env.BLOB_REGION ? process.env.BLOB_REGION : 'sgp1'
 const BLOB_PATH = process.env.BLOB_PATH ? process.env.BLOB_PATH : 'http://localhost:9000/uploads/'
 const CACHE_HOST = process.env.CACHE_HOST ? process.env.CACHE_HOST : 'cache'
 const CACHE_PORT = process.env.CACHE_PORT ? parseInt(process.env.CACHE_PORT) : 6379
@@ -72,53 +75,30 @@ console.log(`Waiting on blobstore availability ${BLOB_HOST}:${BLOB_PORT}`)
 await waitOn({
   resources: [`tcp:${BLOB_HOST}:${BLOB_PORT}`]
 })
-const minioClient = new minio.Client({
-  endPoint: BLOB_HOST,
-  port: BLOB_PORT,
-  accessKey: BLOB_USER,
-  secretKey: BLOB_PASSWORD,
-  useSSL: false
-})
-console.log(`Blobstore available at ${BLOB_HOST}:${BLOB_PORT}`)
-// Stores a file with a random filename
-class MinioMulterStorage {
-  #client
-  #bucket
-  constructor (opts) {
-    this.#client = opts.client
-    this.#bucket = opts.bucket
+const s3Client = new S3Client({
+  endpoint: (BLOB_SSL ? `https://${BLOB_HOST}` : `http://${BLOB_HOST}`),
+  forcePathStyle: false,
+  region: 'sgp1',
+  credentials: {
+    accessKeyId: BLOB_USER,
+    secretAccessKey: BLOB_PASSWORD
   }
-
-  _handleFile (req, file, cb) {
-    const key = uuid()
-    this.#client.putObject(
-      this.#bucket,
-      key,
-      file.stream,
-      (err, result) => {
-        console.log("finished upload", err, result)
-        if (err) cb(err)
-        cb(null, {
-          bucket: this.#bucket,
-          key,
-          etag: result.etag,
-          versionId: result.versionId
-        })
-      }
-    )
-  }
-
-  _removeFile (req, file, cb) {
-    this.#client.removeObject(file.bucket, file.key, cb)
-  }
-}
-// Multer for express middleware it
+});
 const upload = multer({
-  storage: new MinioMulterStorage({
-    client: minioClient,
-    bucket: BLOB_BUCKET
+  storage: multerS3({
+    s3: s3Client,
+    bucket: BLOB_BUCKET,
+    acl: 'public-read',
+    // metadata: function (req, file, cb) {
+    //   console.log("doing metadata function", file)
+    //   cb(null, {fieldName: file.fieldname});
+    // },
+    key: function (req, file, cb) {
+      cb(null, uuid())
+    }
   })
 })
+console.log(`Blobstore available at ${BLOB_HOST}:${BLOB_PORT}`)
 
 // Setup cache connection
 console.log(`Waiting on cache availability ${CACHE_HOST}:${CACHE_PORT}`)
@@ -246,6 +226,7 @@ app.get('/listing', auth.check('/login'), async (req, res) => {
 })
 
 app.post('/listing', auth.check('/login'), upload.single('file'), async (req, res) => {
+  console.log("got to listing with", req.file)
   const owner = req?.user?.id
   const description = req?.body?.description
   const category = req?.body?.category
@@ -298,18 +279,15 @@ app.get('/callback', auth.authenticate(), async (req, res) => {
   else res.redirect('/')
 })
 
-app.post(
-  '/login',
-  auth.checkNot('/'),
-  (req, res, next) => {
-    let targetUrl = '/'
-    if (req.session.targetUrl) {
-      targetUrl = req.session.targetUrl
-      delete req.session.targetUrl
-    }
-    return auth.authenticate()(req, res, next)
+// TODO delete this since not used for singpass login
+app.post('/login', auth.checkNot('/'), (req, res, next) => {
+  let targetUrl = '/'
+  if (req.session.targetUrl) {
+    targetUrl = req.session.targetUrl
+    delete req.session.targetUrl
   }
-)
+  return auth.authenticate()(req, res, next)
+})
 
 app.post('/logout', (req, res, next) => {
   req.logout((err) => {
