@@ -40,7 +40,7 @@ const BLOB_SSL = process.env.BLOB_SSL ? (process.env.BLOB_SSL === 'true') : fals
 const BLOB_BUCKET = process.env.BLOB_BUCKET ? process.env.BLOB_BUCKET : 'uploads'
 const BLOB_USER = process.env.BLOB_USER ? process.env.BLOB_USER : 'minioadmin'
 const BLOB_PASSWORD = process.env.BLOB_PASSWORD ? process.env.BLOB_PASSWORD : 'minioadmin'
-const BLOB_REGION = process.env.BLOB_REGION ? process.env.BLOB_REGION : null
+const BLOB_REGION = process.env.BLOB_REGION ? process.env.BLOB_REGION : 'sgp1'
 const BLOB_PATH = process.env.BLOB_PATH ? process.env.BLOB_PATH : 'http://localhost:9000/uploads/'
 const CACHE_HOST = process.env.CACHE_HOST ? process.env.CACHE_HOST : 'cache'
 const CACHE_PORT = process.env.CACHE_PORT ? parseInt(process.env.CACHE_PORT) : 6379

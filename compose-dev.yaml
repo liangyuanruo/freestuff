@@ -37,6 +37,7 @@ services:
       DB_NAME: "postgres"
       BLOB_HOST: "blobstore"
       BLOB_PORT: 9000
+      BLOB_REGOIN: "sgp1"
       BLOB_USER: "minioadmin"
       BLOB_PASSWORD: "minioadmin"
       BLOB_BUCKET: "uploads"
