@@ -1,6 +1,7 @@
 console.log('Start');
 
 console.log('Creating checks to enable submit button if all fields are filled');
+const submit = document.querySelector('button[type=submit]');
 const form = document.querySelector('form');
 const fields = document.querySelectorAll('form input, form select');
 const checkSubmit = () => {
