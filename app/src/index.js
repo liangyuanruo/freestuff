@@ -78,7 +78,7 @@ await waitOn({
 const s3Client = new S3Client({
   endpoint: (BLOB_SSL ? `https://${BLOB_HOST}` : `http://${BLOB_HOST}`),
   forcePathStyle: false,
-  region: 'sgp1',
+  region: BLOB_REGION,
   credentials: {
     accessKeyId: BLOB_USER,
     secretAccessKey: BLOB_PASSWORD
