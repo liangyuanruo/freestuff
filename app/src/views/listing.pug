@@ -27,6 +27,13 @@ block main
         .field
           label Contact 
           p= listing.contact
+        .field
+          label Contact 
+          p= listing.contact
+        form.listing(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
+          button.primary(type="submit") Delete item
+        p= JSON.stringify(listing)
+
 
   //- Creating a new listing
   else

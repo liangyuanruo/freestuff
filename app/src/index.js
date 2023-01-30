@@ -7,7 +7,7 @@ import express from 'express'
 import flash from 'express-flash'
 import session from 'express-session'
 import url from 'url'
-import { S3Client } from '@aws-sdk/client-s3';
+import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import multer from 'multer'
 import multerS3 from 'multer-s3'
 import passport from 'passport'
@@ -194,9 +194,30 @@ app.get('/account', auth.check('/login'), async (req, res) => {
   res.render('account', { user: req.user })
 })
 
+app.post('/listing/delete/:listingId', auth.check('/'), async (req, res) => {
+  // In a single query check ownership and delete the listing
+  const result = await db.query(`
+    DELETE FROM listing 
+    WHERE listing_id = $1
+    AND listing_owner_id = $2
+    RETURNING listing_image_key
+  `, [ req.params.listingId, req.user.id ])
+  if (result.rows.length === 0) throw new Error('Listing not found')
+  if (result.rows.length > 1) throw new Error('Duplicate listings found')
+  // Cleanup the blobstore
+  // TODO figure out recovery if the request fails at this step
+  const imageKey = result.rows[0]['listing_image_key']
+  await s3Client.send(new DeleteObjectCommand({
+    Bucket: BLOB_BUCKET, 
+    Key: imageKey
+  }))
+  res.redirect('/')
+})
+
 app.get('/listing/:listingId', auth.check('/login'), async (req, res) => {
   const result = await db.query(`
     SELECT 
+      listing_id,
       listing_owner_id,
       listing_description,
       listing_category,

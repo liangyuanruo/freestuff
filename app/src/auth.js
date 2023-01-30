@@ -126,6 +126,24 @@ export default class Auth {
     return this.#passport.authenticate('sgid', config)
   }
 
+  checkListingOwner (redirectPath) {
+    return async (req, res, next) => {
+      const result = await this.#db.query(`
+        SELECT 
+          listing_id,
+          listing_owner_id
+        FROM listing
+        WHERE listing_id = $1
+        AND listing_owner_id = $2
+      `, [ req.params.listingId, req.user?.id ])
+      if (result.rows.length === 1) {
+        next()
+        return
+      }
+      res.redirect(redirectPath)
+    }
+  }
+
   check (redirectPath) {
     return (req, res, next) => {
       if (req.isAuthenticated()) return next()
