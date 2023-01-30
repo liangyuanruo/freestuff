@@ -7,7 +7,7 @@ import express from 'express'
 import flash from 'express-flash'
 import session from 'express-session'
 import url from 'url'
-import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3'
 import multer from 'multer'
 import multerS3 from 'multer-s3'
 import morgan from 'morgan'
@@ -64,10 +64,12 @@ const db = new pg.Pool({
   database: DB_NAME,
   user: DB_USER,
   password: DB_PASSWORD,
-  ssl: DB_CA ? {
-    rejectUnauthorized: true,
-    ca: DB_CA
-  } : null
+  ssl: DB_CA
+    ? {
+        rejectUnauthorized: true,
+        ca: DB_CA
+      }
+    : null
 })
 console.log(`Database available at ${DB_HOST}:${DB_PORT}`)
 
@@ -85,7 +87,7 @@ const s3Client = new S3Client({
     accessKeyId: BLOB_USER,
     secretAccessKey: BLOB_PASSWORD
   }
-});
+})
 const upload = multer({
   storage: multerS3({
     s3: s3Client,
@@ -110,7 +112,7 @@ await waitOn({
 const RedisStore = connectRedis(session)
 const redisClient = redis.createClient({
   legacyMode: true,
-  url: CACHE_SSL 
+  url: CACHE_SSL
     ? `rediss://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
     : `redis://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
 })
@@ -204,14 +206,14 @@ app.post('/listing/delete/:listingId', auth.check('/'), async (req, res) => {
     WHERE listing_id = $1
     AND listing_owner_id = $2
     RETURNING listing_image_key
-  `, [ req.params.listingId, req.user.id ])
+  `, [req.params.listingId, req.user.id])
   if (result.rows.length === 0) throw new Error('Listing not found')
   if (result.rows.length > 1) throw new Error('Duplicate listings found')
   // Cleanup the blobstore
   // TODO figure out recovery if the request fails at this step
-  const imageKey = result.rows[0]['listing_image_key']
+  const imageKey = result.rows[0].listing_image_key
   await s3Client.send(new DeleteObjectCommand({
-    Bucket: BLOB_BUCKET, 
+    Bucket: BLOB_BUCKET,
     Key: imageKey
   }))
   res.redirect('/')
@@ -232,7 +234,7 @@ app.get('/listing/:listingId', auth.check('/login'), async (req, res) => {
     FROM listing JOIN account 
     ON listing_owner_id = account_id
     WHERE listing_id = $1
-  `, [ req.params.listingId ])
+  `, [req.params.listingId])
   const listing = {
     id: result.rows[0].listing_id,
     description: result.rows[0].listing_description,
@@ -251,7 +253,7 @@ app.get('/listing', auth.check('/login'), async (req, res) => {
 })
 
 app.post('/listing', auth.check('/login'), upload.single('file'), async (req, res) => {
-  console.log("got to listing with", req.file)
+  console.log('got to listing with', req.file)
   const owner = req?.user?.id
   const description = req?.body?.description
   const category = req?.body?.category

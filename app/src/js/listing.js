@@ -34,11 +34,10 @@ const checkFile = () => {
     preview.src = URL.createObjectURL(file)
     preview.classList.remove('hidden')
     fileChange.classList.remove('hidden')
-    return
   }
 }
 checkFile()
-fileInput.addEventListener("change", checkFile)
+fileInput.addEventListener('change', checkFile)
 setTimeout(checkFile, 1000) // Timeout to check for browser autofill
 
-console.log("End")
+console.log('End')
