@@ -202,14 +202,15 @@ app.get('/listing/:listingId', auth.check(), async (req, res) => {
     WHERE listing_id = $1
   `, [req.params.listingId])
   const listing = {
-    id: result.rows[0].listing_id,
-    description: result.rows[0].listing_description,
-    category: result.rows[0].listing_category,
-    location: result.rows[0].listing_location,
-    contact: result.rows[0].listing_contact,
-    collection: result.rows[0].listing_collection,
-    imageURL: `${BLOB_PATH}${result.rows[0].listing_image_key}`,
-    timestamp: dayjs(result.rows[0].listing_created_at).fromNow()
+    id: result.rows[0]['listing_id'],
+    owner: result.rows[0]['listing_owner_id'],
+    description: result.rows[0]['listing_description'],
+    category: result.rows[0]['listing_category'],
+    location: result.rows[0]['listing_location'],
+    contact: result.rows[0]['listing_contact'],
+    collection: result.rows[0]['listing_collection'],
+    imageURL: `${BLOB_PATH}${result.rows[0]['listing_image_key']}`,
+    timestamp: dayjs(result.rows[0]['listing_created_at']).fromNow()
   }
   res.render('listing', { user: req.user, listing })
 })

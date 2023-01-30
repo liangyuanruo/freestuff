@@ -25,9 +25,10 @@ block main
         .pill
           label Location
           .category= listing.location
-          
-        form.listing(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
-          button.primary(type="submit") Delete item
+
+        if listing.owner == user.id
+          form.listing(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
+            button.primary(type="submit") Delete item
 
   //- Creating a new listing
   else

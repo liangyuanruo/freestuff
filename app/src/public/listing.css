@@ -147,6 +147,8 @@ main .listing {
 main .listing .image-field {
   position: relative;
   display: flex;
+  border-bottom: 4px solid;
+  border-color: #FE938C;
   height: 50vh;
   overflow: hidden;
   background-color: #EEEEEE;
