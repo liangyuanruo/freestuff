@@ -139,11 +139,9 @@ console.log('Configuring public routes')
 app.use(express.static(publicPath))
 
 app.get('/', async (req, res) => {
-  // Charity users see everthing
-  // Logged in users see can their own posts even if less than 48 hours
-  // Non logged in users only see results older than 48 hours
   let result
   if (req.user?.charity) {
+    // Charity users see everthing
     result = await db.query(`
       SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
       FROM listing JOIN account 
@@ -151,6 +149,7 @@ app.get('/', async (req, res) => {
       ORDER BY listing_created_at DESC
     `)
   } else if (req.user?.id) {
+    // Logged in users see can their own posts even if less than 48 hours
     result = await db.query(`
       SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
       FROM listing JOIN account 
@@ -160,6 +159,7 @@ app.get('/', async (req, res) => {
       ORDER BY listing_created_at DESC
     `, [req.user.id])
   } else {
+    // Non logged in users only see results older than 48 hours
     result = await db.query(`
       SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
       FROM listing JOIN account 
@@ -168,7 +168,6 @@ app.get('/', async (req, res) => {
       ORDER BY listing_created_at DESC
     `)
   }
-  // Non charity users only see stuff older than 48 hours
   const listings = result.rows.map(row => {
     return {
       id: row.listing_id,
@@ -181,11 +180,11 @@ app.get('/', async (req, res) => {
   res.render('index', { listings, user: req.user })
 })
 
-app.get('/account', auth.check('/login'), async (req, res) => {
+app.get('/account', auth.check(), async (req, res) => {
   res.render('account', { user: req.user })
 })
 
-app.post('/listing/delete/:listingId', auth.check('/'), async (req, res) => {
+app.post('/listing/delete/:listingId', auth.check(), async (req, res) => {
   // In a single query check ownership and delete the listing
   const result = await db.query(`
     DELETE FROM listing 
@@ -202,10 +201,11 @@ app.post('/listing/delete/:listingId', auth.check('/'), async (req, res) => {
     Bucket: BLOB_BUCKET,
     Key: imageKey
   }))
+  // TODO flash message with successful deletion
   res.redirect('/')
 })
 
-app.get('/listing/:listingId', auth.check('/login'), async (req, res) => {
+app.get('/listing/:listingId', auth.check(), async (req, res) => {
   const result = await db.query(`
     SELECT 
       listing_id,
@@ -234,19 +234,18 @@ app.get('/listing/:listingId', auth.check('/login'), async (req, res) => {
   res.render('listing', { user: req.user, listing })
 })
 
-app.get('/listing', auth.check('/login'), async (req, res) => {
+app.get('/listing', auth.check(), async (req, res) => {
   res.render('listing', { user: req.user })
 })
 
-app.post('/listing', auth.check('/login'), upload.single('file'), async (req, res) => {
-  console.log('got to listing with', req.file)
-  const owner = req?.user?.id
-  const description = req?.body?.description
-  const category = req?.body?.category
-  const location = req?.body?.location
-  const collection = req?.body?.collection
-  const contact = req?.body?.contact
-  const image = req?.file?.key
+app.post('/listing', auth.check(), upload.single('file'), async (req, res) => {
+  const owner = req.user.id
+  const description = req.body.description
+  const category = req.body.category
+  const location = req.body.location
+  const collection = req.body.collection
+  const contact = req.body.contact
+  const image = req.file?.key
   // Validate inputs. Only create a new object if all fields are set
   if (
     owner === undefined ||
@@ -260,7 +259,7 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
     res.sendStatus(422)
     return
   }
-  const query = `
+  const result = await db.query(`
     INSERT INTO listing(
       listing_owner_id,
       listing_description,
@@ -272,8 +271,7 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
     ) 
     VALUES ($1, $2, $3, $4, $5, $6, $7) 
     RETURNING *
-  `
-  await db.query(query, [
+  `, [
     owner,
     description,
     category,
@@ -282,7 +280,8 @@ app.post('/listing', auth.check('/login'), upload.single('file'), async (req, re
     contact,
     image
   ])
-  res.redirect('/')
+  const listingId = result.rows[0]['listing_id']  
+  res.redirect(`/listing/${listingId}`)
 })
 
 app.get('/login', auth.authenticate())

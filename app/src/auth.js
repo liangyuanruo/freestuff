@@ -126,26 +126,17 @@ export default class Auth {
     return this.#passport.authenticate('sgid', config)
   }
 
-  check (redirectPath) {
+  check () {
     return (req, res, next) => {
       if (req.isAuthenticated()) return next()
       else {
         // Store the target URL for after login completes
         // Will be cleared after use
         req.session.targetUrl = req.originalUrl
-        res.redirect(redirectPath)
+        this.authenticate()(req, res, next)
+        return
       }
     }
   }
 
-  checkNot (redirectPath) {
-    return (req, res, next) => {
-      if (req.isAuthenticated()) {
-        // Store the target URL for after login completes
-        // Will be cleared after use
-        req.session.targetUrl = req.originalUrl
-        return res.redirect(redirectPath)
-      } else next()
-    }
-  }
 }
