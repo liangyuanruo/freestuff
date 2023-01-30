@@ -301,16 +301,6 @@ app.get('/callback', auth.authenticate(), async (req, res) => {
   else res.redirect('/')
 })
 
-// TODO delete this since not used for singpass login
-app.post('/login', auth.checkNot('/'), (req, res, next) => {
-  let targetUrl = '/'
-  if (req.session.targetUrl) {
-    targetUrl = req.session.targetUrl
-    delete req.session.targetUrl
-  }
-  return auth.authenticate()(req, res, next)
-})
-
 app.post('/logout', (req, res, next) => {
   req.logout((err) => {
     if (err) next(err)
