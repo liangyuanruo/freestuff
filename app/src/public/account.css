@@ -7,16 +7,6 @@
 html {
   font-size: 16px;
 }
-@media (max-width: 1000px) {
-  html {
-    font-size: 15px;
-  }
-}
-@media (max-width: 650px) {
-  html {
-    font-size: 14px;
-  }
-}
 
 body {
   color: #444;
@@ -97,14 +87,28 @@ input[type=checkbox] {
   color: #FFFFFF;
 }
 .button:hover {
-  background-color: #FFA8A3;
+  background-color: #8CF7FE;
 }
 .button:active {
-  background-color: #ff7870;
+  background-color: #59f3fe;
 }
 .button:disabled {
   background-color: #999;
   cursor: auto;
+}
+
+.pill {
+  display: inline-flex;
+  padding: 0.2rem 0.6rem;
+  flex-direction: row;
+  align-items: stretch;
+  border-radius: 0.3rem;
+  background-color: #EEEEEE;
+}
+.pill label {
+  display: flex;
+  padding-right: 0.4rem;
+  align-items: center;
 }
 
 .navbar {

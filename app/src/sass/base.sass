@@ -7,7 +7,8 @@
 // Colors
 $brand-color: #FE938C
 $action-color: #FD685D
-$highlight-color: #FFA8A3
+// $highlight-color: #FFA8A3
+$highlight-color: #8CF7FE
 
 $content-background-color: #FFFFFF
 $well-background-color: #EEEEEE
@@ -38,10 +39,6 @@ $medium-max: 1000px
 
 html
   font-size: 16px
-  @media (max-width: $medium-max)
-    font-size: 15px
-  @media (max-width: $small-max)
-    font-size: 14px
 
 body
   color: $text-color
@@ -117,6 +114,17 @@ input[type="checkbox"]
     background-color: $hint-color
     cursor: auto
 
+.pill
+  display: inline-flex
+  padding: 0.2rem 0.6rem
+  flex-direction: row
+  align-items: stretch
+  border-radius: $card-border-radius
+  background-color: $well-background-color
+  label
+    display: flex
+    padding-right: 0.4rem
+    align-items: center
 ////////////////////////////////////////////////////////////////////////////////
 // Specific Styles
 ////////////////////////////////////////////////////////////////////////////////

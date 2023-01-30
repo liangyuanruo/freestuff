@@ -7,16 +7,6 @@
 html {
   font-size: 16px;
 }
-@media (max-width: 1000px) {
-  html {
-    font-size: 15px;
-  }
-}
-@media (max-width: 650px) {
-  html {
-    font-size: 14px;
-  }
-}
 
 body {
   color: #444;
@@ -97,14 +87,28 @@ input[type=checkbox] {
   color: #FFFFFF;
 }
 .button:hover, main .listing .fields .field button[type=submit]:hover, main .listing .image-field label[for=file]:hover {
-  background-color: #FFA8A3;
+  background-color: #8CF7FE;
 }
 .button:active, main .listing .fields .field button[type=submit]:active, main .listing .image-field label[for=file]:active {
-  background-color: #ff7870;
+  background-color: #59f3fe;
 }
 .button:disabled, main .listing .fields .field button[type=submit]:disabled, main .listing .image-field label[for=file]:disabled {
   background-color: #999;
   cursor: auto;
+}
+
+.pill {
+  display: inline-flex;
+  padding: 0.2rem 0.6rem;
+  flex-direction: row;
+  align-items: stretch;
+  border-radius: 0.3rem;
+  background-color: #EEEEEE;
+}
+.pill label {
+  display: flex;
+  padding-right: 0.4rem;
+  align-items: center;
 }
 
 .navbar {
@@ -127,22 +131,41 @@ input[type=checkbox] {
 
 main .listing {
   display: flex;
-  padding: 1rem;
-  flex-direction: row;
+  flex-direction: column;
   align-items: stretch;
+}
+@media (min-width: 650px) {
+  main .listing {
+    padding: 1rem;
+  }
+}
+@media (min-width: 650px) {
+  main .listing {
+    flex-direction: row;
+  }
 }
 main .listing .image-field {
   position: relative;
   display: flex;
-  margin-right: 1rem;
-  width: 30rem;
-  border-radius: 0.3rem;
+  height: 50vh;
   overflow: hidden;
   background-color: #EEEEEE;
   color: #FFFFFF;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+@media (min-width: 650px) {
+  main .listing .image-field {
+    margin-right: 1rem;
+  }
+}
+@media (min-width: 650px) {
+  main .listing .image-field {
+    height: auto;
+    width: 30rem;
+    border-radius: 0.3rem;
+  }
 }
 main .listing .image-field i {
   margin-bottom: 1rem;
@@ -169,7 +192,14 @@ main .listing .image-field img.preview {
   object-fit: cover;
 }
 main .listing .fields {
+  padding: 1rem;
   flex-grow: 1;
+}
+main .listing .fields .description {
+  margin-top: 0;
+}
+main .listing .fields .pill:not(:last-child) {
+  margin-right: 1rem;
 }
 main .listing .fields .field {
   display: flex;
@@ -182,14 +212,11 @@ main .listing .fields .field:last-child {
 main .listing .fields .field.delivery {
   flex-direction: row;
 }
-main .listing .fields .field label {
-  margin-bottom: 0.3rem;
-}
 main .listing .fields .field input[type=radio] {
   display: none;
 }
 main .listing .fields .field input[type=radio]:checked + .button, main .listing .fields .field input[type=radio]:checked + button[type=submit], main .listing .fields .field .image-field input[type=radio]:checked + label[for=file], main .listing .image-field .fields .field input[type=radio]:checked + label[for=file] {
-  background-color: #FFA8A3;
+  background-color: #8CF7FE;
 }
 main .listing .fields .field p {
   margin: 0;

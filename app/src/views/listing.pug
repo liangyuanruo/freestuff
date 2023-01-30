@@ -12,28 +12,22 @@ block main
       .image-field
         img.preview(src=listing.imageURL)
       .fields
+        p.description= listing.description
         .field
-          label Category
-          p= listing.category
-        .field
-          label Description 
-          p= listing.description
-        .field
-          label Location 
-          p= listing.location
-        .field
-          label Collection 
+          label Collection Instructions
           p= listing.collection
         .field
-          label Contact 
+          label Contact Information
           p= listing.contact
-        .field
-          label Contact 
-          p= listing.contact
+        .pill
+          label Category
+          .category= listing.category
+        .pill
+          label Location
+          .category= listing.location
+          
         form.listing(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
           button.primary(type="submit") Delete item
-        p= JSON.stringify(listing)
-
 
   //- Creating a new listing
   else
