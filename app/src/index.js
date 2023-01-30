@@ -143,7 +143,7 @@ app.get('/', async (req, res) => {
   if (req.user?.charity) {
     // Charity users see everthing
     result = await db.query(`
-      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
+      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
       FROM listing JOIN account 
       ON listing_owner_id = account_id
       ORDER BY listing_created_at DESC
@@ -151,7 +151,7 @@ app.get('/', async (req, res) => {
   } else if (req.user?.id) {
     // Logged in users see can their own posts even if less than 48 hours
     result = await db.query(`
-      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
+      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
       FROM listing JOIN account 
       ON listing_owner_id = account_id
       WHERE (listing_created_at < NOW() - INTERVAL '48 hours')
@@ -161,7 +161,7 @@ app.get('/', async (req, res) => {
   } else {
     // Non logged in users only see results older than 48 hours
     result = await db.query(`
-      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key 
+      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
       FROM listing JOIN account 
       ON listing_owner_id = account_id
       WHERE listing_created_at < NOW() - INTERVAL '48 hours'
@@ -170,11 +170,12 @@ app.get('/', async (req, res) => {
   }
   const listings = result.rows.map(row => {
     return {
-      id: row.listing_id,
-      description: row.listing_description,
-      timestamp: dayjs(row.listing_created_at).fromNow(),
-      location: row.listing_location,
-      imageURL: `${BLOB_PATH}${row.listing_image_key}`
+      id: row['listing_id'],
+      category: row['listing_category'],
+      description: row['listing_description'],
+      timestamp: dayjs(row['listing_created_at']).fromNow(),
+      location: row['listing_location'],
+      imageURL: `${BLOB_PATH}${row['listing_image_key']}`
     }
   })
   res.render('index', { listings, user: req.user })

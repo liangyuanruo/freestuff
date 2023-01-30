@@ -215,5 +215,8 @@ input[type=checkbox] {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.listings .listing footer .meta .category {
+  display: none;
+}
 
 /*# sourceMappingURL=index.css.map */

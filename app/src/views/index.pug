@@ -19,7 +19,7 @@ block main
     .filter
       label(for='category') Category
       select#category(name='category' required)
-        option(value='all' selected) All
+        option(value='' selected) All
         option(value='clothes') Clothes
         option(value='furniture') Furniture
         option(value='appliances') Appliances
@@ -28,7 +28,7 @@ block main
     .filter
       label(for='location') Location
       select#location(name='location' required)
-        option(value='all' selected) All
+        option(value='' selected) All
         option(value='ang moh kio') Ang Moh Kio
         option(value='bukit timah') Bukit Timah
         option(value='orchard') Orchard
@@ -46,6 +46,7 @@ block main
             .location
               i.fas.fa-location-dot
               |  
-              =listing.location
+              span=listing.location
             time(datetime='2016-1-1')=listing.timestamp
+            data.category=listing.category
   
