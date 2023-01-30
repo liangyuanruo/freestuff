@@ -23,31 +23,27 @@ import Auth from './auth.js'
 // -----------------------------------------------------------------------------
 // Environmental Variables & Constants
 // -----------------------------------------------------------------------------
-// TODO throw error if not set instead of using a default
-const APP_PORT = process.env.APP_PORT ? process.env.APP_PORT : 1337
-const SESSION_SECRET = process.env.SESSION_SECRET
-  ? process.env.SESSION_SECRET
-  : 'keyboardCat'
-const DB_HOST = process.env.DB_HOST ? process.env.DB_HOST : 'db'
-const DB_PORT = process.env.DB_PORT ? parseInt(process.env.DB_PORT) : 5432
-const DB_USER = process.env.DB_USER ? process.env.DB_USER : 'postgres'
-const DB_PASSWORD = process.env.DB_PASSWORD
-  ? process.env.DB_PASSWORD
-  : 'postgres'
-const DB_NAME = process.env.DB_NAME ? process.env.DB_NAME : 'postgres'
+// Using valueOf() as a hacky check if the variable is defined
+const APP_PORT = process.env.APP_PORT.valueOf()
+const SESSION_SECRET = process.env.SESSION_SECRET.valueOf()
+const DB_HOST = process.env.DB_HOST.valueOf()
+const DB_PORT = parseInt(process.env.DB_PORT.valueOf())
+const DB_USER = process.env.DB_USER.valueOf()
+const DB_PASSWORD = process.env.DB_PASSWORD.valueOf()
+const DB_NAME = process.env.DB_NAME.valueOf()
 const DB_CA = process.env.DB_CA ? process.env.DB_CA : null
-const BLOB_HOST = process.env.BLOB_HOST ? process.env.BLOB_HOST : 'blobstore'
-const BLOB_PORT = process.env.BLOB_PORT ? parseInt(process.env.BLOB_PORT) : 9000
-const BLOB_SSL = process.env.BLOB_SSL ? (process.env.BLOB_SSL === 'true') : false
-const BLOB_BUCKET = process.env.BLOB_BUCKET ? process.env.BLOB_BUCKET : 'uploads'
-const BLOB_USER = process.env.BLOB_USER ? process.env.BLOB_USER : 'minioadmin'
-const BLOB_PASSWORD = process.env.BLOB_PASSWORD ? process.env.BLOB_PASSWORD : 'minioadmin'
-const BLOB_REGION = process.env.BLOB_REGION ? process.env.BLOB_REGION : 'sgp1'
-const BLOB_PATH = process.env.BLOB_PATH ? process.env.BLOB_PATH : 'http://localhost:9000/uploads/'
-const CACHE_HOST = process.env.CACHE_HOST ? process.env.CACHE_HOST : 'cache'
-const CACHE_PORT = process.env.CACHE_PORT ? parseInt(process.env.CACHE_PORT) : 6379
-const CACHE_PASSWORD = process.env.CACHE_PASSWORD ? process.env.CACHE_PASSWORD : 'foobared'
-const CACHE_SSL = process.env.CACHE_SSL ? (process.env.CACHE_SSL === 'true') : false
+const BLOB_HOST = process.env.BLOB_HOST.valueOf()
+const BLOB_PORT = parseInt(process.env.BLOB_PORT.valueOf())
+const BLOB_SSL = (process.env.BLOB_SSL.valueOf() === 'true')
+const BLOB_BUCKET = process.env.BLOB_BUCKET.valueOf()
+const BLOB_USER = process.env.BLOB_USER.valueOf()
+const BLOB_PASSWORD = process.env.BLOB_PASSWORD.valueOf()
+const BLOB_REGION = process.env.BLOB_REGION.valueOf()
+const BLOB_PATH = process.env.BLOB_PATH.valueOf()
+const CACHE_HOST = process.env.CACHE_HOST.valueOf()
+const CACHE_PORT = parseInt(process.env.CACHE_PORT.valueOf())
+const CACHE_PASSWORD = process.env.CACHE_PASSWORD.valueOf()
+const CACHE_SSL = (process.env.CACHE_SSL.valueOf() === 'true')
 
 // -----------------------------------------------------------------------------
 // Initialization
