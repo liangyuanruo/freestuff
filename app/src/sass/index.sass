@@ -28,15 +28,24 @@
   border-color: $brand-color
   padding: 1rem 2rem
   background-color: $content-background-color
+  overflow: scroll
   flex-direction: row
   align-items: center
   justify-content: flex-start
 
-  label
-    margin-right: 0.5rem
-
   .filter
+    display: flex
     margin-right: 2rem
+    flex-direction: row
+    align-items: center
+    justify-content: flex-start
+    label
+      margin-right: 0.5rem
+    #search
+      width: 15em
+    select
+      width: 10em
+
 
 .listings
   display: flex
@@ -49,7 +58,9 @@
     display: block
     @extend .card
     margin: 1rem
-    width: calc(100%/3 - 2rem)
+    width: calc(100%/2 - 2rem)
+    @media (min-width: $small-max)
+      width: calc(100%/3 - 2rem)    
     color: $text-color
     text-decoration: none
     cursor: pointer

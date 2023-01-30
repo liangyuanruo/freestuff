@@ -154,15 +154,26 @@ input[type=checkbox] {
   border-color: #FE938C;
   padding: 1rem 2rem;
   background-color: #FFFFFF;
+  overflow: scroll;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
 }
-.filters label {
+.filters .filter {
+  display: flex;
+  margin-right: 2rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+}
+.filters .filter label {
   margin-right: 0.5rem;
 }
-.filters .filter {
-  margin-right: 2rem;
+.filters .filter #search {
+  width: 15em;
+}
+.filters .filter select {
+  width: 10em;
 }
 
 .listings {
@@ -175,10 +186,15 @@ input[type=checkbox] {
 .listings .listing {
   display: block;
   margin: 1rem;
-  width: calc(33.3333333333% - 2rem);
+  width: calc(50% - 2rem);
   color: #444;
   text-decoration: none;
   cursor: pointer;
+}
+@media (min-width: 650px) {
+  .listings .listing {
+    width: calc(33.3333333333% - 2rem);
+  }
 }
 .listings .listing img {
   display: block;
