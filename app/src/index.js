@@ -10,6 +10,7 @@ import url from 'url'
 import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import multer from 'multer'
 import multerS3 from 'multer-s3'
+import morgan from 'morgan'
 import passport from 'passport'
 import path from 'path'
 import pg from 'pg'
@@ -119,6 +120,8 @@ console.log(`Cache available ${CACHE_HOST}:${CACHE_PORT}`)
 // Setup the main application stack
 console.log('Initializing app server')
 const app = express()
+// Request logging
+app.use(morgan('combined'))
 // Find the path to the staic file folder
 const filePath = url.fileURLToPath(import.meta.url)
 const serverPath = path.dirname(filePath)
