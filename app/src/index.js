@@ -184,27 +184,6 @@ app.get('/account', auth.check(), async (req, res) => {
   res.render('account', { user: req.user })
 })
 
-app.post('/listing/delete/:listingId', auth.check(), async (req, res) => {
-  // In a single query check ownership and delete the listing
-  const result = await db.query(`
-    DELETE FROM listing 
-    WHERE listing_id = $1
-    AND listing_owner_id = $2
-    RETURNING listing_image_key
-  `, [req.params.listingId, req.user.id])
-  if (result.rows.length === 0) throw new Error('Listing not found')
-  if (result.rows.length > 1) throw new Error('Duplicate listings found')
-  // Cleanup the blobstore
-  // TODO figure out recovery if the request fails at this step
-  const imageKey = result.rows[0].listing_image_key
-  await s3Client.send(new DeleteObjectCommand({
-    Bucket: BLOB_BUCKET,
-    Key: imageKey
-  }))
-  // TODO flash message with successful deletion
-  res.redirect('/')
-})
-
 app.get('/listing/:listingId', auth.check(), async (req, res) => {
   const result = await db.query(`
     SELECT 
@@ -236,6 +215,27 @@ app.get('/listing/:listingId', auth.check(), async (req, res) => {
 
 app.get('/listing', auth.check(), async (req, res) => {
   res.render('listing', { user: req.user })
+})
+
+app.post('/listing/delete/:listingId', auth.check(), async (req, res) => {
+  // In a single query check ownership and delete the listing
+  const result = await db.query(`
+    DELETE FROM listing 
+    WHERE listing_id = $1
+    AND listing_owner_id = $2
+    RETURNING listing_image_key
+  `, [req.params.listingId, req.user.id])
+  if (result.rows.length === 0) throw new Error('Listing not found')
+  if (result.rows.length > 1) throw new Error('Duplicate listings found')
+  // Cleanup the blobstore
+  // TODO figure out recovery if the request fails at this step
+  const imageKey = result.rows[0].listing_image_key
+  await s3Client.send(new DeleteObjectCommand({
+    Bucket: BLOB_BUCKET,
+    Key: imageKey
+  }))
+  // TODO flash message with successful deletion
+  res.redirect('/')
 })
 
 app.post('/listing', auth.check(), upload.single('file'), async (req, res) => {
@@ -270,7 +270,7 @@ app.post('/listing', auth.check(), upload.single('file'), async (req, res) => {
       listing_image_key
     ) 
     VALUES ($1, $2, $3, $4, $5, $6, $7) 
-    RETURNING *
+    RETURNING listing_id
   `, [
     owner,
     description,
@@ -280,21 +280,16 @@ app.post('/listing', auth.check(), upload.single('file'), async (req, res) => {
     contact,
     image
   ])
-  const listingId = result.rows[0]['listing_id']  
+  const listingId = result.rows[0].listing_id
   res.redirect(`/listing/${listingId}`)
 })
 
 app.get('/login', auth.authenticate())
 
-app.get('/callback', auth.authenticate(), async (req, res) => {
-  if (req.session.targetUrl) res.redirect(req.session.targetUrl)
-  else res.redirect('/')
-})
-
 app.post('/logout', (req, res, next) => {
   req.logout((err) => {
-    if (err) next(err)
-    else res.redirect('/')
+    if (err) return next(err)
+    res.redirect('/')
   })
 })
 

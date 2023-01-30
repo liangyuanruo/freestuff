@@ -9,10 +9,11 @@ import { SgidClient } from '@opengovsg/sgid-client'
 // -----------------------------------------------------------------------------
 // Environmental Variables & Constants
 // -----------------------------------------------------------------------------
-const SGID_CLIENT_ID = process.env.SGID_CLIENT_ID
-const SGID_CLIENT_SECRET = process.env.SGID_CLIENT_SECRET
-const SGID_PRIVATE_KEY = process.env.SGID_PRIVATE_KEY
-const SGID_REDIRECT_URI = process.env.SGID_REDIRECT_URI
+// Using valueOf() as a hacky check if the variable is defined
+const SGID_CLIENT_ID = process.env.SGID_CLIENT_ID.valueOf()
+const SGID_CLIENT_SECRET = process.env.SGID_CLIENT_SECRET.valueOf()
+const SGID_PRIVATE_KEY = process.env.SGID_PRIVATE_KEY.valueOf()
+const SGID_REDIRECT_URI = process.env.SGID_REDIRECT_URI.valueOf()
 
 // -----------------------------------------------------------------------------
 // Implementation
@@ -41,7 +42,7 @@ class SgidStrategy extends PassportStrategy {
   // If successful it then calls verify to populate application user data
   async authenticate (req, options) {
     // For the initial call just send the user to the sgid site to authenticate
-    if (req?.query?.code === undefined) {
+    if (req.query.code === undefined) {
       const { url } = this.client.authorizationUrl(
         null, // any state that needs to be sent to the callback
         ['openid'], // array of scopes requested
@@ -50,19 +51,13 @@ class SgidStrategy extends PassportStrategy {
       this.redirect(url)
     }
     // If returning with a code, then swap the code for a user
-    if (req?.query?.code !== undefined) {
-      try {
-        const { accessToken } = await this.client.callback(req.query.code, null)
-        const { sub, data } = await this.client.userinfo(accessToken)
-        this.verify(sub, data, (error, user) => {
-          if (error) this.error(error)
-          this.success(user)
-        })
-      } catch (error) {
-        // TODO should handle more elegantly
-        // Return to previous screen? Or go somewhere with a flash error message
-        this.error(error)
-      }
+    if (req.query.code !== undefined) {
+      const { accessToken } = await this.client.callback(req.query.code, null)
+      const { sub, data } = await this.client.userinfo(accessToken)
+      this.verify(sub, data, (error, user) => {
+        if (error) this.error(error)
+        this.success(user)
+      })
     }
   }
 }
@@ -77,13 +72,12 @@ export default class Auth {
 
   // Helper function to retrieve the full user data given an id
   async getUser (id) {
-    const selectQuery = `
+    const results = await this.#db.query(`
       SELECT * 
       FROM account
       WHERE account_id = $1
-    `
-    const results = await this.#db.query(selectQuery, [id])
-    if (results.rows[0] === undefined) return null
+    `, [id])
+    if (results.rows.length === 0) return null
     const user = {
       id: results.rows[0].account_id,
       charity: results.rows[0].account_charity,
@@ -100,12 +94,11 @@ export default class Auth {
       privateKey: SGID_PRIVATE_KEY,
       redirectUri: SGID_REDIRECT_URI
     }, async (sub, data, done) => {
-      const insertQuery = `
+      await this.#db.query(`
         INSERT INTO account(account_id)
         VALUES ($1)
         ON CONFLICT DO NOTHING
-      `
-      await this.#db.query(insertQuery, [sub])
+      `, [sub])
       const user = await this.getUser(sub)
       done(null, user)
     }))
@@ -122,8 +115,12 @@ export default class Auth {
   }
 
   // Middleware
-  authenticate (config) {
-    return this.#passport.authenticate('sgid', config)
+  authenticate () {
+    return (req, res, next) => {
+      this.#passport.authenticate('sgid', {
+        successRedirect: req.session.targetUrl ? req.session.targetUrl : '/'
+      })(req, res, next)
+    }
   }
 
   check () {
@@ -131,12 +128,9 @@ export default class Auth {
       if (req.isAuthenticated()) return next()
       else {
         // Store the target URL for after login completes
-        // Will be cleared after use
         req.session.targetUrl = req.originalUrl
         this.authenticate()(req, res, next)
-        return
       }
     }
   }
-
 }
