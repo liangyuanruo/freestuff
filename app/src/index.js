@@ -23,6 +23,7 @@ import Auth from './auth.js'
 // -----------------------------------------------------------------------------
 // Environmental Variables & Constants
 // -----------------------------------------------------------------------------
+// TODO throw error if not set instead of using a default
 const APP_PORT = process.env.APP_PORT ? process.env.APP_PORT : 1337
 const SESSION_SECRET = process.env.SESSION_SECRET
   ? process.env.SESSION_SECRET
@@ -51,33 +52,26 @@ const CACHE_SSL = process.env.CACHE_SSL ? (process.env.CACHE_SSL === 'true') : f
 // -----------------------------------------------------------------------------
 // Initialization
 // -----------------------------------------------------------------------------
+// Setup imports
 dayjs.extend(relativeTime)
+const RedisStore = connectRedis(session)
 
 // Setup the database connection
 console.log(`Waiting on database availability ${DB_HOST}:${DB_PORT}`)
-await waitOn({
-  resources: [`tcp:${DB_HOST}:${DB_PORT}`]
-})
+await waitOn({ resources: [`tcp:${DB_HOST}:${DB_PORT}`] })
 const db = new pg.Pool({
   host: DB_HOST,
   port: DB_PORT,
   database: DB_NAME,
   user: DB_USER,
   password: DB_PASSWORD,
-  ssl: DB_CA
-    ? {
-        rejectUnauthorized: true,
-        ca: DB_CA
-      }
-    : null
+  ssl: DB_CA ? { rejectUnauthorized: true, ca: DB_CA } : null
 })
 console.log(`Database available at ${DB_HOST}:${DB_PORT}`)
 
 // Setup blobstore connection
 console.log(`Waiting on blobstore availability ${BLOB_HOST}:${BLOB_PORT}`)
-await waitOn({
-  resources: [`tcp:${BLOB_HOST}:${BLOB_PORT}`]
-})
+await waitOn({ resources: [`tcp:${BLOB_HOST}:${BLOB_PORT}`] })
 const s3Client = new S3Client({
   endpoint: (BLOB_SSL ? `https://${BLOB_HOST}:${BLOB_PORT}` : `http://${BLOB_HOST}:${BLOB_PORT}`),
   forcePathStyle: true,
@@ -94,7 +88,6 @@ const upload = multer({
     bucket: BLOB_BUCKET,
     acl: 'public-read',
     // metadata: function (req, file, cb) {
-    //   console.log("doing metadata function", file)
     //   cb(null, {fieldName: file.fieldname});
     // },
     key: function (req, file, cb) {
@@ -106,10 +99,7 @@ console.log(`Blobstore available at ${BLOB_HOST}:${BLOB_PORT}`)
 
 // Setup cache connection
 console.log(`Waiting on cache availability ${CACHE_HOST}:${CACHE_PORT}`)
-await waitOn({
-  resources: [`tcp:${CACHE_HOST}:${CACHE_PORT}`]
-})
-const RedisStore = connectRedis(session)
+await waitOn({ resources: [`tcp:${CACHE_HOST}:${CACHE_PORT}`] })
 const redisClient = redis.createClient({
   legacyMode: true,
   url: CACHE_SSL
@@ -122,34 +112,34 @@ console.log(`Cache available ${CACHE_HOST}:${CACHE_PORT}`)
 // Setup the main application stack
 console.log('Initializing app server')
 const app = express()
-// Request logging
-app.use(morgan('combined'))
 // Find the path to the staic file folder
-const filePath = url.fileURLToPath(import.meta.url)
-const serverPath = path.dirname(filePath)
+const serverPath = path.dirname(url.fileURLToPath(import.meta.url))
 const viewPath = path.join(serverPath, 'views')
 const publicPath = path.join(serverPath, 'public')
 // Configure middleware
-app.set('view engine', 'pug')
-app.set('views', viewPath)
+app.use(morgan('combined'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
+app.use(session({
+  store: new RedisStore({ client: redisClient }),
+  secret: SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false
+}))
 app.use(flash())
-app.use(
-  session({
-    store: new RedisStore({ client: redisClient }),
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: false
-  })
-)
 app.use(passport.initialize())
 app.use(passport.session())
+app.set('view engine', 'pug')
+app.set('views', viewPath)
+
+// Helpers
 const auth = new Auth(passport, db).init()
 
 // -----------------------------------------------------------------------------
 // Web Server
 // -----------------------------------------------------------------------------
+console.log('Configuring public routes')
+
 app.use(express.static(publicPath))
 
 app.get('/', async (req, res) => {
