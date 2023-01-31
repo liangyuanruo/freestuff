@@ -1,20 +1,25 @@
-Template & guide for the development & deployment of a basic production app
+# FreeStuff
 
-# Development environment
-- Local Docker compose cluster for isolated dev infra
+Give away free stuff to charities and those in need
+
+## Development environment
+- Docker Development Environment (backed by docker compose) for isolated dev infra
 - VSCode for an IDE connected to the dev containers
 - Standard JS for linting and formatting
 - Local testing (TBD)
 - Git branching startegy (TBD)
 - CI/CD strategy (TBD)
 
-# App structure
+## App structure
 - Postgres database
 - S3-compatible blobstore 
 - Redis cache
-- App server running express with server-side rendering
+- App server running Express with server-side rendering
+- Pug templating engine
+- SASS stylesheets
+- Native JS
 
-# Deployment infrastructure (TBD)
+## Deployment infrastructure (TBD)
 - Digital ocean (compose/swarm/manual config)
 - Dev/Staging/Prod environments
 - Incremental rollout
@@ -22,13 +27,64 @@ Template & guide for the development & deployment of a basic production app
 - Backups
 - Alerts
 
-# Get started
+## Getting started
+
+### Prerequisites
 - Install Docker Desktop
 - Install VS Code
 - Install TablePlus
-- Copy https://github.com/fynyky/web-app-template into your own repo
-- Create a Docker Dev Environment using the new repo
-- Check website working localhost
-- Open app container in VSCode from docker dev
-- In the VSCode terminal `npm run dev`
-- Make changes
+
+### Setup Docker Dev Environment
+In Docker Desktop, create a Dev Environment using the existing git repo URL (https://github.com/fynyky/freestuff).
+Open the `app` container in VSCode from Docker Dev, then enter the `app` folder.
+
+```sh
+cd app
+```
+
+Install the necessary NodeJS dependencies.
+```sh
+npm install
+```
+
+### Setup Ngrok for SGID redirection
+Install Ngrok into the development container via the below command.
+
+```sh
+curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list && apt update && apt install ngrok
+```
+
+Create an account in [Ngrok](ngrok.com) to obtain an auth token, and add it to your development environment
+```sh
+ngrok config add-authtoken <your-auth-token>
+```
+
+Start ngrok on the exposed Docker port
+
+```sh
+ngrok http 1337
+```
+
+### Setting up SGID
+Create a new application at the [SGID Developer Portal](https://developer.id.gov.sg/). Use `https://<your_ngrok_url>/login` for the redirection URI.
+Using the downloaded SGID credentials, create a `.env` file and populate it with the necessary SGID environment variables.
+
+```sh
+export SGID_CLIENT_ID="<your-sgid-client-id>"
+export SGID_CLIENT_SECRET="<your-sgid-client-secret>"
+export SGID_PRIVATE_KEY="<your-sgid-private-key>"
+export SGID_REDIRECT_URI="https://<your-ngrok-url>/login"
+```
+
+Load the environment variables into your development container with
+```sh
+source .env
+```
+
+### Start your dev server
+Start your app server in the VSCode terminal.
+
+```sh
+npm run dev
+```
+The application should be accessible at your ngrok URL or http://localhost:1338.
