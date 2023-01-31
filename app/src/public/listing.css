@@ -116,6 +116,15 @@ input[type=checkbox] {
   align-items: center;
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
 .navbar {
   display: flex;
   height: 3rem;
@@ -195,11 +204,15 @@ main {
   max-width: 100vw;
   padding: 1rem;
 }
-.listing .fields .description {
+.listing .fields p {
   margin-top: 0;
 }
-.listing .fields .pill:not(:last-child) {
+.listing .fields .pill {
+  margin-top: 1rem;
   margin-right: 1rem;
+}
+.listing .fields .pill:last-child {
+  margin-right: 0;
 }
 .listing .fields .field {
   display: flex;
@@ -214,6 +227,21 @@ main {
 }
 .listing #delete {
   margin-top: 1rem;
+}
+
+.overlay {
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.overlay p {
+  font-size: 1.6rem;
+}
+.overlay .button:not(:last-child), .overlay .listing .image-field label[for=file]:not(:last-child), .listing .image-field .overlay label[for=file]:not(:last-child), .overlay .listing .fields .field button[type=submit]:not(:last-child), .listing .fields .field .overlay button[type=submit]:not(:last-child) {
+  margin-right: 1rem;
 }
 
 /*# sourceMappingURL=listing.css.map */

@@ -47,10 +47,14 @@
     max-width: 100vw
     padding: 1rem
 
-    .description
+    p
       margin-top: 0
-    .pill:not(:last-child)
+
+    .pill
+      margin-top: 1rem
       margin-right: 1rem
+      &:last-child
+        margin-right: 0
 
     .field
       display: flex
@@ -67,10 +71,15 @@
 
   #delete
     margin-top: 1rem
-// .overlay
-//   // position: fixed
-//   // top: 0
-//   // left: 0
-//   // width: 100%
-//   // height: 100%
-//   // background-color: rgba($content-background-color, 0.8)
+
+.overlay
+  display: flex
+  padding: 1rem
+  flex-direction: column
+  align-items: center
+  justify-content: center
+  text-align: center
+  p
+    font-size: 1.6rem
+  .button:not(:last-child)
+    margin-right: 1rem

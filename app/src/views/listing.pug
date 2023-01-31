@@ -27,8 +27,17 @@ block main
           .category= listing.location
 
         if listing.owner == user.id
-          form.listing(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
-            button.button.hint#delete(type="submit") Delete item
+          form#deleteForm(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
+            button.button.hint#delete(type="submit") Remove Listing
+
+    //- Delete confirmation overlay
+    .overlay.hidden
+      p Remove this listing?
+      .buttons
+        button.button.hint#cancel(type="submit") Cancel
+        button.button.hint#confirm(type="submit") Remove
+
+
 
   //- Creating a new listing
   else
@@ -49,14 +58,12 @@ block main
             option(value='appliances') Appliances
             option(value='toys') Toys &amp; Games
             option(value='tools') Tools
-
         .field
           label(for="description") Description
           input(
             id="description" name="description" type="text"
             placeholder="Details about the item that would be useful or interesting!"
           )
-
         .field
           label(for="location") Location 
           select#location(name='location' required)
@@ -66,21 +73,18 @@ block main
             option(value='orchard') Orchard
             option(value='jurong') Jurong
             option(value='woodlands') Woodlands
-
         .field
           label(for="collection") Collection
           input(
             id="collection" name="collection" type="text" 
             placeholder="How should people collect the item?"
           )
-
         .field
           label(for="contact") Contact Details
           input(
             id="contact" name="contact" type="text" 
             placeholder="How should people get in touch with you?"
           )
-
         .field
           button.primary(type="submit") List item
 
