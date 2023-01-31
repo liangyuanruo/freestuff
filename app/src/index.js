@@ -201,6 +201,7 @@ app.get('/listing/:listingId', auth.check(), async (req, res) => {
     ON listing_owner_id = account_id
     WHERE listing_id = $1
   `, [req.params.listingId])
+  if (result.rows.length === 0) return res.sendStatus(404)
   const listing = {
     id: result.rows[0]['listing_id'],
     owner: result.rows[0]['listing_owner_id'],

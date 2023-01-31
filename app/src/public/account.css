@@ -86,6 +86,10 @@ input[type=checkbox] {
   background-color: #FD685D;
   color: #FFFFFF;
 }
+.button.hint {
+  background-color: #FFFFFF;
+  border: 1px solid #CCC;
+}
 .button:hover {
   background-color: #8CF7FE;
 }

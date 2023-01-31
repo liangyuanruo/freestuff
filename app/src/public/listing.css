@@ -86,6 +86,10 @@ input[type=checkbox] {
   background-color: #FD685D;
   color: #FFFFFF;
 }
+.button.hint, main .listing .fields .field button.hint[type=submit], main .listing .image-field label.hint[for=file] {
+  background-color: #FFFFFF;
+  border: 1px solid #CCC;
+}
 .button:hover, main .listing .fields .field button[type=submit]:hover, main .listing .image-field label[for=file]:hover {
   background-color: #8CF7FE;
 }
@@ -143,6 +147,9 @@ main .listing {
   main .listing {
     flex-direction: row;
   }
+}
+main .listing #delete {
+  margin-top: 1rem;
 }
 main .listing .image-field {
   position: relative;
