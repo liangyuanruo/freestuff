@@ -4,15 +4,16 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 16px;
-}
-
 body {
+  display: flex;
+  min-height: 100vh;
+  background-color: #EEEEEE;
   color: #444;
-  line-height: 1.7;
   font-family: Heebo, sans-serif;
+  font-size: 16px;
   font-weight: 400;
+  line-height: 1.7;
+  flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -72,7 +73,7 @@ input[type=checkbox] {
   display: none !important;
 }
 
-.button, main .listing .fields .field button[type=submit], main .listing .image-field label[for=file] {
+.button, .listing .fields .field button[type=submit], .listing .image-field label[for=file] {
   display: inline-block;
   border: none;
   padding: 0.3rem 0.8rem;
@@ -82,21 +83,21 @@ input[type=checkbox] {
   text-decoration: none;
   cursor: pointer;
 }
-.button.primary, main .listing .fields .field button.primary[type=submit], main .listing .image-field label.primary[for=file] {
+.button.primary, .listing .fields .field button.primary[type=submit], .listing .image-field label.primary[for=file] {
   background-color: #FD685D;
   color: #FFFFFF;
 }
-.button.hint, main .listing .fields .field button.hint[type=submit], main .listing .image-field label.hint[for=file] {
+.button.hint, .listing .fields .field button.hint[type=submit], .listing .image-field label.hint[for=file] {
   background-color: #FFFFFF;
   border: 1px solid #CCC;
 }
-.button:hover, main .listing .fields .field button[type=submit]:hover, main .listing .image-field label[for=file]:hover {
+.button:hover, .listing .fields .field button[type=submit]:hover, .listing .image-field label[for=file]:hover {
   background-color: #8CF7FE;
 }
-.button:active, main .listing .fields .field button[type=submit]:active, main .listing .image-field label[for=file]:active {
+.button:active, .listing .fields .field button[type=submit]:active, .listing .image-field label[for=file]:active {
   background-color: #59f3fe;
 }
-.button:disabled, main .listing .fields .field button[type=submit]:disabled, main .listing .image-field label[for=file]:disabled {
+.button:disabled, .listing .fields .field button[type=submit]:disabled, .listing .image-field label[for=file]:disabled {
   background-color: #999;
   cursor: auto;
 }
@@ -124,6 +125,7 @@ input[type=checkbox] {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background-color: #FFFFFF;
 }
 .navbar .site-logo {
   display: block;
@@ -133,102 +135,85 @@ input[type=checkbox] {
   text-decoration: none;
 }
 
-main .listing {
+main {
   display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+}
+
+.listing {
+  display: flex;
+  flex-grow: 1;
   flex-direction: column;
   align-items: stretch;
+  background-color: #FFFFFF;
 }
-@media (min-width: 650px) {
-  main .listing {
-    padding: 1rem;
-  }
-}
-@media (min-width: 650px) {
-  main .listing {
+@media (min-width: 651px) {
+  .listing {
     flex-direction: row;
   }
 }
-main .listing #delete {
-  margin-top: 1rem;
-}
-main .listing .image-field {
-  position: relative;
+.listing .image-field {
   display: flex;
+  position: relative;
+  min-height: 50vh;
+  flex-grow: 1;
   border-bottom: 4px solid;
   border-color: #FE938C;
-  height: 50vh;
-  overflow: hidden;
-  background-color: #EEEEEE;
+  background-color: rgba(0, 0, 0, 0.8);
   color: #FFFFFF;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-@media (min-width: 650px) {
-  main .listing .image-field {
-    margin-right: 1rem;
-  }
-}
-@media (min-width: 650px) {
-  main .listing .image-field {
-    height: auto;
-    width: 30rem;
-    border-radius: 0.3rem;
-  }
-}
-main .listing .image-field i {
+.listing .image-field i {
   margin-bottom: 1rem;
   font-size: 7rem;
 }
-main .listing .image-field label[for=file] {
+.listing .image-field input[type=file] {
+  display: none;
+}
+.listing .image-field label[for=file] {
   background-color: #FD685D;
   color: #FFFFFF;
   cursor: pointer;
 }
-main .listing .image-field label[for=file].change {
+.listing .image-field label[for=file].change {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
   background-color: rgba(0, 0, 0, 0.4);
 }
-main .listing .image-field input[type=file] {
-  display: none;
-}
-main .listing .image-field img.preview {
+.listing .image-field img.preview {
   position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
 }
-main .listing .fields {
+.listing .fields {
+  width: 30rem;
+  max-width: 100vw;
   padding: 1rem;
-  flex-grow: 1;
 }
-main .listing .fields .description {
+.listing .fields .description {
   margin-top: 0;
 }
-main .listing .fields .pill:not(:last-child) {
+.listing .fields .pill:not(:last-child) {
   margin-right: 1rem;
 }
-main .listing .fields .field {
+.listing .fields .field {
   display: flex;
   margin-bottom: 1rem;
   flex-direction: column;
 }
-main .listing .fields .field:last-child {
+.listing .fields .field:last-child {
   margin-bottom: 0rem;
 }
-main .listing .fields .field.delivery {
+.listing .fields .field.delivery {
   flex-direction: row;
 }
-main .listing .fields .field input[type=radio] {
-  display: none;
-}
-main .listing .fields .field input[type=radio]:checked + .button, main .listing .fields .field input[type=radio]:checked + button[type=submit], main .listing .fields .field .image-field input[type=radio]:checked + label[for=file], main .listing .image-field .fields .field input[type=radio]:checked + label[for=file] {
-  background-color: #8CF7FE;
-}
-main .listing .fields .field p {
-  margin: 0;
+.listing #delete {
+  margin-top: 1rem;
 }
 
 /*# sourceMappingURL=listing.css.map */

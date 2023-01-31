@@ -4,15 +4,16 @@
   box-sizing: border-box;
 }
 
-html {
-  font-size: 16px;
-}
-
 body {
+  display: flex;
+  min-height: 100vh;
+  background-color: #EEEEEE;
   color: #444;
-  line-height: 1.7;
   font-family: Heebo, sans-serif;
+  font-size: 16px;
   font-weight: 400;
+  line-height: 1.7;
+  flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -124,6 +125,7 @@ input[type=checkbox] {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  background-color: #FFFFFF;
 }
 .navbar .site-logo {
   display: block;
@@ -131,6 +133,12 @@ input[type=checkbox] {
   font-family: Caveat, sans-serif;
   color: #FE938C;
   text-decoration: none;
+}
+
+main {
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
 }
 
 /*# sourceMappingURL=register.css.map */

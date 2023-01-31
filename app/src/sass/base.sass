@@ -27,7 +27,9 @@ $card-border-radius: 0.3rem
 
 // Breakpoints
 $xs-max: 400px
+$small-min: 401px
 $small-max: 650px
+$medium-min: 651px
 $medium-max: 1000px
 
 
@@ -37,15 +39,17 @@ $medium-max: 1000px
 *
   box-sizing: border-box
 
-html
-  font-size: 16px
-
 body
+  display: flex
+  min-height: 100vh
+  background-color: $well-background-color
   color: $text-color
-  line-height: 1.7
   font-family: $body-font-family
+  font-size: 16px
   font-weight: 400
-
+  line-height: 1.7
+  flex-direction: column
+  
 h1, h2, h3, h4, h5, h6
   margin-top: 0
   margin-bottom: 0
@@ -140,6 +144,7 @@ input[type="checkbox"]
   flex-direction: row
   justify-content: space-between
   align-items: center
+  background-color: $content-background-color
 
 
   .site-logo
@@ -148,3 +153,8 @@ input[type="checkbox"]
     font-family: $header-font-family
     color: $brand-color
     text-decoration: none
+
+main
+  display: flex
+  flex-grow: 1
+  flex-direction: column
