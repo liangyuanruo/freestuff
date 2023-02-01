@@ -53,11 +53,17 @@ block main
           label(for="category") Category 
           select#category(name='category' required)
             option(value='' selected disabled hidden) - Choose a category -
+            option(value='books') Books
             option(value='clothes') Clothes
+            option(value='electronics') Electronics
             option(value='furniture') Furniture
-            option(value='appliances') Appliances
-            option(value='toys') Toys &amp; Games
+            option(value='appliances') Home Appliances
+            option(value='infant') Infant and children
+            option(value='school') School supplies
+            option(value='sports') Sports equipment
             option(value='tools') Tools
+            option(value='toys') Toys &amp; Games
+            option(value='others') Others
         .field
           label(for="description") Description
           input(
