@@ -184,5 +184,8 @@ footer .links a {
     padding: 3rem;
   }
 }
+.container p#banner {
+  text-align: center;
+}
 
 /*# sourceMappingURL=about.css.map */
