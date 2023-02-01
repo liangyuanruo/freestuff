@@ -156,6 +156,25 @@ main {
   flex-direction: column;
 }
 
+footer {
+  display: flex;
+  padding: 0.5rem 1rem;
+  background-color: #EEEEEE;
+  font-size: 0.7rem;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+footer img {
+  display: block;
+  height: 1.5rem;
+}
+footer .links a {
+  text-decoration: none;
+  margin-left: 1rem;
+  color: #999;
+}
+
 .listing {
   display: flex;
   flex-grow: 1;
@@ -173,8 +192,6 @@ main {
   position: relative;
   min-height: 50vh;
   flex-grow: 1;
-  border-bottom: 4px solid;
-  border-color: #FE938C;
   background-color: rgba(0, 0, 0, 0.8);
   color: #FFFFFF;
   flex-direction: column;
