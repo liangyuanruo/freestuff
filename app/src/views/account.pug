@@ -5,13 +5,32 @@ block append vars
   - var script='/account.js'
 
 block main
-  .container
+  .profileBanner 
+    h2 Account information
+    .pill
+      label Account ID
+      =user.id
+    if user.charity 
+      .pill Charity Account
+    .pill
+      label Joined
+      =user.createdAt
+    form.logout(action="logout" method="POST")
+      button.button.is-light(type="submit") Logout
+
+
+  h2.listingTitle My Listings
+  section.listings 
+    each listing in listings
+      a.listing(href="/listing/" + listing.id)
+        img(src=listing.imageURL loading="lazy")
+        footer
+          p.description=listing.description
+          small.meta
+            .location
+              i.fas.fa-location-dot
+              |  
+              span=listing.location
+            time(datetime='2016-1-1')=listing.timestamp
+            data.category=listing.category
     
-    h1.title Account information
-
-    p.block= JSON.stringify(user)
-
-    form(action="logout" method="POST")
-      .field
-        .control
-          button.button.is-light(type="submit") Logout

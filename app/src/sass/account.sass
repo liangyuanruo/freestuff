@@ -1,1 +1,68 @@
 @import base.sass
+
+.profileBanner
+  display: flex
+  padding: 1rem
+  background-color: $content-background-color
+  flex-direction: column
+  align-items: flex-start
+
+.pill
+  margin-right: 1rem
+  margin-top: 1rem
+
+.logout
+  margin-top: 1rem
+  align-self: flex-end
+
+.listingTitle
+  margin-left: 1rem
+  margin-top: 1rem
+
+.listings
+  display: flex
+  background-color: $well-background-color
+  flex-direction: row
+  flex-wrap: wrap
+  justify-content: flex-start
+
+  .listing
+    display: block
+    @extend .card
+    margin: 1rem
+    width: calc(100%/2 - 2rem)
+    @media (min-width: $small-max)
+      width: calc(100%/3 - 2rem)    
+    color: $text-color
+    text-decoration: none
+    cursor: pointer
+    img
+      display: block
+      width: 100%
+      aspect-ratio: 4/3
+      object-fit: cover
+    footer
+      border-top: 4px solid
+      border-color: $brand-color
+      padding: 0.5rem 1rem
+      .description
+        margin-top: 0
+        margin-bottom: 0.5rem
+        white-space: nowrap
+        overflow: hidden
+        text-overflow: ellipsis
+      .meta
+        display: flex
+        flex-direction: row
+        justify-content: space-between
+        white-space: nowrap
+        color: $hint-color
+        .location
+          margin-right: 2em
+          i
+            color: $brand-color
+        time
+          overflow: hidden
+          text-overflow: ellipsis
+        .category
+          display: none

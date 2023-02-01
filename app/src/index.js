@@ -183,7 +183,22 @@ app.get('/', async (req, res) => {
 })
 
 app.get('/account', auth.check(), async (req, res) => {
-  res.render('account', { user: req.user })
+  const result = await db.query(`
+    SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key
+    FROM listing
+    WHERE (listing_owner_id = $1)
+    ORDER BY listing_created_at DESC
+  `, [req.user.id])
+  const listings = result.rows.map(row => {
+    return {
+      id: row['listing_id'],
+      description: row['listing_description'],
+      location: row['listing_location'],
+      timestamp: dayjs(row['listing_created_at']).fromNow(),
+      imageURL: `${BLOB_PATH}${row['listing_image_key']}`
+    }
+  })
+  res.render('account', { listings, user: req.user })
 })
 
 app.get('/listing/:listingId', auth.check(), async (req, res) => {
