@@ -45,7 +45,7 @@ block main
       .image-field 
         i.fa-solid.fa-image
         label(for="file") Add a photo
-        input(type='file' id="file" name="file" accept="image/png, image/jpeg")
+        input(type='file' id="file" name="file" capture="environment" accept="image/*")
         img.preview.hidden(src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==")
         label.change.hidden(for="file") Change photo
       .fields
