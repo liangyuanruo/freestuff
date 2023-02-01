@@ -176,11 +176,12 @@ footer .links a {
 }
 
 .container {
-  margin: 1rem;
+  background-color: white;
+  padding: 1rem;
 }
 @media (min-width: 651px) {
   .container {
-    margin: 3rem;
+    padding: 3rem;
   }
 }
 
