@@ -156,7 +156,7 @@ main {
   flex-direction: column;
 }
 
-footer {
+.site-footer {
   display: flex;
   padding: 0.7rem 1rem;
   background-color: #EEEEEE;
@@ -165,11 +165,11 @@ footer {
   align-items: center;
   justify-content: space-between;
 }
-footer img {
+.site-footer img {
   display: block;
   height: 1.5rem;
 }
-footer .links a {
+.site-footer .links a {
   text-decoration: none;
   margin-left: 1rem;
   color: #999;
