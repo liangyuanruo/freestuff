@@ -187,5 +187,23 @@ footer .links a {
 .container p#banner {
   text-align: center;
 }
+.container p#banner img {
+  zoom: 0.25;
+}
+@media (min-width: 401px) {
+  .container p#banner img {
+    zoom: 0.35;
+  }
+}
+@media (min-width: 651px) {
+  .container p#banner img {
+    zoom: 0.7;
+  }
+}
+@media (min-width: 1000px) {
+  .container p#banner img {
+    zoom: 0.9;
+  }
+}
 
 /*# sourceMappingURL=about.css.map */
