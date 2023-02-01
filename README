@@ -47,24 +47,6 @@ Install the necessary NodeJS dependencies.
 npm install
 ```
 
-### Setup Ngrok for SGID redirection
-Install Ngrok into the development container via the below command.
-
-```sh
-curl -s https://ngrok-agent.s3.amazonaws.com/ngrok.asc | tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" | tee /etc/apt/sources.list.d/ngrok.list && apt update && apt install ngrok
-```
-
-Create an account in [Ngrok](ngrok.com) to obtain an auth token, and add it to your development environment
-```sh
-ngrok config add-authtoken <your-auth-token>
-```
-
-Start ngrok on the exposed Docker port
-
-```sh
-ngrok http 1337
-```
-
 ### Setting up SGID
 Create a new application at the [SGID Developer Portal](https://developer.id.gov.sg/). Use `https://<your_ngrok_url>/login` for the redirection URI.
 Using the downloaded SGID credentials, create a `.env` file and populate it with the necessary SGID environment variables.
@@ -73,7 +55,7 @@ Using the downloaded SGID credentials, create a `.env` file and populate it with
 export SGID_CLIENT_ID="<your-sgid-client-id>"
 export SGID_CLIENT_SECRET="<your-sgid-client-secret>"
 export SGID_PRIVATE_KEY="<your-sgid-private-key>"
-export SGID_REDIRECT_URI="https://<your-ngrok-url>/login"
+export SGID_REDIRECT_URI="http://localhost:1338/login"
 ```
 
 Load the environment variables into your development container with
@@ -87,4 +69,4 @@ Start your app server in the VSCode terminal.
 ```sh
 npm run dev
 ```
-The application should be accessible at your ngrok URL or http://localhost:1338.
+The application should be accessible at http://localhost:1338.
