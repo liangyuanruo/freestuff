@@ -48,7 +48,7 @@ npm install
 ```
 
 ### Setting up SGID
-Create a new application at the [SGID Developer Portal](https://developer.id.gov.sg/). Use `https://<your_ngrok_url>/login` for the redirection URI.
+Create a new application at the [SGID Developer Portal](https://developer.id.gov.sg/), and use `http://localhost:1338/login` for the redirection URI.
 Using the downloaded SGID credentials, create a `.env` file and populate it with the necessary SGID environment variables.
 
 ```sh
