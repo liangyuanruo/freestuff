@@ -102,6 +102,7 @@ const redisClient = redis.createClient({
     ? `rediss://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
     : `redis://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
 })
+redisClient.on("error", (error) => { console.error(error) })
 await redisClient.connect()
 console.log(`Cache available ${CACHE_HOST}:${CACHE_PORT}`)
 
