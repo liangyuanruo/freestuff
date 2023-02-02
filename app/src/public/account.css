@@ -101,6 +101,10 @@ button:disabled, .button:disabled {
   cursor: auto;
 }
 
+.field {
+  display: flex;
+  flex-direction: column;
+}
 .field label {
   display: block;
   font-size: 0.8rem;
