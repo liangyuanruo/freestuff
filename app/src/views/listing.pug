@@ -12,23 +12,25 @@ block main
       .image-field
         img.preview(src=listing.imageURL)
       .fields
-        p.description= listing.description
+        .field
+          label Description
+          p.description= listing.description
         .field
           label Collection Instructions
           p= listing.collection
         .field
           label Contact Information
           p= listing.contact
-        .pill
+        .tag
           label Category
           .category= listing.category
-        .pill
+        .tag
           label Location
           .category= listing.location
 
         if listing.owner == user.id
           form#deleteForm(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
-            button.button.hint#delete(type="submit") Remove Listing
+            button#delete(type="submit") Remove Listing
 
     //- Delete confirmation overlay
     .overlay.hidden
@@ -37,17 +39,16 @@ block main
         button.button.hint#cancel(type="submit") Cancel
         button.button.hint#confirm(type="submit") Remove
 
-
-
   //- Creating a new listing
   else
     form.listing(action="listing" method="POST" enctype="multipart/form-data")
       .image-field 
         i.fa-solid.fa-image
-        label(for="file") Add a photo
+        label.button.primary(for="file") Add a photo
         input(type='file' id="file" name="file" capture="environment" accept="image/*")
         img.preview.hidden(src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==")
-        label.change.hidden(for="file") Change photo
+        label.button.change.hidden(for="file") Change photo
+
       .fields
         .field
           label(for="category") Category 
@@ -68,7 +69,7 @@ block main
           label(for="description") Description
           input(
             id="description" name="description" type="text"
-            placeholder="Details about the item that would be useful or interesting!"
+            placeholder="What are you giving away? This helps us get it into the right hands!"
           )
         .field
           label(for="location") Location 
@@ -123,16 +124,16 @@ block main
             option(value='woodlands') Woodlands
             option(value='yishun') Yishun
         .field
-          label(for="collection") Collection
+          label(for="collection") Collection Instructions
           input(
             id="collection" name="collection" type="text" 
-            placeholder="How should people collect the item?"
+            placeholder="Can you deliver to charities? If not how should it be collected?"
           )
         .field
           label(for="contact") Contact Details
           input(
             id="contact" name="contact" type="text" 
-            placeholder="How should people get in touch with you?"
+            placeholder="Should people contact you by whatsapp/emai/some other way?"
           )
         .field
           button.primary(type="submit") List item

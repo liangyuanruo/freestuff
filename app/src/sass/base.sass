@@ -103,14 +103,16 @@ button, .button
   display: inline-block
   padding: 0.3rem 0.8rem
   // Text
-  color: $inverse-text-color
+  color: $text-color
   line-height: 1.7
   text-decoration: none
   // Appearance
-  background-color: $hint-color
+  background-color: transparent
   border-radius: $card-border-radius
   cursor: pointer
+  outline: 1px solid $outline-color
   &.primary
+    outline: none
     background-color: $action-color
     color: $inverse-text-color
   &.hint
@@ -136,7 +138,7 @@ button, .button
 .tag
   // Layout
   display: inline-flex
-  padding: 0.2rem 0.4rem
+  padding: 0.2rem 0.5rem
   vertical-align: middle
   // Text
   color: $inverse-text-color
@@ -147,6 +149,10 @@ button, .button
   // Children
   flex-direction: row
   align-items: stretch
+
+  label
+    margin-right: 0.6em
+    color: $inverse-hint-color
 
 .overlay
   position: fixed

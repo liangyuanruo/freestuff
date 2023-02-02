@@ -69,32 +69,34 @@ input[type=checkbox] {
   display: none !important;
 }
 
-button, .button, .listing .fields .field button[type=submit], .listing .image-field label[for=file] {
+button, .button {
   border: none;
   display: inline-block;
   padding: 0.3rem 0.8rem;
-  color: #FFFFFF;
+  color: #444;
   line-height: 1.7;
   text-decoration: none;
-  background-color: #999;
+  background-color: transparent;
   border-radius: 0.3rem;
   cursor: pointer;
+  outline: 1px solid #CCC;
 }
-button.primary, .button.primary, .listing .fields .field button.primary[type=submit], .listing .image-field label.primary[for=file] {
+button.primary, .button.primary {
+  outline: none;
   background-color: #FD685D;
   color: #FFFFFF;
 }
-button.hint, .button.hint, .listing .fields .field button.hint[type=submit], .listing .image-field label.hint[for=file] {
+button.hint, .button.hint {
   background-color: #FFFFFF;
   outline: 1px solid #CCC;
 }
-button:hover, .button:hover, .listing .fields .field button[type=submit]:hover, .listing .image-field label[for=file]:hover {
+button:hover, .button:hover {
   background-color: #8CF7FE;
 }
-button:active, .button:active, .listing .fields .field button[type=submit]:active, .listing .image-field label[for=file]:active {
+button:active, .button:active {
   background-color: #59f3fe;
 }
-button:disabled, .button:disabled, .listing .fields .field button[type=submit]:disabled, .listing .image-field label[for=file]:disabled {
+button:disabled, .button:disabled {
   background-color: #999;
   cursor: auto;
 }
@@ -107,7 +109,7 @@ button:disabled, .button:disabled, .listing .fields .field button[type=submit]:d
 
 .tag {
   display: inline-flex;
-  padding: 0.2rem 0.4rem;
+  padding: 0.2rem 0.5rem;
   vertical-align: middle;
   color: #FFFFFF;
   font-size: 0.6rem;
@@ -115,6 +117,10 @@ button:disabled, .button:disabled, .listing .fields .field button[type=submit]:d
   border-radius: 0.3rem;
   flex-direction: row;
   align-items: stretch;
+}
+.tag label {
+  margin-right: 0.6em;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .overlay {
@@ -184,9 +190,9 @@ main {
 .listing {
   display: flex;
   flex-grow: 1;
-  flex-direction: column;
-  align-items: stretch;
   background-color: #FFFFFF;
+  align-items: stretch;
+  flex-direction: column;
 }
 @media (min-width: 651px) {
   .listing {
@@ -194,16 +200,16 @@ main {
   }
 }
 .listing .image-field {
-  display: flex;
-  position: relative;
-  min-height: 50vh;
-  flex-grow: 1;
   border-bottom: 4px solid #FE938C;
-  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  flex-grow: 1;
+  min-height: 50vh;
+  position: relative;
   color: #FFFFFF;
+  background-color: rgba(0, 0, 0, 0.8);
+  align-items: center;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
 }
 .listing .image-field i {
   margin-bottom: 1rem;
@@ -211,11 +217,6 @@ main {
 }
 .listing .image-field input[type=file] {
   display: none;
-}
-.listing .image-field label[for=file] {
-  background-color: #FD685D;
-  color: #FFFFFF;
-  cursor: pointer;
 }
 .listing .image-field label[for=file].change {
   position: absolute;
@@ -225,8 +226,8 @@ main {
 }
 .listing .image-field img.preview {
   position: absolute;
-  width: 100%;
   height: 100%;
+  width: 100%;
   object-fit: contain;
 }
 .listing .fields {
@@ -235,26 +236,21 @@ main {
   padding: 1rem;
   border-bottom: 4px solid #FE938C;
 }
-.listing .fields p {
-  margin-top: 0;
-}
-.listing .fields .pill {
+.listing .fields .tag {
   margin-top: 1rem;
   margin-right: 1rem;
 }
-.listing .fields .pill:last-child {
+.listing .fields .tag:last-child {
   margin-right: 0;
 }
 .listing .fields .field {
-  display: flex;
   margin-bottom: 1rem;
-  flex-direction: column;
 }
 .listing .fields .field:last-child {
   margin-bottom: 0rem;
 }
-.listing .fields .field.delivery {
-  flex-direction: row;
+.listing .fields .field p {
+  margin: 0;
 }
 .listing .fields #delete {
   margin-top: 3rem;
@@ -263,15 +259,15 @@ main {
 .overlay {
   display: flex;
   padding: 1rem;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   text-align: center;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 .overlay p {
   font-size: 1.6rem;
 }
-.overlay .button:not(:last-child), .overlay .listing .image-field label[for=file]:not(:last-child), .listing .image-field .overlay label[for=file]:not(:last-child), .overlay .listing .fields .field button[type=submit]:not(:last-child), .listing .fields .field .overlay button[type=submit]:not(:last-child) {
+.overlay .button:not(:last-child) {
   margin-right: 1rem;
 }
 
