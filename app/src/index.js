@@ -139,7 +139,7 @@ console.log('Configuring public routes')
 
 app.use(express.static(publicPath))
 
-app.get('/', async (req, res) => {
+app.get('/', auth.target(), async (req, res) => {
   let result
   if (req.user?.charity) {
     // Charity users see everthing
@@ -201,7 +201,7 @@ app.get('/account', auth.check(), async (req, res) => {
   res.render('account', { listings, user: req.user })
 })
 
-app.get('/listing/:listingId', auth.check(), async (req, res) => {
+app.get('/listing/:listingId', auth.target(), async (req, res) => {
   const result = await db.query(`
     SELECT 
       listing_id,
@@ -312,7 +312,7 @@ app.post('/logout', (req, res, next) => {
   })
 })
 
-app.get('/about', async (req, res) => {
+app.get('/about', auth.target(), async (req, res) => {
   res.render('about')
 })
 

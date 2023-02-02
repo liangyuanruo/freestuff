@@ -133,4 +133,12 @@ export default class Auth {
       }
     }
   }
+
+  target () {
+    return (req, res, next) => {
+      req.session.targetUrl = req.originalUrl
+      next()
+    }
+  }
+
 }
