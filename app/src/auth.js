@@ -3,6 +3,7 @@
 // -----------------------------------------------------------------------------
 // Dependencies
 // -----------------------------------------------------------------------------
+import dayjs from 'dayjs'
 import PassportStrategy from 'passport-strategy'
 import { SgidClient } from '@opengovsg/sgid-client'
 
@@ -81,7 +82,7 @@ export default class Auth {
     const user = {
       id: results.rows[0].account_id,
       charity: results.rows[0].account_charity,
-      createdAt: results.rows[0].account_created_at
+      createdAt: dayjs(results.rows[0].account_created_at).format('D MMM YYYY')
     }
     return user
   }
