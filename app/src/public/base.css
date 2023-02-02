@@ -113,18 +113,18 @@ button:disabled, .button:disabled {
 
 .tag {
   display: inline-flex;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   vertical-align: middle;
-  color: #FFFFFF;
+  color: #444;
   font-size: 0.7rem;
-  background-color: #FE7968;
+  background-color: #EEEEEE;
   border-radius: 0.3rem;
   flex-direction: row;
   align-items: stretch;
 }
 .tag label {
-  margin-right: 0.6em;
-  color: rgba(255, 255, 255, 0.7);
+  margin-right: 0.4em;
+  color: #999;
 }
 
 .overlay {

@@ -17,10 +17,20 @@ block main
           p.description= listing.description
         .field
           label Collection Instructions
-          p= listing.collection
+          if user
+            p= listing.collection
+          else
+            .blockPrompt
+              a.button.primary(href='/login') Sign in
+              | to see collection instructions
         .field
           label Contact Information
-          p= listing.contact
+          if user
+            p= listing.contact
+          else
+            .blockPrompt
+              a.button.primary(href='/login') Sign in
+              | to see contact information
         .tag
           label Category
           .category= listing.category
@@ -28,7 +38,7 @@ block main
           label Location
           .category= listing.location
 
-        if listing.owner == user.id
+        if user && listing.owner == user.id
           form#deleteForm(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
             button#delete(type="submit") Remove Listing
 
