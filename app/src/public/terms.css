@@ -196,9 +196,8 @@ main {
 
 .legal h1, .legal h2, .legal h3, .legal h4, .legal h5, .legal h6, .legal p {
   font-family: Heebo, sans-serif;
-  margin-top: 0;
-  margin-bottom: 0;
-  font-weight: 400;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .container {
