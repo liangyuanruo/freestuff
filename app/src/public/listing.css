@@ -220,7 +220,7 @@ main {
   min-height: 50vh;
   position: relative;
   color: #FFFFFF;
-  background-color: #000;
+  background-color: #222;
   align-items: center;
   flex-direction: column;
   justify-content: center;
@@ -236,7 +236,7 @@ main {
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(34, 34, 34, 0.6);
 }
 .listing .image-field img.preview {
   position: absolute;
