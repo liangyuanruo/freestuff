@@ -24,6 +24,8 @@ $inverse-hint-color: rgba($inverse-text-color, 0.7)
 $header-font-family: Heebo, sans-serif
 $body-font-family: Heebo, sans-serif
 $card-border-radius: 0.3rem
+$small-font-size: 0.8rem
+$tiny-font-size: 0.6rem
 
 // Breakpoints
 $xs-max: 400px
@@ -127,7 +129,7 @@ button, .button
   
   label
     display: block
-    font-size: 0.9em
+    font-size: $small-font-size
     color: $hint-color
     
 
@@ -138,7 +140,7 @@ button, .button
   vertical-align: middle
   // Text
   color: $inverse-text-color
-  font-size: 0.6rem
+  font-size: $tiny-font-size
   // Appearance
   background-color: $brand-color
   border-radius: $card-border-radius
@@ -197,7 +199,7 @@ main
   display: flex
   padding: 0.7rem 1rem
   // Text
-  font-size: 0.7rem
+  font-size: $tiny-font-size
   // Appearance
   background-color: $content-background-color
   overflow: scroll

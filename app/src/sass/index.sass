@@ -1,51 +1,62 @@
 @import base.sass
 
 .hero
+  // Layout
   display: flex
   height: 20rem
+  // Text
+  color: $inverse-text-color
+  text-align: center
+  // Appearance
   background-color: $inverse-background-color
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url("https://images.unsplash.com/photo-1609139003551-ee40f5f73ec0")
   background-size: cover
   background-position: 50% 25%
-  color: $inverse-text-color
-  flex-direction: column
+  // Children
   align-items: center
+  flex-direction: column
   justify-content: center
-  text-align: center
 
   .title
+    // Layout
     margin-bottom: 0.5rem
+    // Text
+    color: $brand-color
     font-size: 3rem
     line-height: 1
-    color: $brand-color
 
-  .subtitle
-    margin-bottom: 1.5rem
+  .button
+    margin-top: 1.5rem
   
 .filters
+  // Layout
   display: flex
-  border-top: 4px solid
-  border-color: $brand-color
+  border-top: 4px solid $brand-color
   padding: 1rem 2rem
-  background-color: $content-background-color
   overflow: scroll
+  // Appearance
+  background-color: $content-background-color
+  // Children
   flex-direction: row
   align-items: center
   justify-content: flex-start
 
   .filter
+    // Layout
     display: flex
     margin-right: 2rem
+    // Children
     flex-direction: row
     align-items: center
     justify-content: flex-start
     label
+      color: $hint-color
+      font-size: $small-font-size
       margin-right: 0.5rem
     #search
       width: 15em
     select
       width: 10em
-
 
 .listings
   display: flex
@@ -55,42 +66,58 @@
   justify-content: flex-start
 
   .listing
-    display: block
     @extend .card
+    // Layout
+    display: block
     margin: 1rem
     width: calc(100%/2 - 2rem)
     @media (min-width: $small-max)
       width: calc(100%/3 - 2rem)    
+    // Text
     color: $text-color
-    text-decoration: none
     cursor: pointer
+    text-decoration: none
+
     img
+      // Layout
+      aspect-ratio: 4/3
       display: block
       width: 100%
-      aspect-ratio: 4/3
+      // Appearance
       object-fit: cover
+
     footer
-      border-top: 4px solid
       border-color: $brand-color
+      border-top: 4px solid
       padding: 0.5rem 1rem
+
       .description
         margin-top: 0
         margin-bottom: 0.5rem
         white-space: nowrap
         overflow: hidden
         text-overflow: ellipsis
+
       .meta
         display: flex
+        // Text
+        color: $hint-color
+        font-size: $small-font-size
+        white-space: nowrap
+        // Children
         flex-direction: row
         justify-content: space-between
-        white-space: nowrap
-        color: $hint-color
+
         .location
           margin-right: 2em
-          i
-            color: $brand-color
-        time
           overflow: hidden
           text-overflow: ellipsis
+          i
+            color: $brand-color
+
+        .time
+          overflow: hidden
+          text-overflow: ellipsis
+
         .category
           display: none

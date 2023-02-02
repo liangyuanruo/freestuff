@@ -101,7 +101,7 @@ button:disabled, .button:disabled, .listing .fields .field button[type=submit]:d
 
 .field label {
   display: block;
-  font-size: 0.9em;
+  font-size: 0.8rem;
   color: #999;
 }
 
@@ -163,7 +163,7 @@ main {
 .site-footer {
   display: flex;
   padding: 0.7rem 1rem;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   background-color: #FFFFFF;
   overflow: scroll;
   align-items: center;

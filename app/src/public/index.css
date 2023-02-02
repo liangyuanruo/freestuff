@@ -101,7 +101,7 @@ button:disabled, .button:disabled {
 
 .field label {
   display: block;
-  font-size: 0.9em;
+  font-size: 0.8rem;
   color: #999;
 }
 
@@ -163,7 +163,7 @@ main {
 .site-footer {
   display: flex;
   padding: 0.7rem 1rem;
-  font-size: 0.7rem;
+  font-size: 0.6rem;
   background-color: #FFFFFF;
   overflow: scroll;
   align-items: center;
@@ -184,33 +184,32 @@ main {
 .hero {
   display: flex;
   height: 20rem;
+  color: #FFFFFF;
+  text-align: center;
   background-color: rgba(0, 0, 0, 0.8);
   background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.9)), url("https://images.unsplash.com/photo-1609139003551-ee40f5f73ec0");
   background-size: cover;
   background-position: 50% 25%;
-  color: #FFFFFF;
-  flex-direction: column;
   align-items: center;
+  flex-direction: column;
   justify-content: center;
-  text-align: center;
 }
 .hero .title {
   margin-bottom: 0.5rem;
+  color: #FE938C;
   font-size: 3rem;
   line-height: 1;
-  color: #FE938C;
 }
-.hero .subtitle {
-  margin-bottom: 1.5rem;
+.hero .button {
+  margin-top: 1.5rem;
 }
 
 .filters {
   display: flex;
-  border-top: 4px solid;
-  border-color: #FE938C;
+  border-top: 4px solid #FE938C;
   padding: 1rem 2rem;
-  background-color: #FFFFFF;
   overflow: scroll;
+  background-color: #FFFFFF;
   flex-direction: row;
   align-items: center;
   justify-content: flex-start;
@@ -223,6 +222,8 @@ main {
   justify-content: flex-start;
 }
 .filters .filter label {
+  color: #999;
+  font-size: 0.8rem;
   margin-right: 0.5rem;
 }
 .filters .filter #search {
@@ -244,8 +245,8 @@ main {
   margin: 1rem;
   width: calc(50% - 2rem);
   color: #444;
-  text-decoration: none;
   cursor: pointer;
+  text-decoration: none;
 }
 @media (min-width: 650px) {
   .listings .listing {
@@ -253,14 +254,14 @@ main {
   }
 }
 .listings .listing img {
+  aspect-ratio: 4/3;
   display: block;
   width: 100%;
-  aspect-ratio: 4/3;
   object-fit: cover;
 }
 .listings .listing footer {
-  border-top: 4px solid;
   border-color: #FE938C;
+  border-top: 4px solid;
   padding: 0.5rem 1rem;
 }
 .listings .listing footer .description {
@@ -272,18 +273,21 @@ main {
 }
 .listings .listing footer .meta {
   display: flex;
+  color: #999;
+  font-size: 0.8rem;
+  white-space: nowrap;
   flex-direction: row;
   justify-content: space-between;
-  white-space: nowrap;
-  color: #999;
 }
 .listings .listing footer .meta .location {
   margin-right: 2em;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .listings .listing footer .meta .location i {
   color: #FE938C;
 }
-.listings .listing footer .meta time {
+.listings .listing footer .meta .time {
   overflow: hidden;
   text-overflow: ellipsis;
 }

@@ -13,9 +13,11 @@ block main
       a.button.primary(href="/listing") List an item
 
   section.filters 
+
     .filter
       label(for='search') Search
       input#search(type="text")
+
     .filter
       label(for='category') Category
       select#category(name='category' required)
@@ -25,6 +27,7 @@ block main
         option(value='appliances') Appliances
         option(value='toys') Toys &amp; Games
         option(value='tools') Tools
+
     .filter
       label(for='location') Location
       select#location(name='location' required)
@@ -41,12 +44,12 @@ block main
       a.listing(href="/listing/" + listing.id)
         img(src=listing.imageURL loading="lazy")
         footer
-          p.description=listing.description
-          small.meta
+          .description=listing.description
+          .meta
             .location
               i.fas.fa-location-dot
-              |  
+              = " "
               span=listing.location
-            time(datetime='2016-1-1')=listing.timestamp
-            data.category=listing.category
+            .time=listing.timestamp
+            .category=listing.category
   
