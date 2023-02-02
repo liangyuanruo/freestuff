@@ -316,6 +316,14 @@ app.get('/about', auth.target(), async (req, res) => {
   res.render('about')
 })
 
+app.get('/privacy', async (req, res) => {
+  res.render('privacy')
+})
+
+app.get('/terms', async (req, res) => {
+  res.render('terms')
+})
+
 // -----------------------------------------------------------------------------
 // Deployment
 // -----------------------------------------------------------------------------
