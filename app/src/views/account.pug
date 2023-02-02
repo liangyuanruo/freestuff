@@ -20,17 +20,25 @@ block main
 
 
   h2.listingTitle My Listings
-  section.listings 
-    each listing in listings
-      a.listing(href="/listing/" + listing.id)
-        img(src=listing.imageURL loading="lazy")
-        footer
-          p.description=listing.description
-          small.meta
-            .location
-              i.fas.fa-location-dot
-              |  
-              span=listing.location
-            time(datetime='2016-1-1')=listing.timestamp
-            data.category=listing.category
-    
+
+  if listings.length === 0
+    section.noListingNotice
+      h2 You have no listings yet!
+      a.button.primary(href="/listing") List an item
+
+  else 
+    section.listings 
+      each listing in listings
+        a.listing(href="/listing/" + listing.id)
+          img(src=listing.imageURL loading="lazy")
+          footer
+            p.description=listing.description
+            small.meta
+              .location
+                i.fas.fa-location-dot
+                |  
+                span=listing.location
+              time(datetime='2016-1-1')=listing.timestamp
+              data.category=listing.category
+      
+

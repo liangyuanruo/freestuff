@@ -19,7 +19,7 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: Caveat, sans-serif;
+  font-family: Heebo, sans-serif;
   font-weight: 400;
 }
 
@@ -145,7 +145,7 @@ input[type=checkbox] {
 .navbar .site-logo {
   display: block;
   font-size: 1.5rem;
-  font-family: Caveat, sans-serif;
+  font-family: Heebo, sans-serif;
   color: #FE938C;
   text-decoration: none;
 }
@@ -255,6 +255,17 @@ main {
 }
 .listings .listing footer .meta .category {
   display: none;
+}
+
+.noListingNotice {
+  display: flex;
+  color: #999;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.noListingNotice .button {
+  margin-top: 1rem;
 }
 
 /*# sourceMappingURL=account.css.map */
