@@ -35,7 +35,8 @@ Give away free stuff to charities and those in need
 - Install TablePlus
 
 ### Setup Docker Dev Environment
-In Docker Desktop, create a Dev Environment using the existing git repo URL (https://github.com/fynyky/freestuff).
+Fork the GitHub repo to your own account. In Docker Desktop, create a Dev Environment using your git repo URL (https://github.com/your-username/freestuff).
+
 Open the `app` container in VSCode from Docker Dev, then enter the `app` folder.
 
 ```sh
@@ -58,7 +59,7 @@ export SGID_PRIVATE_KEY="<your-sgid-private-key>"
 export SGID_REDIRECT_URI="http://localhost:1337/login"
 ```
 
-Load the environment variables into your development container with
+Override the dummy SGID environment variables in `compose-dev.yml` with
 ```sh
 source .env
 ```
