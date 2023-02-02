@@ -203,6 +203,9 @@ main {
     padding: 3rem;
   }
 }
+.container h1 + h2 {
+  margin: 1rem 0;
+}
 .container p#banner {
   text-align: center;
 }
