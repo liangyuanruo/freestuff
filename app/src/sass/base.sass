@@ -1,11 +1,11 @@
-@import 'https://fonts.googleapis.com/css2?family=Caveat&display=swap'
+@import 'https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap'
 @import 'https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Variables
 ////////////////////////////////////////////////////////////////////////////////
 // Colors
-$brand-color: #FE938C
+$brand-color: #FE7968
 $action-color: #FD685D
 // $highlight-color: #FFA8A3
 $highlight-color: #8CF7FE
@@ -21,6 +21,7 @@ $inverse-text-color: #FFFFFF
 $inverse-hint-color: rgba($inverse-text-color, 0.7)
 
 // Styles
+$brand-font-family: Kalam, sans-serif
 $header-font-family: Heebo, sans-serif
 $body-font-family: Heebo, sans-serif
 $card-border-radius: 0.3rem
@@ -188,10 +189,12 @@ button, .button
   
   .site-logo
     display: block
+    color: $text-color
+    font-family: $brand-font-family
     font-size: 1.5rem
-    font-family: $header-font-family
-    color: $brand-color
     text-decoration: none
+    .free
+      color: $brand-color
   
   .site-controls
     a
