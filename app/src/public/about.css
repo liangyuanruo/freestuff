@@ -160,10 +160,11 @@ main {
 .site-footer {
   display: flex;
   padding: 0.7rem 1rem;
-  background-color: #FFFFFF;
   font-size: 0.7rem;
-  flex-direction: row;
+  background-color: #FFFFFF;
+  overflow: scroll;
   align-items: center;
+  flex-direction: row;
   justify-content: space-between;
 }
 .site-footer img {
@@ -171,9 +172,10 @@ main {
   height: 1.5rem;
 }
 .site-footer .links a {
-  text-decoration: none;
   margin-left: 1rem;
   color: #999;
+  text-decoration: none;
+  white-space: nowrap;
 }
 
 .container {

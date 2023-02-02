@@ -187,18 +187,24 @@ main
   flex-direction: column
 
 .site-footer
+  // Layout
   display: flex
   padding: 0.7rem 1rem
-  background-color: $content-background-color
+  // Text
   font-size: 0.7rem
-  flex-direction: row
+  // Appearance
+  background-color: $content-background-color
+  overflow: scroll
+  // Children
   align-items: center
+  flex-direction: row
   justify-content: space-between
   img
     display: block
     height: 1.5rem
   .links a
-    text-decoration: none
     margin-left: 1rem
     color: $hint-color
+    text-decoration: none
+    white-space: nowrap
   
