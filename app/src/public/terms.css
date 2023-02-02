@@ -1,4 +1,4 @@
-@import 'https://fonts.googleapis.com/css2?family=Caveat&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap';
 @import 'https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap';
 * {
   box-sizing: border-box;
@@ -19,13 +19,9 @@ body {
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0;
   margin-bottom: 0;
-  font-family: Caveat, sans-serif;
+  font-family: Heebo, sans-serif;
   font-weight: 400;
-}
-
-label {
-  font-size: 0.9em;
-  color: #999;
+  line-height: 1;
 }
 
 input[type=text] {
@@ -73,47 +69,62 @@ input[type=checkbox] {
   display: none !important;
 }
 
-.button {
-  display: inline-block;
+button, .button {
   border: none;
+  display: inline-block;
   padding: 0.3rem 0.8rem;
-  line-height: 1.7;
-  border-radius: 0.3rem;
   color: #444;
+  line-height: 1.7;
   text-decoration: none;
+  background-color: transparent;
+  border-radius: 0.3rem;
   cursor: pointer;
+  outline: 1px solid #CCC;
 }
-.button.primary {
+button.primary, .button.primary {
+  outline: none;
   background-color: #FD685D;
   color: #FFFFFF;
 }
-.button.hint {
+button.hint, .button.hint {
   background-color: #FFFFFF;
-  border: 1px solid #CCC;
+  outline: 1px solid #CCC;
 }
-.button:hover {
+button:hover, .button:hover {
   background-color: #8CF7FE;
 }
-.button:active {
+button:active, .button:active {
   background-color: #59f3fe;
 }
-.button:disabled {
+button:disabled, .button:disabled {
   background-color: #999;
   cursor: auto;
 }
 
-.pill {
+.field {
+  display: flex;
+  flex-direction: column;
+}
+.field label {
+  display: block;
+  font-size: 0.85rem;
+  color: #999;
+}
+
+.tag {
   display: inline-flex;
-  padding: 0.2rem 0.6rem;
+  padding: 0.2rem 0.5rem;
+  vertical-align: middle;
+  color: #FFFFFF;
+  font-size: 0.7rem;
+  background-color: #FE7968;
+  border-radius: 0.3rem;
   flex-direction: row;
   align-items: stretch;
-  border-radius: 0.3rem;
-  background-color: #EEEEEE;
 }
-.pill label {
-  display: flex;
-  padding-right: 0.4rem;
-  align-items: center;
+.tag label {
+  margin-right: 0.6em;
+  color: rgba(255, 255, 255, 0.7);
 }
 
 .overlay {
@@ -132,21 +143,27 @@ input[type=checkbox] {
 }
 
 .navbar {
+  border-bottom: 4px solid;
+  border-color: #FE7968;
   display: flex;
   height: 3rem;
-  border-bottom: 4px solid;
-  border-color: #FE938C;
   padding: 0 1rem;
+  background-color: #FFFFFF;
+  align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  background-color: #FFFFFF;
 }
 .navbar .site-logo {
   display: block;
+  color: #444;
+  font-family: Kalam, sans-serif;
   font-size: 1.5rem;
-  font-family: Caveat, sans-serif;
-  color: #FE938C;
+  text-decoration: none;
+}
+.navbar .site-logo .free {
+  color: #FE7968;
+}
+.navbar .site-controls a {
   text-decoration: none;
 }
 
@@ -159,10 +176,11 @@ main {
 .site-footer {
   display: flex;
   padding: 0.7rem 1rem;
-  background-color: #FFFFFF;
   font-size: 0.7rem;
-  flex-direction: row;
+  background-color: #FFFFFF;
+  overflow: scroll;
   align-items: center;
+  flex-direction: row;
   justify-content: space-between;
 }
 .site-footer img {
@@ -170,9 +188,14 @@ main {
   height: 1.5rem;
 }
 .site-footer .links a {
-  text-decoration: none;
   margin-left: 1rem;
   color: #999;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.legal h1, .legal h2, .legal h3, .legal h4, .legal h5, .legal h6, .legal p {
+  font-family: Heebo, sans-serif;
 }
 
 .container {

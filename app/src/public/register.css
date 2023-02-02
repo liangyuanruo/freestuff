@@ -194,4 +194,8 @@ main {
   white-space: nowrap;
 }
 
+.legal h1, .legal h2, .legal h3, .legal h4, .legal h5, .legal h6, .legal p {
+  font-family: Heebo, sans-serif;
+}
+
 /*# sourceMappingURL=register.css.map */
