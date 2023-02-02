@@ -1,5 +1,5 @@
 @import 'https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap';
-@import 'https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap';
+@import 'https://fonts.googleapis.com/css2?family=Heebo:wght@400&display=swap';
 * {
   box-sizing: border-box;
 }
@@ -113,18 +113,18 @@ button:disabled, .button:disabled {
 
 .tag {
   display: inline-flex;
-  padding: 0.2rem 0.5rem;
+  padding: 0.2rem 0.6rem;
   vertical-align: middle;
-  color: #FFFFFF;
+  color: #444;
   font-size: 0.7rem;
-  background-color: #FE7968;
+  background-color: #EEEEEE;
   border-radius: 0.3rem;
   flex-direction: row;
   align-items: stretch;
 }
 .tag label {
-  margin-right: 0.6em;
-  color: rgba(255, 255, 255, 0.7);
+  margin-right: 0.4em;
+  color: #999;
 }
 
 .overlay {
@@ -164,6 +164,7 @@ button:disabled, .button:disabled {
   color: #FE7968;
 }
 .navbar .site-controls a {
+  color: #444;
   text-decoration: none;
 }
 
@@ -249,13 +250,6 @@ main {
   padding: 1rem;
   border-bottom: 4px solid #FE7968;
 }
-.listing .fields .tag {
-  margin-top: 1rem;
-  margin-right: 1rem;
-}
-.listing .fields .tag:last-child {
-  margin-right: 0;
-}
 .listing .fields .field {
   margin-bottom: 1rem;
 }
@@ -264,6 +258,21 @@ main {
 }
 .listing .fields .field p {
   margin: 0;
+}
+.listing .fields .blockPrompt {
+  background-color: #EEEEEE;
+  padding: 1rem;
+  border-radius: 0.3rem;
+}
+.listing .fields .blockPrompt .button {
+  margin-right: 0.5em;
+}
+.listing .fields .tag {
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+.listing .fields .tag:last-child {
+  margin-right: 0;
 }
 .listing .fields #delete {
   margin-top: 3rem;

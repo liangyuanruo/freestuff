@@ -48,6 +48,10 @@ services:
       CACHE_PORT: 6379
       CACHE_PASSWORD: "foobared"
       CACHE_SSL: false
+      SGID_CLIENT_ID: "dummy-sgid-client-id"
+      SGID_CLIENT_SECRET: "dummy-sgid-client-secret"
+      SGID_PRIVATE_KEY: "dummy-sgid-private-key"
+      SGID_REDIRECT_URI: "http://localhost:1337/login"
     ports:
       - 1337:1337
     depends_on:

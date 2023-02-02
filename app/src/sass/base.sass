@@ -1,5 +1,5 @@
 @import 'https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap'
-@import 'https://fonts.googleapis.com/css2?family=Heebo:wght@100;200;300;400;500;600;700;800;900&display=swap'
+@import 'https://fonts.googleapis.com/css2?family=Heebo:wght@400&display=swap'
 
 ////////////////////////////////////////////////////////////////////////////////
 // Variables
@@ -7,7 +7,6 @@
 // Colors
 $brand-color: #FE7968
 $action-color: #FD685D
-// $highlight-color: #FFA8A3
 $highlight-color: #8CF7FE
 
 $content-background-color: #FFFFFF
@@ -141,21 +140,21 @@ button, .button
 .tag
   // Layout
   display: inline-flex
-  padding: 0.2rem 0.5rem
+  padding: 0.2rem 0.6rem
   vertical-align: middle
   // Text
-  color: $inverse-text-color
+  color: $text-color
   font-size: $tiny-font-size
   // Appearance
-  background-color: $brand-color
+  background-color: $well-background-color
   border-radius: $card-border-radius
   // Children
   flex-direction: row
   align-items: stretch
 
   label
-    margin-right: 0.6em
-    color: $inverse-hint-color
+    margin-right: 0.4em
+    color: $hint-color
 
 .overlay
   position: fixed
@@ -198,6 +197,7 @@ button, .button
   
   .site-controls
     a
+      color: $text-color
       text-decoration: none
 
 main
