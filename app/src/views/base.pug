@@ -43,20 +43,19 @@ html
 
   body
     block body
+
       header.hackBanner Freestuff is a work-in-progress hackathon project for OGP's 
         a(href="https://hack.gov.sg") Hack for Public Good
+
       header.navbar
         block header
           a.site-logo(href="/") Freestuff
           .site-controls
             if user
-              //- a.button(href="/favorites")
-              //-   i.fas.fa-heart
-              a.button(href="/account")
+              a(href="/account")
                 i.fas.fa-user
             if !user
-              a.button(href="/login")
-                | Login
+              a(href="/login") Login
 
       main
         block main

@@ -69,7 +69,7 @@ input[type=checkbox] {
   display: none !important;
 }
 
-button {
+button, .button, .listing .fields .field button[type=submit], .listing .image-field label[for=file] {
   border: none;
   display: inline-block;
   padding: 0.3rem 0.8rem;
@@ -80,21 +80,21 @@ button {
   border-radius: 0.3rem;
   cursor: pointer;
 }
-button.primary {
+button.primary, .button.primary, .listing .fields .field button.primary[type=submit], .listing .image-field label.primary[for=file] {
   background-color: #FD685D;
   color: #FFFFFF;
 }
-button.hint {
+button.hint, .button.hint, .listing .fields .field button.hint[type=submit], .listing .image-field label.hint[for=file] {
   background-color: #FFFFFF;
   outline: 1px solid #CCC;
 }
-button:hover {
+button:hover, .button:hover, .listing .fields .field button[type=submit]:hover, .listing .image-field label[for=file]:hover {
   background-color: #8CF7FE;
 }
-button:active {
+button:active, .button:active, .listing .fields .field button[type=submit]:active, .listing .image-field label[for=file]:active {
   background-color: #59f3fe;
 }
-button:disabled {
+button:disabled, .button:disabled, .listing .fields .field button[type=submit]:disabled, .listing .image-field label[for=file]:disabled {
   background-color: #999;
   cursor: auto;
 }
@@ -133,21 +133,24 @@ button:disabled {
 }
 
 .navbar {
-  display: flex;
-  height: 3rem;
   border-bottom: 4px solid;
   border-color: #FE938C;
+  display: flex;
+  height: 3rem;
   padding: 0 1rem;
+  background-color: #FFFFFF;
+  align-items: center;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  background-color: #FFFFFF;
 }
 .navbar .site-logo {
   display: block;
   font-size: 1.5rem;
   font-family: Heebo, sans-serif;
   color: #FE938C;
+  text-decoration: none;
+}
+.navbar .site-controls a {
   text-decoration: none;
 }
 

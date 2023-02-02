@@ -95,7 +95,7 @@ input[type="checkbox"]
 .hidden
   display: none !important
 
-button
+button, .button
   // Layout
   border: none
   display: inline-block
@@ -163,23 +163,29 @@ button
   text-align: center
 
 .navbar
-  display: flex
-  height: 3rem
+  // Layout
   border-bottom: 4px solid
   border-color: $brand-color
+  display: flex
+  height: 3rem
   padding: 0 1rem
+  // Appearance
+  background-color: $content-background-color
+  // Children
+  align-items: center
   flex-direction: row
   justify-content: space-between
-  align-items: center
-  background-color: $content-background-color
-
-
+  
   .site-logo
     display: block
     font-size: 1.5rem
     font-family: $header-font-family
     color: $brand-color
     text-decoration: none
+  
+  .site-controls
+    a
+      text-decoration: none
 
 main
   display: flex
