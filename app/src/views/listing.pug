@@ -8,7 +8,7 @@ block main
 
   //- View an existing listing
   if listing
-    .listing 
+    .listing
       .image-field
         img.preview(src=listing.imageURL)
       .fields
@@ -31,16 +31,17 @@ block main
             .blockPrompt
               a.button.primary(href='/login') Sign in
               | to see contact information
-        .tag
-          label Category
-          .category= listing.category
-        .tag
-          label Location
-          .category= listing.location
+        .tags
+          .tag
+            label Category
+            .category= listing.category
+          .tag
+            label Location
+            .category= listing.location
 
         if user && listing.owner == user.id
           form#deleteForm(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
-            button#delete(type="submit") Remove Listing
+            input#delete(type="submit" value="Remove Listing")
 
     //- Delete confirmation overlay
     .overlay.hidden
@@ -59,7 +60,7 @@ block main
         img.preview.hidden(src="data:image/gif;base64,R0lGODlhAQABAIAAAMLCwgAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==")
         label.button.change.hidden(for="file") Change photo
 
-      .fields
+      .fields.input
         .field
           label(for="category") Category 
           select#category(name='category' required)
