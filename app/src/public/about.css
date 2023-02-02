@@ -227,5 +227,13 @@ main {
     zoom: 0.9;
   }
 }
+.container #attribution {
+  text-align: center;
+  color: #5f7d95;
+  font-size: 14px;
+}
+.container #attribution a {
+  color: #5f7d95;
+}
 
 /*# sourceMappingURL=about.css.map */
