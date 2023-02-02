@@ -21,11 +21,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-bottom: 0;
   font-family: Heebo, sans-serif;
   font-weight: 400;
-}
-
-label {
-  font-size: 0.9em;
-  color: #999;
+  line-height: 1;
 }
 
 input[type=text] {
@@ -73,47 +69,52 @@ input[type=checkbox] {
   display: none !important;
 }
 
-.button {
-  display: inline-block;
+button {
   border: none;
+  display: inline-block;
   padding: 0.3rem 0.8rem;
+  color: #FFFFFF;
   line-height: 1.7;
-  border-radius: 0.3rem;
-  color: #444;
   text-decoration: none;
+  background-color: #999;
+  border-radius: 0.3rem;
   cursor: pointer;
 }
-.button.primary {
+button.primary {
   background-color: #FD685D;
   color: #FFFFFF;
 }
-.button.hint {
+button.hint {
   background-color: #FFFFFF;
-  border: 1px solid #CCC;
+  outline: 1px solid #CCC;
 }
-.button:hover {
+button:hover {
   background-color: #8CF7FE;
 }
-.button:active {
+button:active {
   background-color: #59f3fe;
 }
-.button:disabled {
+button:disabled {
   background-color: #999;
   cursor: auto;
 }
 
-.pill {
+.field label {
+  display: block;
+  font-size: 0.9em;
+  color: #999;
+}
+
+.tag {
   display: inline-flex;
-  padding: 0.2rem 0.6rem;
+  padding: 0.2rem 0.4rem;
+  vertical-align: middle;
+  color: #FFFFFF;
+  font-size: 0.6rem;
+  background-color: #FE938C;
+  border-radius: 0.3rem;
   flex-direction: row;
   align-items: stretch;
-  border-radius: 0.3rem;
-  background-color: #EEEEEE;
-}
-.pill label {
-  display: flex;
-  padding-right: 0.4rem;
-  align-items: center;
 }
 
 .overlay {
@@ -182,10 +183,14 @@ main {
   flex-direction: column;
   align-items: flex-start;
 }
-
-.pill {
-  margin-right: 1rem;
-  margin-top: 1rem;
+.profileBanner h2 {
+  margin-bottom: 1rem;
+}
+.profileBanner .field {
+  margin-bottom: 1rem;
+}
+.profileBanner .tag {
+  margin-left: 1rem;
 }
 
 .logout {

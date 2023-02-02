@@ -7,12 +7,12 @@ block append vars
 block main
   .profileBanner 
     h2 Account information
-    .pill
+    .field
       label Account ID
       =user.id
-    if user.charity 
-      .pill Charity Account
-    .pill
+      if user.charity 
+        .tag Charity Account
+    .field
       label Joined
       =user.createdAt
     form.logout(action="logout" method="POST")
