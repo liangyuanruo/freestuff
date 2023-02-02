@@ -164,6 +164,7 @@ button:disabled, .button:disabled {
   color: #FE7968;
 }
 .navbar .site-controls a {
+  color: #444;
   text-decoration: none;
 }
 
