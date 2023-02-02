@@ -313,15 +313,15 @@ app.post('/logout', (req, res, next) => {
 })
 
 app.get('/about', auth.target(), async (req, res) => {
-  res.render('about')
+  res.render('about', { user: req.user })
 })
 
 app.get('/privacy', async (req, res) => {
-  res.render('privacy')
+  res.render('privacy', { user: req.user })
 })
 
 app.get('/terms', async (req, res) => {
-  res.render('terms')
+  res.render('terms', { user: req.user })
 })
 
 // -----------------------------------------------------------------------------
