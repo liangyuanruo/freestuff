@@ -10,7 +10,8 @@ const filterListings = () => {
     listing.classList.remove('hidden');
 
     if (searchFilter.value) {
-      const description = listing.querySelector(".description").textContent;
+      const description = listing.querySelector(".description").textContent.toLowerCase();
+      searchFilter.value.toLowerCase();
       if (!description.includes(searchFilter.value)) listing.classList.add('hidden');
     }
 
