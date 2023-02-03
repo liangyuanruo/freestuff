@@ -1,3 +1,4 @@
 .DS_Store
 .docker/devenvs-docker-compose.yaml
 .env
+node_modules
