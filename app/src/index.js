@@ -8,6 +8,7 @@ import flash from 'express-flash'
 import session from 'express-session'
 import url from 'url'
 import { S3Client, DeleteObjectCommand } from '@aws-sdk/client-s3'
+
 import multer from 'multer'
 import multerS3 from 'multer-s3'
 import morgan from 'morgan'
@@ -19,6 +20,7 @@ import connectRedis from 'connect-redis'
 import { v4 as uuid } from 'uuid'
 import waitOn from 'wait-on'
 import Auth from './auth.js'
+import { getListingQuery } from './listing.js'
 
 // -----------------------------------------------------------------------------
 // Environmental Variables & Constants
@@ -63,6 +65,7 @@ const db = new pg.Pool({
   password: DB_PASSWORD,
   ssl: DB_CA ? { rejectUnauthorized: true, ca: DB_CA } : null
 })
+
 console.log(`Database available at ${DB_HOST}:${DB_PORT}`)
 
 // Setup blobstore connection
@@ -141,36 +144,31 @@ app.use(express.static(publicPath))
 
 app.get('/', auth.target(), async (req, res, next) => {
   try {
-    let result
+    // search query parameters
+    const {
+      s: searchTerm = '',
+      c: searchCategory = '',
+      l: searchLocation = '',
+    } = req.query
+
+    let sql
+    let bindings
+
+    // Charity users
     if (req.user?.charity) {
-      // Charity users see everthing
-      result = await db.query(`
-        SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
-        FROM listing JOIN account 
-        ON listing_owner_id = account_id
-        ORDER BY listing_created_at DESC
-      `)
-    } else if (req.user?.id) {
-    // Logged in users see can their own posts even if less than 48 hours
-      result = await db.query(`
-      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
-      FROM listing JOIN account 
-      ON listing_owner_id = account_id
-      WHERE (listing_created_at < NOW() - INTERVAL '48 hours')
-      OR (listing_owner_id = $1)
-      ORDER BY listing_created_at DESC
-    `, [req.user.id])
-    } else {
-    // Non logged in users only see results older than 48 hours
-      result = await db.query(`
-      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
-      FROM listing JOIN account 
-      ON listing_owner_id = account_id
-      WHERE listing_created_at < NOW() - INTERVAL '48 hours'
-      ORDER BY listing_created_at DESC
-    `)
+      ;({ sql, bindings } = getListingQuery('charity', { searchTerm, searchCategory, searchLocation }))
     }
-    const listings = result.rows.map(row => {
+    // Logged in users
+    else if (req.user?.id) {
+      ;({ sql, bindings } = getListingQuery('auth', { userId: req.user?.id, searchTerm, searchCategory, searchLocation }))
+    // Non logged in users
+    } else {
+      ;({ sql, bindings } = getListingQuery('public', { searchTerm, searchCategory, searchLocation }))
+    }
+
+    // execute query
+    const { rows } = await db.query(sql, bindings)
+    const listings = rows.map(row => {
       return {
         id: row.listing_id,
         category: row.listing_category,
@@ -180,7 +178,7 @@ app.get('/', auth.target(), async (req, res, next) => {
         imageURL: `${BLOB_PATH}${row.listing_image_key}`
       }
     })
-    res.render('index', { listings, user: req.user })
+    return res.render('index', { listings, user: req.user })
   } catch (error) {
     next(error)
   }
