@@ -223,8 +223,11 @@ main {
 .hero .title .free {
   color: #FE7968;
 }
+.hero .subtitle a {
+  color: inherit;
+}
 .hero .button {
-  margin-top: 1.5rem;
+  margin-top: 2.5rem;
 }
 
 .filters {
