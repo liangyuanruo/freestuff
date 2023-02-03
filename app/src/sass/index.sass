@@ -29,6 +29,11 @@
   .subtitle
     a
       color: inherit
+      &:after
+        display: inline-block
+        margin-left: .2em
+        content: "»"
+        text-decoration: none
 
   .button
     margin-top: 2.5rem
@@ -37,7 +42,7 @@
   // Layout
   display: flex
   border-top: 4px solid $brand-color
-  padding: 1rem 2rem
+  padding: 1rem 1rem
   overflow: scroll
   // Appearance
   background-color: $content-background-color
@@ -62,6 +67,18 @@
       width: 15em
     select
       width: 10em
+
+.notice
+  background-color: $highlight-background-color
+  padding: 0.3rem 1rem
+
+  a[href='/about']
+    margin-left: 1rem
+    &:after
+      display: inline-block
+      margin-left: .2em
+      content: "»"
+      text-decoration: none
 
 .listings
   display: flex

@@ -15,94 +15,103 @@ block main
         br
         a(href="/about") How this works
       a.button.primary(href="/listing") List an item
-
-  section.filters 
-
-    .filter
-      label(for='search') Search
-      input#search(type="text")
-
-    .filter
-      label(for='category') Category
-      select#category(name='category' required)
-        option(value='' selected) All
-        option(value='books') Books
-        option(value='clothes') Clothes
-        option(value='electronics') Electronics
-        option(value='furniture') Furniture
-        option(value='appliances') Home Appliances
-        option(value='infant') Infant and children
-        option(value='school') School supplies
-        option(value='sports') Sports equipment
-        option(value='tools') Tools
-        option(value='toys') Toys &amp; Games
-        option(value='others') Others
-
-    .filter
-      label(for='location') Location
-      select#location(name='location' required)
-        option(value='' selected) All
-        option(value='ang moh kio') Ang Moh Kio
-        option(value='bedok') Bedok
-        option(value='bishan') Bishan
-        option(value='boon lay') Boon Lay
-        option(value='bukit batok') Bukit Batok
-        option(value='bukit merah') Bukit Merah
-        option(value='bukit panjang') Bukit Panjang
-        option(value='bukit timah') Bukit Timah
-        option(value='changi') Changi
-        option(value='changi bay') Changi Bay
-        option(value='choa chu kang') Choa Chu Kang
-        option(value='clementi') Clementi
-        option(value='downtown core') Downtown Core
-        option(value='geylang') Geylang
-        option(value='hougang') Hougang
-        option(value='jurong east') Jurong East
-        option(value='jurong west') Jurong West
-        option(value='kallang') Kallang
-        option(value='lim chu kang') Lim Chu Kang
-        option(value='mandai') Mandai
-        option(value='marina east') Marina East
-        option(value='marina south') Marina South
-        option(value='marine parade') Marine Parade
-        option(value='newton') Newton
-        option(value='novena') Novena
-        option(value='orchard') Orchard
-        option(value='outram') Outram
-        option(value='pasir ris') Pasir Ris
-        option(value='paya lebar') Paya Lebar
-        option(value='pioneer') Pioneer
-        option(value='punggol') Punggol
-        option(value='queenstown') Queenstown
-        option(value='river valley') River Valley
-        option(value='rochor') Rochor
-        option(value='seletar') Seletar
-        option(value='sembawang') Sembawang
-        option(value='sengkang') Sengkang
-        option(value='serangoon') Serangoon
-        option(value='simpang') Simpang
-        option(value='straits view') Straits View
-        option(value='sungei kadut') Sungei Kadut
-        option(value='tampines') Tampines
-        option(value='tanglin') Tanglin
-        option(value='tengah') Tengah
-        option(value='toa payoh') Toa Payoh
-        option(value='tuas') Tuas
-        option(value='woodlands') Woodlands
-        option(value='yishun') Yishun
-
-  section.listings
-    each listing in listings
-
-      a.listing(href="/listing/" + listing.id)
-        img(src=listing.imageURL loading="lazy")
-        footer
-          .description=listing.description
-          .meta
-            .location
-              i.fas.fa-location-dot
-              = " "
-              span=listing.location
-            .time=listing.timestamp
-            .category=listing.category
   
+
+  section
+
+    .filters 
+
+      .filter
+        label(for='search') Search
+        input#search(type="text")
+
+      .filter
+        label(for='category') Category
+        select#category(name='category' required)
+          option(value='' selected) All
+          option(value='books') Books
+          option(value='clothes') Clothes
+          option(value='electronics') Electronics
+          option(value='furniture') Furniture
+          option(value='appliances') Home Appliances
+          option(value='infant') Infant and children
+          option(value='school') School supplies
+          option(value='sports') Sports equipment
+          option(value='tools') Tools
+          option(value='toys') Toys &amp; Games
+          option(value='others') Others
+
+      .filter
+        label(for='location') Location
+        select#location(name='location' required)
+          option(value='' selected) All
+          option(value='ang moh kio') Ang Moh Kio
+          option(value='bedok') Bedok
+          option(value='bishan') Bishan
+          option(value='boon lay') Boon Lay
+          option(value='bukit batok') Bukit Batok
+          option(value='bukit merah') Bukit Merah
+          option(value='bukit panjang') Bukit Panjang
+          option(value='bukit timah') Bukit Timah
+          option(value='changi') Changi
+          option(value='changi bay') Changi Bay
+          option(value='choa chu kang') Choa Chu Kang
+          option(value='clementi') Clementi
+          option(value='downtown core') Downtown Core
+          option(value='geylang') Geylang
+          option(value='hougang') Hougang
+          option(value='jurong east') Jurong East
+          option(value='jurong west') Jurong West
+          option(value='kallang') Kallang
+          option(value='lim chu kang') Lim Chu Kang
+          option(value='mandai') Mandai
+          option(value='marina east') Marina East
+          option(value='marina south') Marina South
+          option(value='marine parade') Marine Parade
+          option(value='newton') Newton
+          option(value='novena') Novena
+          option(value='orchard') Orchard
+          option(value='outram') Outram
+          option(value='pasir ris') Pasir Ris
+          option(value='paya lebar') Paya Lebar
+          option(value='pioneer') Pioneer
+          option(value='punggol') Punggol
+          option(value='queenstown') Queenstown
+          option(value='river valley') River Valley
+          option(value='rochor') Rochor
+          option(value='seletar') Seletar
+          option(value='sembawang') Sembawang
+          option(value='sengkang') Sengkang
+          option(value='serangoon') Serangoon
+          option(value='simpang') Simpang
+          option(value='straits view') Straits View
+          option(value='sungei kadut') Sungei Kadut
+          option(value='tampines') Tampines
+          option(value='tanglin') Tanglin
+          option(value='tengah') Tengah
+          option(value='toa payoh') Toa Payoh
+          option(value='tuas') Tuas
+          option(value='woodlands') Woodlands
+          option(value='yishun') Yishun
+
+    if !user
+      .notice Charity users can 
+        a(href="/login") sign in
+        |  to see the newest listings
+        a(href="/about") Learn more
+
+    .listings
+      each listing in listings
+
+        a.listing(href="/listing/" + listing.id)
+          img(src=listing.imageURL loading="lazy")
+          footer
+            .description=listing.description
+            .meta
+              .location
+                i.fas.fa-location-dot
+                = " "
+                span=listing.location
+              .time=listing.timestamp
+              .category=listing.category
+    
