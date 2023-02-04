@@ -12,94 +12,75 @@ body {
   font-size: 16px;
   font-weight: 400;
   line-height: 1.7;
-  background-color: #EEEEEE;
+  background-color: #DDD;
   flex-direction: column;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin-top: 0;
   margin-bottom: 0;
+  margin-top: 0;
   font-family: Heebo, sans-serif;
   font-weight: 400;
   line-height: 1;
 }
 
 button, .button {
-  border: none;
   display: inline-block;
   padding: 0.3rem 0.8rem;
   color: #444;
-  line-height: 1.7;
   text-align: center;
   text-decoration: none;
-  background-color: transparent;
+  line-height: inherit;
+  background-color: #FFF;
+  border: none;
   border-radius: 0.3rem;
   cursor: pointer;
   outline: 1px solid #CCC;
 }
-button.primary, .button.primary {
-  outline: none;
-  background-color: #FD685D;
-  color: #FFFFFF;
-}
-button.hint, .button.hint {
-  background-color: #FFFFFF;
-  outline: 1px solid #CCC;
-}
 button:hover, .button:hover {
-  background-color: #8CF7FE;
+  background-color: #fe978f;
 }
 button:active, .button:active {
-  background-color: #59f3fe;
+  background-color: #fc392b;
+}
+button.primary, .button.primary {
+  color: #FFF;
+  background-color: #FD685D;
+  outline: none;
 }
 button:disabled, .button:disabled {
-  background-color: #999;
+  background-color: #DDD;
   cursor: auto;
 }
 
 input[type=text] {
-  appearance: none;
-  border-radius: 0.3rem;
-  border-color: #CCC;
-  border-style: solid;
-  border-width: 1px;
   padding: 0.5rem 1rem;
   color: #444;
+  appearance: none;
+  border: 1px solid #CCC;
+  border-radius: 0.3rem;
 }
 input[type=text]::placeholder {
-  color: #999;
+  color: #888;
 }
 
 select {
-  appearance: none;
-  border-radius: 0.3rem;
-  border-color: #CCC;
-  border-style: solid;
-  border-width: 1px;
-  padding: 0.5rem 1rem;
-  padding-right: 2em;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23CCCCCC%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
-  background-repeat: no-repeat, repeat;
-  background-position: right 0.7em top 50%, 0 0;
-  background-size: 0.65em auto, 100%;
+  padding: 0.5rem 2rem 0.5rem 1rem;
   color: #444;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23CCCCCC%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E");
+  background-position: right 0.7em top 50%, 0 0;
+  background-repeat: no-repeat, repeat;
+  background-size: 0.65em auto, 100%;
+  border: 1px solid #CCC;
+  border-radius: 0.3rem;
 }
 select:invalid {
-  color: #999;
+  color: #888;
 }
 
 input[type=checkbox] {
   cursor: pointer;
-}
-
-.card {
-  overflow: hidden;
-  border-radius: 0.3rem;
-  background-color: #FFFFFF;
-}
-
-.hidden {
-  display: none !important;
 }
 
 .field {
@@ -108,25 +89,31 @@ input[type=checkbox] {
 }
 .field label {
   display: block;
+  color: #888;
   font-size: 0.85rem;
-  color: #999;
 }
 
 .tag {
   display: inline-flex;
-  padding: 0.2rem 0.6rem;
+  padding: 0.2em 0.6em;
   vertical-align: middle;
   color: #444;
   font-size: 0.7rem;
-  background-color: #EEEEEE;
+  background-color: #DDD;
   border-radius: 0.3rem;
   flex-direction: row;
   align-items: stretch;
 }
 .tag label {
   margin-right: 0.4em;
-  color: #999;
+  color: #888;
   font-size: inherit;
+}
+
+.card {
+  overflow: hidden;
+  border-radius: 0.3rem;
+  background-color: #FFF;
 }
 
 .overlay {
@@ -138,8 +125,12 @@ input[type=checkbox] {
   background-color: rgba(255, 255, 255, 0.9);
 }
 
+.hidden {
+  display: none !important;
+}
+
 .hackBanner {
-  background-color: #ffe9e7;
+  background-color: #ffe7e5;
   padding: 1rem 2rem;
   text-align: center;
 }
@@ -150,7 +141,7 @@ input[type=checkbox] {
   display: flex;
   height: 3rem;
   padding: 0 1rem;
-  background-color: #FFFFFF;
+  background-color: #FFF;
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
@@ -183,7 +174,7 @@ main {
   display: flex;
   padding: 0.7rem 1rem;
   font-size: 0.7rem;
-  background-color: #FFFFFF;
+  background-color: #FFF;
   overflow: scroll;
   align-items: center;
   flex-direction: row;
@@ -195,7 +186,7 @@ main {
 }
 .site-footer .links a {
   margin-left: 1rem;
-  color: #999;
+  color: #888;
   text-decoration: none;
   white-space: nowrap;
 }

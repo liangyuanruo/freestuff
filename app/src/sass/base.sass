@@ -6,29 +6,29 @@
 ////////////////////////////////////////////////////////////////////////////////
 // Color: Base
 $brand-color: #FE7968
+$accent-color: $brand-color
 $action-color: #FD685D
-$highlight-color: #8CF7FE
 // Color: Backgrounds
-$content-background-color: #FFFFFF
+$content-background-color: #FFF
+$well-background-color: #DDD
+$highlight-background-color: lighten($action-color, 27%)
 $inverse-background-color: #222
-$well-background-color: #EEEEEE
-$highlight-background-color: lighten($brand-color, 25%)
 // Color: Text
 $text-color: #444
-$inverse-text-color: #FFFFFF
-$hint-color: #999
-$inverse-hint-color: rgba($inverse-text-color, 0.7)
-// Color: Support
+$hint-color: #888
 $outline-color: #CCC
+$inverse-text-color: #FFF
+$inverse-hint-color: #AAA
 
-
-// Styles
+// Text
 $brand-font-family: Kalam, sans-serif
 $header-font-family: Heebo, sans-serif
 $body-font-family: Heebo, sans-serif
-$card-border-radius: 0.3rem
 $small-font-size: 0.85rem
 $tiny-font-size: 0.7rem
+
+// Misc Styles
+$card-border-radius: 0.3rem
 
 // Media Breakpoints
 // Small phones are design default 
@@ -59,96 +59,84 @@ body
   flex-direction: column
   
 h1, h2, h3, h4, h5, h6
-  margin-top: 0
+  // Layout
   margin-bottom: 0
+  margin-top: 0
+  // Text
   font-family: $header-font-family
   font-weight: 400
   line-height: 1
 
 button, .button
   // Layout
-  border: none
   display: inline-block
   padding: 0.3rem 0.8rem
   // Text
   color: $text-color
-  line-height: 1.7
   text-align: center
   text-decoration: none
+  line-height: inherit
   // Appearance
-  background-color: transparent
+  background-color: $content-background-color
+  border: none
   border-radius: $card-border-radius
   cursor: pointer
   outline: 1px solid $outline-color
-  &.primary
-    outline: none
-    background-color: $action-color
-    color: $inverse-text-color
-  &.hint
-    background-color: $content-background-color
-    outline: 1px solid $outline-color
   &:hover
-    background-color: $highlight-color
+    background-color: lighten($action-color, 10%)
   &:active
-    background-color: darken($highlight-color, 10%)
+    background-color: darken($action-color, 10%)
+  &.primary
+    color: $inverse-text-color
+    background-color: $action-color
+    outline: none
   &:disabled
-    background-color: $hint-color
+    background-color: $well-background-color
     cursor: auto
 
-
-
 input[type=text]
-  appearance: none
-  border-radius: $card-border-radius
-  border-color: $outline-color
-  border-style: solid
-  border-width: 1px
+  // Layout
   padding: 0.5rem 1rem
+  // Text
   color: $text-color
   &::placeholder
     color: $hint-color
+  // Appearance
+  appearance: none
+  border: 1px solid $outline-color
+  border-radius: $card-border-radius
 
 select    
-  appearance: none
-  border-radius: $card-border-radius
-  border-color: $outline-color
-  border-style: solid
-  border-width: 1px
-  padding: 0.5rem 1rem
-  padding-right: 2em
-  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23CCCCCC%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')
-  background-repeat: no-repeat, repeat
-  background-position: right .7em top 50%, 0 0
-  background-size: .65em auto, 100%
+  // Layout
+  padding: 0.5rem 2rem 0.5rem 1rem
+  // Text
   color: $text-color
   &:invalid
     color: $hint-color
+  // Appearance
+  appearance: none
+  background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23CCCCCC%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E')
+  background-position: right .7em top 50%, 0 0
+  background-repeat: no-repeat, repeat
+  background-size: .65em auto, 100%
+  border: 1px solid $outline-color
+  border-radius: $card-border-radius
   
 input[type="checkbox"]
   cursor: pointer
 
-.card 
-  overflow: hidden
-  border-radius: $card-border-radius
-  background-color: $content-background-color
-
-.hidden
-  display: none !important
-
 .field
   display: flex
   flex-direction: column
-
   label
     display: block
-    font-size: $small-font-size
     color: $hint-color
-    
+    font-size: $small-font-size
 
 .tag
   // Layout
   display: inline-flex
-  padding: 0.2rem 0.6rem
+  padding: 0.2em 0.6em
   vertical-align: middle
   // Text
   color: $text-color
@@ -159,11 +147,15 @@ input[type="checkbox"]
   // Children
   flex-direction: row
   align-items: stretch
-
   label
     margin-right: 0.4em
     color: $hint-color
     font-size: inherit 
+
+.card 
+  overflow: hidden
+  border-radius: $card-border-radius
+  background-color: $content-background-color
 
 .overlay
   position: fixed
@@ -172,6 +164,9 @@ input[type="checkbox"]
   width: 100%
   height: 100%
   background-color: rgba($content-background-color, 0.9)
+
+.hidden
+  display: none !important
 
 ////////////////////////////////////////////////////////////////////////////////
 // Specific Styles
