@@ -1,1 +1,1 @@
-console.log('hello register.js');
+console.log('hello register.js')

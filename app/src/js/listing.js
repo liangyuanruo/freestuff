@@ -6,22 +6,21 @@ const cancelButton = document.querySelector('#cancel')
 const confirmButton = document.querySelector('#confirm')
 const deleteForm = document.querySelector('#deleteForm')
 deleteButton?.addEventListener('click', (event) => {
-  console.log("deleteButtonHandler: Start")
+  console.log('deleteButtonHandler: Start')
   event.preventDefault()
   overlay.classList.remove('hidden')
 })
 cancelButton?.addEventListener('click', (event) => {
-  console.log("cancelButtonHandler: Start")
+  console.log('cancelButtonHandler: Start')
   overlay.classList.add('hidden')
 })
 confirmButton?.addEventListener('click', (event) => {
-  console.log("confirmButtonHandler: Start")
+  console.log('confirmButtonHandler: Start')
   deleteForm.submit()
 })
 
-// Scripts for the create new listing page 
-if (document.querySelector("form.listing")) {
-
+// Scripts for the create new listing page
+if (document.querySelector('form.listing')) {
   console.log('Creating checks to enable submit button if all fields are filled')
   const submit = document.querySelector('button[type=submit]')
   const form = document.querySelector('form')
@@ -61,7 +60,6 @@ if (document.querySelector("form.listing")) {
   checkFile()
   fileInput?.addEventListener('change', checkFile)
   setTimeout(checkFile, 1000) // Timeout to check for browser autofill
-
 }
 
 console.log('End')

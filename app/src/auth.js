@@ -118,28 +118,39 @@ export default class Auth {
   // Middleware
   authenticate () {
     return (req, res, next) => {
-      this.#passport.authenticate('sgid', {
-        successRedirect: req.session.targetUrl ? req.session.targetUrl : '/'
-      })(req, res, next)
+      try {
+        this.#passport.authenticate('sgid', {
+          successRedirect: req.session.targetUrl ? req.session.targetUrl : '/'
+        })(req, res, next)
+      } catch (error) {
+        next(error)
+      }
     }
   }
 
   check () {
     return (req, res, next) => {
-      if (req.isAuthenticated()) return next()
-      else {
-        // Store the target URL for after login completes
-        req.session.targetUrl = req.originalUrl
-        this.authenticate()(req, res, next)
+      try {
+        if (req.isAuthenticated()) return next()
+        else {
+          // Store the target URL for after login completes
+          req.session.targetUrl = req.originalUrl
+          this.authenticate()(req, res, next)
+        }
+      } catch (error) {
+        next(error)
       }
     }
   }
 
   target () {
     return (req, res, next) => {
-      req.session.targetUrl = req.originalUrl
-      next()
+      try {
+        req.session.targetUrl = req.originalUrl
+        next()
+      } catch (error) {
+        next(error)
+      }
     }
   }
-
 }

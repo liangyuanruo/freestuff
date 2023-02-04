@@ -102,7 +102,7 @@ const redisClient = redis.createClient({
     ? `rediss://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
     : `redis://default:${CACHE_PASSWORD}@${CACHE_HOST}:${CACHE_PORT}`
 })
-redisClient.on("error", (error) => { console.error(error) })
+redisClient.on('error', (error) => { console.error(error) })
 await redisClient.connect()
 console.log(`Cache available ${CACHE_HOST}:${CACHE_PORT}`)
 
@@ -139,19 +139,20 @@ console.log('Configuring public routes')
 
 app.use(express.static(publicPath))
 
-app.get('/', auth.target(), async (req, res) => {
-  let result
-  if (req.user?.charity) {
-    // Charity users see everthing
-    result = await db.query(`
-      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
-      FROM listing JOIN account 
-      ON listing_owner_id = account_id
-      ORDER BY listing_created_at DESC
-    `)
-  } else if (req.user?.id) {
+app.get('/', auth.target(), async (req, res, next) => {
+  try {
+    let result
+    if (req.user?.charity) {
+      // Charity users see everthing
+      result = await db.query(`
+        SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
+        FROM listing JOIN account 
+        ON listing_owner_id = account_id
+        ORDER BY listing_created_at DESC
+      `)
+    } else if (req.user?.id) {
     // Logged in users see can their own posts even if less than 48 hours
-    result = await db.query(`
+      result = await db.query(`
       SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
       FROM listing JOIN account 
       ON listing_owner_id = account_id
@@ -159,169 +160,192 @@ app.get('/', auth.target(), async (req, res) => {
       OR (listing_owner_id = $1)
       ORDER BY listing_created_at DESC
     `, [req.user.id])
-  } else {
+    } else {
     // Non logged in users only see results older than 48 hours
-    result = await db.query(`
+      result = await db.query(`
       SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key, listing_category
       FROM listing JOIN account 
       ON listing_owner_id = account_id
       WHERE listing_created_at < NOW() - INTERVAL '48 hours'
       ORDER BY listing_created_at DESC
     `)
-  }
-  const listings = result.rows.map(row => {
-    return {
-      id: row['listing_id'],
-      category: row['listing_category'],
-      description: row['listing_description'],
-      timestamp: dayjs(row['listing_created_at']).fromNow(),
-      location: row['listing_location'],
-      imageURL: `${BLOB_PATH}${row['listing_image_key']}`
     }
-  })
-  res.render('index', { listings, user: req.user })
+    const listings = result.rows.map(row => {
+      return {
+        id: row.listing_id,
+        category: row.listing_category,
+        description: row.listing_description,
+        timestamp: dayjs(row.listing_created_at).fromNow(),
+        location: row.listing_location,
+        imageURL: `${BLOB_PATH}${row.listing_image_key}`
+      }
+    })
+    res.render('index', { listings, user: req.user })
+  } catch (error) {
+    next(error)
+  }
 })
 
-app.get('/account', auth.check(), async (req, res) => {
-  const result = await db.query(`
-    SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key
-    FROM listing
-    WHERE (listing_owner_id = $1)
-    ORDER BY listing_created_at DESC
-  `, [req.user.id])
-  const listings = result.rows.map(row => {
-    return {
-      id: row['listing_id'],
-      description: row['listing_description'],
-      location: row['listing_location'],
-      timestamp: dayjs(row['listing_created_at']).fromNow(),
-      imageURL: `${BLOB_PATH}${row['listing_image_key']}`
+app.get('/account', auth.check(), async (req, res, next) => {
+  try {
+    const result = await db.query(`
+      SELECT listing_id, listing_description, listing_location, listing_created_at, listing_image_key
+      FROM listing
+      WHERE (listing_owner_id = $1)
+      ORDER BY listing_created_at DESC
+    `, [req.user.id])
+    const listings = result.rows.map(row => {
+      return {
+        id: row.listing_id,
+        description: row.listing_description,
+        location: row.listing_location,
+        timestamp: dayjs(row.listing_created_at).fromNow(),
+        imageURL: `${BLOB_PATH}${row.listing_image_key}`
+      }
+    })
+    res.render('account', { listings, user: req.user })
+  } catch (error) {
+    next(error)
+  }
+})
+
+app.get('/listing/:listingId', auth.target(), async (req, res, next) => {
+  try {
+    const result = await db.query(`
+      SELECT 
+        listing_id,
+        listing_owner_id,
+        listing_description,
+        listing_category,
+        listing_location,
+        listing_contact,
+        listing_collection,
+        listing_image_key,
+        listing_created_at
+      FROM listing JOIN account 
+      ON listing_owner_id = account_id
+      WHERE listing_id = $1
+    `, [req.params.listingId])
+    if (result.rows.length === 0) return res.sendStatus(404)
+    const listing = {
+      id: result.rows[0].listing_id,
+      owner: result.rows[0].listing_owner_id,
+      description: result.rows[0].listing_description,
+      category: result.rows[0].listing_category,
+      location: result.rows[0].listing_location,
+      contact: result.rows[0].listing_contact,
+      collection: result.rows[0].listing_collection,
+      imageURL: `${BLOB_PATH}${result.rows[0].listing_image_key}`,
+      timestamp: dayjs(result.rows[0].listing_created_at).fromNow()
     }
-  })
-  res.render('account', { listings, user: req.user })
+    res.render('listing', { user: req.user, listing })
+  } catch (error) { next(error) }
 })
 
-app.get('/listing/:listingId', auth.target(), async (req, res) => {
-  const result = await db.query(`
-    SELECT 
-      listing_id,
-      listing_owner_id,
-      listing_description,
-      listing_category,
-      listing_location,
-      listing_contact,
-      listing_collection,
-      listing_image_key,
-      listing_created_at
-    FROM listing JOIN account 
-    ON listing_owner_id = account_id
-    WHERE listing_id = $1
-  `, [req.params.listingId])
-  if (result.rows.length === 0) return res.sendStatus(404)
-  const listing = {
-    id: result.rows[0]['listing_id'],
-    owner: result.rows[0]['listing_owner_id'],
-    description: result.rows[0]['listing_description'],
-    category: result.rows[0]['listing_category'],
-    location: result.rows[0]['listing_location'],
-    contact: result.rows[0]['listing_contact'],
-    collection: result.rows[0]['listing_collection'],
-    imageURL: `${BLOB_PATH}${result.rows[0]['listing_image_key']}`,
-    timestamp: dayjs(result.rows[0]['listing_created_at']).fromNow()
-  }
-  res.render('listing', { user: req.user, listing })
+app.get('/listing', auth.check(), async (req, res, next) => {
+  try {
+    res.render('listing', { user: req.user })
+  } catch (error) { next(error) }
 })
 
-app.get('/listing', auth.check(), async (req, res) => {
-  res.render('listing', { user: req.user })
+app.post('/listing/delete/:listingId', auth.check(), async (req, res, next) => {
+  try {
+    // In a single query check ownership and delete the listing
+    const result = await db.query(`
+      DELETE FROM listing 
+      WHERE listing_id = $1
+      AND listing_owner_id = $2
+      RETURNING listing_image_key
+    `, [req.params.listingId, req.user.id])
+    if (result.rows.length === 0) throw new Error('Listing not found')
+    if (result.rows.length > 1) throw new Error('Duplicate listings found')
+    // Cleanup the blobstore
+    // TODO figure out recovery if the request fails at this step
+    const imageKey = result.rows[0].listing_image_key
+    await s3Client.send(new DeleteObjectCommand({
+      Bucket: BLOB_BUCKET,
+      Key: imageKey
+    }))
+    // TODO flash message with successful deletion
+    res.redirect('/')
+  } catch (error) { next(error) }
 })
 
-app.post('/listing/delete/:listingId', auth.check(), async (req, res) => {
-  // In a single query check ownership and delete the listing
-  const result = await db.query(`
-    DELETE FROM listing 
-    WHERE listing_id = $1
-    AND listing_owner_id = $2
-    RETURNING listing_image_key
-  `, [req.params.listingId, req.user.id])
-  if (result.rows.length === 0) throw new Error('Listing not found')
-  if (result.rows.length > 1) throw new Error('Duplicate listings found')
-  // Cleanup the blobstore
-  // TODO figure out recovery if the request fails at this step
-  const imageKey = result.rows[0].listing_image_key
-  await s3Client.send(new DeleteObjectCommand({
-    Bucket: BLOB_BUCKET,
-    Key: imageKey
-  }))
-  // TODO flash message with successful deletion
-  res.redirect('/')
-})
-
-app.post('/listing', auth.check(), upload.single('file'), async (req, res) => {
-  const owner = req.user.id
-  const description = req.body.description
-  const category = req.body.category
-  const location = req.body.location
-  const collection = req.body.collection
-  const contact = req.body.contact
-  const image = req.file?.key
-  // Validate inputs. Only create a new object if all fields are set
-  if (
-    owner === undefined ||
-    description === undefined ||
-    category === undefined ||
-    location === undefined ||
-    collection === undefined ||
-    contact === undefined ||
-    image === undefined
-  ) {
-    res.sendStatus(422)
-    return
-  }
-  const result = await db.query(`
-    INSERT INTO listing(
-      listing_owner_id,
-      listing_description,
-      listing_category,
-      listing_location,
-      listing_collection,
-      listing_contact,
-      listing_image_key
-    ) 
-    VALUES ($1, $2, $3, $4, $5, $6, $7) 
-    RETURNING listing_id
-  `, [
-    owner,
-    description,
-    category,
-    location,
-    collection,
-    contact,
-    image
-  ])
-  const listingId = result.rows[0].listing_id
-  res.redirect(`/listing/${listingId}`)
+app.post('/listing', auth.check(), upload.single('file'), async (req, res, next) => {
+  try {
+    const owner = req.user.id
+    const description = req.body.description
+    const category = req.body.category
+    const location = req.body.location
+    const collection = req.body.collection
+    const contact = req.body.contact
+    const image = req.file?.key
+    // Validate inputs. Only create a new object if all fields are set
+    if (
+      owner === undefined ||
+      description === undefined ||
+      category === undefined ||
+      location === undefined ||
+      collection === undefined ||
+      contact === undefined ||
+      image === undefined
+    ) {
+      res.sendStatus(422)
+      return
+    }
+    const result = await db.query(`
+      INSERT INTO listing(
+        listing_owner_id,
+        listing_description,
+        listing_category,
+        listing_location,
+        listing_collection,
+        listing_contact,
+        listing_image_key
+      ) 
+      VALUES ($1, $2, $3, $4, $5, $6, $7) 
+      RETURNING listing_id
+    `, [
+      owner,
+      description,
+      category,
+      location,
+      collection,
+      contact,
+      image
+    ])
+    const listingId = result.rows[0].listing_id
+    res.redirect(`/listing/${listingId}`)
+  } catch (error) { next(error) }
 })
 
 app.get('/login', auth.authenticate())
 
 app.post('/logout', (req, res, next) => {
-  req.logout((err) => {
-    if (err) return next(err)
-    res.redirect('/')
-  })
+  try {
+    req.logout((err) => {
+      if (err) return next(err)
+      res.redirect('/')
+    })
+  } catch (error) { next(error) }
 })
 
-app.get('/about', auth.target(), async (req, res) => {
-  res.render('about', { user: req.user })
+app.get('/about', auth.target(), async (req, res, next) => {
+  try {
+    res.render('about', { user: req.user })
+  } catch (error) { next(error) }
 })
 
-app.get('/privacy', async (req, res) => {
-  res.render('privacy', { user: req.user })
+app.get('/privacy', async (req, res, next) => {
+  try {
+    res.render('privacy', { user: req.user })
+  } catch (error) { next(error) }
 })
 
-app.get('/terms', async (req, res) => {
-  res.render('terms', { user: req.user })
+app.get('/terms', async (req, res, next) => {
+  try {
+    res.render('terms', { user: req.user })
+  } catch (error) { next(error) }
 })
 
 // -----------------------------------------------------------------------------
