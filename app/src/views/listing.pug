@@ -11,33 +11,38 @@ block main
     .listing
       .image-field
         img.preview(src=listing.imageURL)
+        
       .fields
+      
         .field
-          label Description
           p.description= listing.description
-        .field
-          label Collection Instructions
-          if user
+          .tags
+            .tag
+              label Category
+              = listing.category
+            .tag
+              label Location
+              = listing.location
+        .field.reminder
+          | Before contacting the donor please remember
+          ul 
+            li Be appreciative. Everything here is being given away for free
+            li Be gracious! It's not anyones fault if the item is not quite what you want or the donor is unable to deliver
+            li More terms TBD
+          
+        if user
+          .field.collection
+            label Collection Instructions
             p= listing.collection
-          else
-            .blockPrompt
-              a.button.primary(href='/login') Sign in
-              | to see collection instructions
-        .field
-          label Contact Information
-          if user
+          .field.contact
+            label Contact Information
             p= listing.contact
-          else
+        else
+          .field 
             .blockPrompt
               a.button.primary(href='/login') Sign in
-              | to see contact information
-        .tags
-          .tag
-            label Category
-            .category= listing.category
-          .tag
-            label Location
-            .category= listing.location
+              p to see collection instructions and contact information
+
 
         if user && listing.owner == user.id
           form#deleteForm(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
@@ -49,6 +54,12 @@ block main
       .buttons
         button.button.hint#cancel(type="submit") Cancel
         button.button.hint#confirm(type="submit") Remove
+
+    //- Delete confirmation overlay
+    //- .overlay
+    //-   p Remove this listing?
+    //-   .buttons
+    //-     button.primary I understand
 
   //- Creating a new listing
   else
@@ -146,11 +157,11 @@ block main
             id="contact" name="contact" type="text" 
             placeholder="Should people contact you by whatsapp/emai/some other way?"
           )
-        .field
-        | Before creating a listing please remember
-        ul 
-          li The only currency here is compassion. List only your good quality non-food items that you would like to give away to those who need it.
-          li Read our <a href="/terms">Terms of Use</a> for full details on what items should not be listed.
+        .field.reminder
+          | Before creating a listing please remember
+          ul 
+            li The only currency here is compassion. List only your good quality non-food items that you would like to give away to those who need it.
+            li Read our <a href="/terms">Terms of Use</a> for full details on what items should not be listed.
         .field
           button.primary(type="submit") List item
 

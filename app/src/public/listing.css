@@ -75,6 +75,7 @@ button, .button {
   padding: 0.3rem 0.8rem;
   color: #444;
   line-height: 1.7;
+  text-align: center;
   text-decoration: none;
   background-color: transparent;
   border-radius: 0.3rem;
@@ -125,6 +126,7 @@ button:disabled, .button:disabled {
 .tag label {
   margin-right: 0.4em;
   color: #999;
+  font-size: inherit;
 }
 
 .overlay {
@@ -257,7 +259,7 @@ main {
 }
 @media (min-width: 651px) {
   .listing .fields {
-    width: 15rem;
+    width: 20rem;
   }
   .listing .fields.input {
     width: 30rem;
@@ -272,16 +274,30 @@ main {
 .listing .fields .field p {
   margin: 0;
 }
+.listing .fields .reminder {
+  padding: 1rem;
+  font-size: 0.85rem;
+  background-color: #ffe9e7;
+  border-radius: 0.3rem;
+}
+.listing .fields .reminder ul {
+  margin: 0;
+  padding-left: 1rem;
+}
+.listing .fields .reminder ul li {
+  margin-top: 0.5rem;
+}
 .listing .fields .blockPrompt {
   background-color: #EEEEEE;
   padding: 1rem;
   border-radius: 0.3rem;
 }
 .listing .fields .blockPrompt .button {
-  margin-right: 0.5em;
+  display: block;
+  margin-bottom: 0.5rem;
 }
 .listing .fields .tag {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-right: 1rem;
 }
 .listing .fields .tag:last-child {

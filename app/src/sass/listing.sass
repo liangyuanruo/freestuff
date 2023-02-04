@@ -55,7 +55,7 @@
     padding: 1rem
     width: 100%
     @media (min-width: $medium-min)
-      width: 15rem
+      width: 20rem
       &.input
         width: 30rem
     // Children
@@ -69,17 +69,27 @@
         margin-bottom: 0rem
       p
         margin: 0
-
+    .reminder
+      padding: 1rem
+      font-size: $small-font-size
+      background-color: $highlight-background-color
+      border-radius: $card-border-radius
+      ul
+        margin: 0
+        padding-left: 1rem
+        li
+          margin-top: 0.5rem
     .blockPrompt
       background-color: $well-background-color
       padding: 1rem
       border-radius: $card-border-radius
 
       .button
-        margin-right: 0.5em
+        display: block
+        margin-bottom: 0.5rem
 
     .tag
-      margin-top: 1rem
+      margin-top: .5rem
       margin-right: 1rem
       &:last-child
         margin-right: 0
