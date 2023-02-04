@@ -12,7 +12,7 @@ const filterListings = () => {
     if (searchFilter.value) {
       const description = listing.querySelector('.description').textContent.toLowerCase()
       const searchQuery = searchFilter.value.toLowerCase()
-      if (!description.includes(searchFilter.value)) listing.classList.add('hidden')
+      if (!description.includes(searchQuery)) listing.classList.add('hidden')
     }
 
     if (categoryFilter.value) {
