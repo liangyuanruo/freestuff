@@ -248,7 +248,7 @@ main {
   text-decoration: none;
   cursor: pointer;
 }
-@media (min-width: 650px) {
+@media (min-width: 651px) {
   .listings .listing {
     width: calc(33.3333333333% - 2rem);
   }

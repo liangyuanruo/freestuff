@@ -234,7 +234,7 @@ main {
     zoom: 0.7;
   }
 }
-@media (min-width: 1000px) {
+@media (min-width: 1001px) {
   .container p#banner img {
     zoom: 0.9;
   }
