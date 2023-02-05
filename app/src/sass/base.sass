@@ -175,6 +175,21 @@ input[type="checkbox"]
     color: $hint-color
     font-size: $tiny-font-size
     text-align: center
+      
+  ol
+    list-style-type: none
+    &:first-of-type
+      counter-reset: item
+    &.reset
+      counter-reset: item
+    li
+      position: relative
+      &:before
+        position: absolute
+        right: 100%
+        margin-right: 0.5em
+        content: counters(item, ".") ". "
+        counter-increment: item
 
   h2 + h3
     margin: 1rem 0

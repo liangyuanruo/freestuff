@@ -139,6 +139,25 @@ input[type=checkbox] {
   font-size: 0.7rem;
   text-align: center;
 }
+.page ol {
+  list-style-type: none;
+}
+.page ol:first-of-type {
+  counter-reset: item;
+}
+.page ol.reset {
+  counter-reset: item;
+}
+.page ol li {
+  position: relative;
+}
+.page ol li:before {
+  position: absolute;
+  right: 100%;
+  margin-right: 0.5em;
+  content: counters(item, ".") ". ";
+  counter-increment: item;
+}
 .page h2 + h3 {
   margin: 1rem 0;
 }
