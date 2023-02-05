@@ -157,6 +157,28 @@ input[type="checkbox"]
   border-radius: $card-border-radius
   background-color: $content-background-color
 
+.page
+  align-self: center
+  padding: 1rem
+  background-color: $content-background-color
+  @media (min-width: $medium-min)
+    margin-top: 1rem
+    margin-bottom: 1rem
+    max-width: 50rem
+    padding: 1rem 3rem
+    border-radius: $card-border-radius
+
+  img
+    max-width: 100%
+      
+  figcaption
+    color: $hint-color
+    font-size: $tiny-font-size
+    text-align: center
+
+  h2 + h3
+    margin: 1rem 0
+
 .overlay
   position: fixed
   top: 0

@@ -116,6 +116,32 @@ input[type=checkbox] {
   background-color: #FFF;
 }
 
+.page {
+  align-self: center;
+  padding: 1rem;
+  background-color: #FFF;
+}
+@media (min-width: 651px) {
+  .page {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-width: 50rem;
+    padding: 1rem 3rem;
+    border-radius: 0.3rem;
+  }
+}
+.page img {
+  max-width: 100%;
+}
+.page figcaption {
+  color: #888;
+  font-size: 0.7rem;
+  text-align: center;
+}
+.page h2 + h3 {
+  margin: 1rem 0;
+}
+
 .overlay {
   position: fixed;
   top: 0;
@@ -195,48 +221,6 @@ main {
   font-family: Heebo, sans-serif;
   margin-top: 1rem;
   margin-bottom: 1rem;
-}
-
-.container {
-  background-color: white;
-  padding: 1rem;
-}
-@media (min-width: 651px) {
-  .container {
-    padding: 3rem;
-  }
-}
-.container h1 + h2 {
-  margin: 1rem 0;
-}
-.container p#banner {
-  text-align: center;
-}
-.container p#banner img {
-  zoom: 0.25;
-}
-@media (min-width: 401px) {
-  .container p#banner img {
-    zoom: 0.35;
-  }
-}
-@media (min-width: 651px) {
-  .container p#banner img {
-    zoom: 0.7;
-  }
-}
-@media (min-width: 1001px) {
-  .container p#banner img {
-    zoom: 0.9;
-  }
-}
-.container #attribution {
-  text-align: center;
-  color: #5f7d95;
-  font-size: 14px;
-}
-.container #attribution a {
-  color: #5f7d95;
 }
 
 /*# sourceMappingURL=about.css.map */

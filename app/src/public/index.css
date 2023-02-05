@@ -117,6 +117,32 @@ input[type=checkbox] {
   background-color: #FFF;
 }
 
+.page {
+  align-self: center;
+  padding: 1rem;
+  background-color: #FFF;
+}
+@media (min-width: 651px) {
+  .page {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    max-width: 50rem;
+    padding: 1rem 3rem;
+    border-radius: 0.3rem;
+  }
+}
+.page img {
+  max-width: 100%;
+}
+.page figcaption {
+  color: #888;
+  font-size: 0.7rem;
+  text-align: center;
+}
+.page h2 + h3 {
+  margin: 1rem 0;
+}
+
 .overlay {
   position: fixed;
   top: 0;
