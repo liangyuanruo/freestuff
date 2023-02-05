@@ -130,6 +130,10 @@ input[type=checkbox] {
     border-radius: 0.3rem;
   }
 }
+.page h1, .page h2, .page h3, .page h4, .page h5, .page h6 {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
 .page img {
   max-width: 100%;
 }
@@ -149,16 +153,19 @@ input[type=checkbox] {
 }
 .page ol li {
   position: relative;
+  counter-increment: item;
 }
 .page ol li:before {
   position: absolute;
   right: 100%;
   margin-right: 0.5em;
   content: counters(item, ".") ". ";
-  counter-increment: item;
 }
-.page h2 + h3 {
-  margin: 1rem 0;
+.page ol li[counter] {
+  counter-increment: item 0;
+}
+.page ol li[counter]:before {
+  content: attr(counter);
 }
 
 .overlay {

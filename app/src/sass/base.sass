@@ -168,6 +168,10 @@ input[type="checkbox"]
     padding: 1rem 3rem
     border-radius: $card-border-radius
 
+  h1, h2, h3, h4, h5, h6
+    margin-top: 1em
+    margin-bottom: 1em
+
   img
     max-width: 100%
       
@@ -184,15 +188,17 @@ input[type="checkbox"]
       counter-reset: item
     li
       position: relative
+      counter-increment: item
       &:before
         position: absolute
         right: 100%
         margin-right: 0.5em
         content: counters(item, ".") ". "
-        counter-increment: item
+      &[counter]
+        counter-increment: item 0
+        &:before
+          content: attr(counter)
 
-  h2 + h3
-    margin: 1rem 0
 
 .overlay
   position: fixed
