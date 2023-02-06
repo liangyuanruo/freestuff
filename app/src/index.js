@@ -326,7 +326,7 @@ app.get('/signin', (req, res, next) => {
   } catch (error) { next(error) }
 })
 
-app.get('/login', auth.authenticate())
+app.get('/auth', auth.authenticate())
 
 app.post('/logout', (req, res, next) => {
   try {

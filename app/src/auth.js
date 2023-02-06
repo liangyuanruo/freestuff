@@ -135,7 +135,7 @@ export default class Auth {
         else {
           // Store the target URL for after login completes
           req.session.targetUrl = req.originalUrl
-          this.authenticate()(req, res, next)
+          res.redirect('/signin')
         }
       } catch (error) {
         next(error)
