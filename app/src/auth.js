@@ -41,7 +41,7 @@ class SgidStrategy extends PassportStrategy {
   // When called with a `code` query param in the request
   // Tries to swap the code for an access token and user data
   // If successful it then calls verify to populate application user data
-  async authenticate (req, options) {
+  async authenticate (req, _options) {
     // For the initial call just send the user to the sgid site to authenticate
     if (req.query.code === undefined) {
       const { url } = this.client.authorizationUrl(
@@ -50,15 +50,22 @@ class SgidStrategy extends PassportStrategy {
         null // defaults to randomly generated nonce if unspecified
       )
       this.redirect(url)
+      return
     }
     // If returning with a code, then swap the code for a user
     if (req.query.code !== undefined) {
-      const { accessToken } = await this.client.callback(req.query.code, null)
-      const { sub, data } = await this.client.userinfo(accessToken)
-      this.verify(sub, data, (error, user) => {
-        if (error) this.error(error)
-        this.success(user)
-      })
+      const code = req.query.code
+      try {
+        const { accessToken } = await this.client.callback(code, null)
+        const { sub, data } = await this.client.userinfo(accessToken)
+        this.verify(sub, data, (error, user) => {
+          if (error) this.error(error)
+          this.success(user)
+        })
+      } catch (error) {
+        console.error(`SGID authentication code failed: code=${code} error="${error}"`)
+      }
+      return
     }
   }
 }
@@ -94,7 +101,7 @@ export default class Auth {
       clientSecret: SGID_CLIENT_SECRET,
       privateKey: SGID_PRIVATE_KEY,
       redirectUri: SGID_REDIRECT_URI
-    }, async (sub, data, done) => {
+    }, async (sub, _data, done) => {
       await this.#db.query(`
         INSERT INTO account(account_id)
         VALUES ($1)
@@ -112,6 +119,7 @@ export default class Auth {
       const user = await this.getUser(id)
       callback(null, user)
     })
+
     return this
   }
 
@@ -144,7 +152,7 @@ export default class Auth {
   }
 
   target () {
-    return (req, res, next) => {
+    return (req, _res, next) => {
       try {
         req.session.targetUrl = req.originalUrl
         next()
