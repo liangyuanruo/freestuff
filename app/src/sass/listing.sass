@@ -1,5 +1,27 @@
 @import base.sass
 
+.charityBanner
+  // Layout
+  padding: 0.3rem 1rem
+  // Text
+  color: $hint-color
+  font-size: $small-font-size
+  text-align: center
+  // Appearance
+  background-color: $highlight-background-color
+  // Children
+  i.fa-heart
+    margin-right: 0.5em
+    color: $brand-color
+  a
+    margin-left: 1em
+    white-space: nowrap
+    &:after
+      display: inline-block
+      margin-left: .2em
+      content: "»"
+      text-decoration: none
+
 .listing
   // Layout
   display: flex
@@ -60,7 +82,6 @@
     // Children
     align-items: stretch
     flex-direction: column
-
 
     .field
       margin-bottom: 1rem

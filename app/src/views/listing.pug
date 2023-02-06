@@ -8,12 +8,19 @@ block main
 
   //- View an existing listing
   if listing
+    if (listing.charityReserved)
+      .charityBanner
+        i.fas.fa-heart
+        | Reserved for charities for 2 days
+        a(href="/about") Learn more
+
     .listing
+
       .image-field
         img.preview(src=listing.imageURL)
         
       .fields
-      
+
         .field
           p.description= listing.description
           .tags

@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import 'https://fonts.googleapis.com/css2?family=Kalam:wght@300&display=swap';
 @import 'https://fonts.googleapis.com/css2?family=Heebo:wght@400&display=swap';
 * {
@@ -253,6 +254,28 @@ main {
   font-family: Heebo, sans-serif;
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.charityBanner {
+  padding: 0.3rem 1rem;
+  color: #888;
+  font-size: 0.85rem;
+  text-align: center;
+  background-color: #ffe7e5;
+}
+.charityBanner i.fa-heart {
+  margin-right: 0.5em;
+  color: #FE7968;
+}
+.charityBanner a {
+  margin-left: 1em;
+  white-space: nowrap;
+}
+.charityBanner a:after {
+  display: inline-block;
+  margin-left: 0.2em;
+  content: "»";
+  text-decoration: none;
 }
 
 .listing {

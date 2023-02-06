@@ -236,7 +236,8 @@ app.get('/listing/:listingId', auth.target(), async (req, res, next) => {
       contact: result.rows[0].listing_contact,
       collection: result.rows[0].listing_collection,
       imageURL: `${BLOB_PATH}${result.rows[0].listing_image_key}`,
-      timestamp: dayjs(result.rows[0].listing_created_at).fromNow()
+      timestamp: dayjs(result.rows[0].listing_created_at).fromNow(),
+      charityReserved: dayjs(result.rows[0].listing_created_at).isAfter(dayjs().subtract(48, 'hour'))
     }
     res.render('listing', { user: req.user, listing })
   } catch (error) { next(error) }
