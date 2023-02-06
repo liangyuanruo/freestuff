@@ -41,7 +41,7 @@ const syncFiltersWithQueryParams = () => {
 const fetchAndUpdateListings = async () => {
   const url = new URL(window.location)
 
-  fetch(`/?${url.searchParams}`, { method: 'GET', cache: 'no-cache' })
+  return fetch(`/?${url.searchParams}`, { method: 'GET', cache: 'no-cache' })
     .then((response) => {
       if (!response.ok) {
         throw new Error(`fetchAndUpdateListings failed with HTTP status: ${response.status} ${response.statusText}`)
@@ -56,7 +56,7 @@ const fetchAndUpdateListings = async () => {
 
       oldListings.parentNode.replaceChild(newListings, oldListings)
     })
-
+    .catch(error => console.error(`fetchAndUpdateListings failed with error: ${error}`))
 }
 
 /**
