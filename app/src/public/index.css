@@ -336,6 +336,7 @@ main {
 
 .listings {
   display: flex;
+  padding-bottom: 2rem;
   background-color: #FFF;
   flex-direction: row;
   flex-wrap: wrap;
