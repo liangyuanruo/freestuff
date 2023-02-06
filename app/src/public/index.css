@@ -210,7 +210,13 @@ input[type=checkbox] {
   color: #FE7968;
 }
 .navbar .site-controls a {
-  margin-left: 1rem;
+  color: #444;
+  margin-left: 1.5rem;
+  text-decoration: none;
+  font-weight: 400;
+}
+.navbar .site-controls a:hover {
+  color: #FD685D;
 }
 .navbar .site-controls i {
   color: #444;
