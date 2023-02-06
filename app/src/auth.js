@@ -59,11 +59,15 @@ class SgidStrategy extends PassportStrategy {
         const { accessToken } = await this.client.callback(code, null)
         const { sub, data } = await this.client.userinfo(accessToken)
         this.verify(sub, data, (error, user) => {
-          if (error) this.error(error)
+          if (error) {
+            console.error(`Login failed: type="verify" code="${code}" error="${error}"`)
+            this.error(error)
+          }
+          console.info(`Login success: sub=${sub}`)
           this.success(user)
         })
       } catch (error) {
-        console.error(`SGID authentication code failed: code=${code} error="${error}"`)
+        console.error(`Login failed: type="general' code="${code}" error="${error}"`)
       }
       return
     }
