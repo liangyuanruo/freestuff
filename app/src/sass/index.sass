@@ -82,13 +82,12 @@
 
 .listings
   display: flex
-  background-color: $well-background-color
+  background-color: $content-background-color
   flex-direction: row
   flex-wrap: wrap
   justify-content: flex-start
 
   .listing
-    @extend .card
     // Layout
     display: block
     margin: 1rem
@@ -99,6 +98,8 @@
     color: $text-color
     cursor: pointer
     text-decoration: none
+    // Appearance
+    border-radius: $card-border-radius
 
     img
       // Layout
@@ -106,10 +107,11 @@
       display: block
       width: 100%
       // Appearance
+      border-bottom: 3px solid $action-color
+      border-radius: $card-border-radius
       object-fit: cover
 
     footer
-      border-top: 4px solid $brand-color
       padding: 0.5rem 1rem
 
       .description
@@ -127,10 +129,10 @@
         white-space: nowrap
         // Children
         flex-direction: row
-        justify-content: space-between
+        justify-content: flex-start
 
         .location
-          margin-right: 2em
+          margin-right: 1em
           overflow: hidden
           text-overflow: ellipsis
           i

@@ -111,7 +111,7 @@ input[type=checkbox] {
   font-size: inherit;
 }
 
-.card, .listings .listing {
+.card {
   overflow: hidden;
   border-radius: 0.3rem;
   background-color: #FFF;
@@ -330,7 +330,7 @@ main {
 
 .listings {
   display: flex;
-  background-color: #DDD;
+  background-color: #FFF;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -342,6 +342,7 @@ main {
   color: #444;
   cursor: pointer;
   text-decoration: none;
+  border-radius: 0.3rem;
 }
 @media (min-width: 651px) {
   .listings .listing {
@@ -352,10 +353,11 @@ main {
   aspect-ratio: 4/3;
   display: block;
   width: 100%;
+  border-bottom: 3px solid #FD685D;
+  border-radius: 0.3rem;
   object-fit: cover;
 }
 .listings .listing footer {
-  border-top: 4px solid #FE7968;
   padding: 0.5rem 1rem;
 }
 .listings .listing footer .description {
@@ -371,10 +373,10 @@ main {
   font-size: 0.85rem;
   white-space: nowrap;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 .listings .listing footer .meta .location {
-  margin-right: 2em;
+  margin-right: 1em;
   overflow: hidden;
   text-overflow: ellipsis;
 }

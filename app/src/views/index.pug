@@ -114,4 +114,26 @@ block main
                 span=listing.location
               .time=listing.timestamp
               .category=listing.category
+        a.listing(href="/listing/" + listing.id)
+          img(src=listing.imageURL loading="lazy")
+          footer
+            .description=listing.description
+            .meta
+              .location
+                i.fas.fa-location-dot
+                = " "
+                span=listing.location
+              .time=listing.timestamp
+              .category=listing.category
+        a.listing(href="/listing/" + listing.id)
+          img(src=listing.imageURL loading="lazy")
+          footer
+            .description=listing.description
+            .meta
+              .location
+                i.fas.fa-location-dot
+                = " "
+                span=listing.location
+              .time=listing.timestamp
+              .category=listing.category
     
