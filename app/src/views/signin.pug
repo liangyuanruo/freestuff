@@ -1,0 +1,15 @@
+extends base.pug
+
+block append vars
+  - var stylesheet='/signin.css'
+
+block main
+  .page
+    .imageList
+      img(src="/ogp.svg")
+      img(src="/singpass.png")
+    p Freestuff is a project by #[a(href="https://open.gov.sg") Open Government Products] and uses #[a(href="https://www.singpass.gov.sg") Singpass] for users to sign in. This helps us ensure only real people are on the platform and keep scammers and spammers out.
+
+    p We use the new #[a(href="https://www.id.gov.sg") sgID protocol] of Singpass to preserve user privacy. All we know is that the user is someone with a Singpass account. Personal details such as NRIC, birthdate, address etc are not shared with us. You can read more about sgID #[a(href="https://www.id.gov.sg/faq") here]
+
+    a.button.primary(href="/login") Sign in with Singpass

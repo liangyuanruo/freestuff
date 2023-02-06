@@ -320,6 +320,12 @@ app.post('/listing', auth.check(), upload.single('file'), async (req, res, next)
   } catch (error) { next(error) }
 })
 
+app.get('/signin', (req, res, next) => {
+  try {
+    res.render('signin', { user: req.user })
+  } catch (error) { next(error) }
+})
+
 app.get('/login', auth.authenticate())
 
 app.post('/logout', (req, res, next) => {

@@ -110,7 +110,7 @@ input[type=checkbox] {
   font-size: inherit;
 }
 
-.card, .listings .listing {
+.card {
   overflow: hidden;
   border-radius: 0.3rem;
   background-color: #FFF;
@@ -255,101 +255,34 @@ main {
   margin-bottom: 1rem;
 }
 
-.profileBanner {
+.imageList {
   display: flex;
-  padding: 1rem;
-  background-color: #FFF;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.profileBanner h2 {
-  margin-bottom: 1rem;
-}
-.profileBanner .field {
-  margin-bottom: 1rem;
-}
-.profileBanner .tag {
-  margin-left: 1rem;
-}
-
-.logout {
-  margin-top: 1rem;
-  align-self: flex-end;
-}
-
-.listingTitle {
-  margin-left: 1rem;
-  margin-top: 1rem;
-}
-
-.listings {
-  display: flex;
-  background-color: #DDD;
   flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
   flex-wrap: wrap;
-  justify-content: flex-start;
 }
-.listings .listing {
+.imageList img {
+  width: 50%;
+  min-width: 15rem;
+}
+.imageList img[src="/ogp.svg"] {
+  padding: 10%;
+}
+.imageList img[src="/singpass.png"] {
+  padding: 10%;
+}
+
+.button.primary {
   display: block;
-  margin: 1rem;
-  width: calc(50% - 2rem);
-  color: #444;
-  text-decoration: none;
-  cursor: pointer;
+  margin: 2rem auto;
+  padding: 1rem 2rem;
+  width: max-content;
 }
 @media (min-width: 651px) {
-  .listings .listing {
-    width: calc(33.3333333333% - 2rem);
+  .button.primary {
+    margin-bottom: 0;
   }
 }
-.listings .listing img {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-}
-.listings .listing footer {
-  border-top: 4px solid;
-  border-color: #FE7968;
-  padding: 0.5rem 1rem;
-}
-.listings .listing footer .description {
-  margin-top: 0;
-  margin-bottom: 0.5rem;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.listings .listing footer .meta {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  white-space: nowrap;
-  color: #888;
-}
-.listings .listing footer .meta .location {
-  margin-right: 2em;
-}
-.listings .listing footer .meta .location i {
-  color: #FE7968;
-}
-.listings .listing footer .meta time {
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.listings .listing footer .meta .category {
-  display: none;
-}
 
-.noListingNotice {
-  display: flex;
-  color: #888;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.noListingNotice .button {
-  margin-top: 1rem;
-}
-
-/*# sourceMappingURL=account.css.map */
+/*# sourceMappingURL=signin.css.map */

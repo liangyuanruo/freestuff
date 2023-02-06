@@ -1,0 +1,23 @@
+@import base.sass
+
+.imageList
+  display: flex
+  flex-direction: row
+  align-items: center
+  justify-content: space-around
+  flex-wrap: wrap
+  img
+    width: 50%
+    min-width: 15rem
+  img[src="/ogp.svg"]
+    padding: 10%
+  img[src="/singpass.png"]
+    padding: 10%
+
+.button.primary
+  display: block
+  margin: 2rem auto
+  padding: 1rem 2rem
+  width: max-content
+  @media (min-width: $medium-min)
+    margin-bottom: 0
