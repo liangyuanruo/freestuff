@@ -192,7 +192,7 @@ input[type=checkbox] {
   border-bottom: 4px solid;
   border-color: #FE7968;
   display: flex;
-  height: 3rem;
+  height: 4rem;
   padding: 0 1rem;
   background-color: #FFF;
   align-items: center;
@@ -342,7 +342,6 @@ main {
   color: #444;
   cursor: pointer;
   text-decoration: none;
-  border-radius: 0.3rem;
 }
 @media (min-width: 651px) {
   .listings .listing {
@@ -358,16 +357,15 @@ main {
   aspect-ratio: 4/3;
   display: block;
   width: 100%;
-  border-bottom: 3px solid #FD685D;
   border-radius: 0.3rem;
   object-fit: cover;
 }
 .listings .listing footer {
-  padding: 0.5rem 1rem;
+  padding: 0.3rem 0.3rem;
 }
 .listings .listing footer .description {
   margin-top: 0;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.3rem;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -378,7 +376,7 @@ main {
   font-size: 0.85rem;
   white-space: nowrap;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: space-between;
 }
 .listings .listing footer .meta .location {
   margin-right: 1em;
