@@ -21,6 +21,9 @@ CREATE TABLE listing (
   listing_created_at TIMESTAMP DEFAULT current_timestamp
 );
 
+-- Foreign key lookups
+CREATE INDEX listing_owner_id_fkey ON listing(listing_owner_id);
+
 -- Full text search
 ALTER TABLE listing
 ADD COLUMN textsearchable_index_col tsvector
@@ -28,4 +31,4 @@ ADD COLUMN textsearchable_index_col tsvector
 		to_tsvector('english', coalesce(listing_description, ''))
 	) STORED;
 
-CREATE INDEX textsearch_idx ON listing USING GIN (textsearchable_index_col);
+CREATE INDEX listing_idx_listing_owner_id_listing_at ON "listing" ("listing_owner_id","listing_created_at" desc);
