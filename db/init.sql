@@ -11,13 +11,13 @@ CREATE TABLE account (
 -- User listings
 CREATE TABLE listing (
   listing_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(), 
-  listing_owner_id TEXT REFERENCES account(account_id),
-  listing_description TEXT,
-  listing_category TEXT,
-  listing_location TEXT,
-  listing_contact TEXT,
-  listing_collection TEXT,
-  listing_image_key TEXT,
+  listing_owner_id TEXT REFERENCES account(account_id) NOT NULL,
+  listing_description TEXT NOT NULL,
+  listing_category TEXT NOT NULL,
+  listing_location TEXT NOT NULL,
+  listing_contact TEXT NOT NULL,
+  listing_collection TEXT NOT NULL,
+  listing_image_key TEXT NOT NULL,
   listing_created_at TIMESTAMP DEFAULT current_timestamp
 );
 
