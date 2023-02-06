@@ -31,12 +31,12 @@ block main
               label Location
               = listing.location
         .field.reminder
-          | Before contacting the donor please remember
+          | Before contacting a donor:
           ul 
-            li Be appreciative. Everything here is being given away for free
-            li Be gracious! It's not anyones fault if the item is not quite what you want or the donor is unable to deliver
-            li More terms TBD
-          
+            li Be gracious. If the item does not meet your expectations, remember that it was donated with the best intentions.
+            li Be patient. Everyone is busy. If a donor is non-responsive, be reasonable before chasing for a reply.
+            li Be understanding. Not every donor has the means to arrange delivery, and some items may need to be self-collected.”
+
         if user
           .field.collection
             label Collection Instructions
@@ -50,7 +50,6 @@ block main
               a.button.primary(href='/signin') Sign in
               p to see collection instructions and contact information
 
-
         if user && listing.owner == user.id
           form#deleteForm(action=("/listing/delete/" + listing.id) method="POST" enctype="multipart/form-data")
             input#delete(type="submit" value="Remove Listing")
@@ -61,12 +60,6 @@ block main
       .buttons
         button.button.hint#cancel(type="submit") Cancel
         button.button.hint#confirm(type="submit") Remove
-
-    //- Delete confirmation overlay
-    //- .overlay
-    //-   p Remove this listing?
-    //-   .buttons
-    //-     button.primary I understand
 
   //- Creating a new listing
   else
