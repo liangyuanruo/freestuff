@@ -1,12 +1,14 @@
 -- Initializes the app data models in the database
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+-- User accounts
 CREATE TABLE account (
   account_id TEXT PRIMARY KEY DEFAULT uuid_generate_v4(),
   account_charity BOOLEAN DEFAULT FALSE, 
   account_created_at TIMESTAMP DEFAULT current_timestamp
 );
 
+-- User listings
 CREATE TABLE listing (
   listing_id uuid PRIMARY KEY DEFAULT uuid_generate_v4(), 
   listing_owner_id TEXT REFERENCES account(account_id),
@@ -18,3 +20,12 @@ CREATE TABLE listing (
   listing_image_key TEXT,
   listing_created_at TIMESTAMP DEFAULT current_timestamp
 );
+
+-- Full text search
+ALTER TABLE listing
+ADD COLUMN textsearchable_index_col tsvector
+	GENERATED ALWAYS AS (
+		to_tsvector('english', coalesce(listing_description, ''))
+	) STORED;
+
+CREATE INDEX textsearch_idx ON listing USING GIN (textsearchable_index_col);
