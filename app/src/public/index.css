@@ -349,6 +349,11 @@ main {
     width: calc(33.3333333333% - 2rem);
   }
 }
+@media (min-width: 1001px) {
+  .listings .listing {
+    width: calc(25% - 2rem);
+  }
+}
 .listings .listing img {
   aspect-ratio: 4/3;
   display: block;
