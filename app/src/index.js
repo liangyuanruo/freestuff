@@ -25,6 +25,7 @@ import { getListingQuery } from './listing.js'
 // -----------------------------------------------------------------------------
 // Environmental Variables & Constants
 // -----------------------------------------------------------------------------
+// Compulsory environment variables
 // Using valueOf() as a hacky check if the variable is defined
 const APP_PORT = process.env.APP_PORT.valueOf()
 const SESSION_SECRET = process.env.SESSION_SECRET.valueOf()
@@ -47,6 +48,8 @@ const CACHE_PORT = parseInt(process.env.CACHE_PORT.valueOf())
 const CACHE_PASSWORD = process.env.CACHE_PASSWORD.valueOf()
 const CACHE_SSL = (process.env.CACHE_SSL.valueOf() === 'true')
 
+// Optional environment variables
+const DB_MAX_CLIENTS = parseInt(process.env.DB_MAX_CLIENTS) || 10
 // -----------------------------------------------------------------------------
 // Initialization
 // -----------------------------------------------------------------------------
@@ -63,7 +66,12 @@ const db = new pg.Pool({
   database: DB_NAME,
   user: DB_USER,
   password: DB_PASSWORD,
-  ssl: DB_CA ? { rejectUnauthorized: true, ca: DB_CA } : null
+  ssl: DB_CA ? { rejectUnauthorized: true, ca: DB_CA } : null,
+  // number of milliseconds to wait before timing out when connecting a new client
+  // by default this is 0 which means no timeout
+  connectionTimeoutMillis: 10000,
+  // maximum number of clients the pool should contain; defaults to 10 when unspecified.
+  max: DB_MAX_CLIENTS
 })
 
 console.log(`Database available at ${DB_HOST}:${DB_PORT}`)
