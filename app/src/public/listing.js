@@ -1,3 +1,5 @@
+console.log('Start');
+
 /**
  * Obtains image dimensions from an <img> Element
  * @param {HTMLImageElement} image element
@@ -36,8 +38,6 @@ function compressImage(image, scale, initialWidth, initialHeight){
       }, "image/jpeg");
   })
 }
-
-console.log('Start');
 
 const overlay = document.querySelector('.overlay');
 const deleteButton = document.querySelector('#delete');
