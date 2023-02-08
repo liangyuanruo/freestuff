@@ -49,7 +49,7 @@ const CACHE_PASSWORD = process.env.CACHE_PASSWORD.valueOf()
 const CACHE_SSL = (process.env.CACHE_SSL.valueOf() === 'true')
 
 // Optional environment variables
-const DB_MAX_CLIENTS = parseInt(process.env.DB_MAX_CLIENTS) ?? 10
+const DB_MAX_CLIENTS = parseInt(process.env.DB_MAX_CLIENTS) || 10
 // -----------------------------------------------------------------------------
 // Initialization
 // -----------------------------------------------------------------------------
