@@ -54,21 +54,12 @@ class SgidStrategy extends PassportStrategy {
     }
     // If returning with a code, then swap the code for a user
     if (req.query.code !== undefined) {
-      const code = req.query.code
-      try {
-        const { accessToken } = await this.client.callback(code, null)
-        const { sub, data } = await this.client.userinfo(accessToken)
-        this.verify(sub, data, (error, user) => {
-          if (error) {
-            console.error(`Login failed: type="verify" code="${code}" error="${error}"`)
-            this.error(error)
-          }
-          console.info(`Login success: sub=${sub}`)
-          this.success(user)
-        })
-      } catch (error) {
-        console.error(`Login failed: type="general' code="${code}" error="${error}"`)
-      }
+      const { accessToken } = await this.client.callback(req.query.code, null)
+      const { sub, data } = await this.client.userinfo(accessToken)
+      this.verify(sub, data, (error, user) => {
+        if (error) this.error(error)
+        this.success(user)
+      })
       return
     }
   }
